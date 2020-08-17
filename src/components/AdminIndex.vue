@@ -9,6 +9,14 @@
             <el-aside width="200px" style="background-color: rgba(238,241,246)">
               <el-menu :router="true">
                 <!-- 开启菜单中的Router=true后 点击菜单会把index作为路由跳转路径-->
+                <el-submenu>
+                   <el-menu-item index="/admin/product">
+                     <i class="el-icon-setting"></i>产品管理
+                   </el-menu-item>
+                   <el-menu-item index="/admin/client">
+                     <i class="el-icon-setting"></i>客户管理
+                   </el-menu-item>
+                </el-submenu>
                  <el-menu-item index="/admin/product">
                    <i class="el-icon-setting"></i>产品管理
                  </el-menu-item>
