@@ -7,7 +7,18 @@
     </div>
 </template>
 <script>
+import { getIndexMsg } from '@/api/public.js'
 export default {
-    name: 'Login'
+    name: 'Login',
+    data() {
+        return {
+            
+        }
+    },
+    created() {
+        getIndexMsg().then(res => {
+            console.log(res);
+        })
+    },
 }
 </script>

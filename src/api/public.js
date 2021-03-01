@@ -1,17 +1,16 @@
-import request from '@/src/plugin/axios/index'
-
+import request from '@/plugin/axios/index'
 export function getIndexMsg(data) {
   return request ({
-    url: '',
+    url: '/pet-api/invite/activityIsOpen',
     method: 'get',
     params: data
   })
 }
 
-export function getProduct(data) {
-  return request ({
-    url: '',
-    method: 'post',
-    data: data
-  })
-}
+// export function getProduct(data) {
+//   return request ({
+//     url: `${requestDomain}`,
+//     method: 'post',
+//     data: data
+//   })
+// }

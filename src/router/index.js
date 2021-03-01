@@ -7,6 +7,7 @@ import ClientManage from '../pages/client/ClientManage'
 
 Vue.use(Router)
 
+
 export default new Router({
   routes: [
     {
