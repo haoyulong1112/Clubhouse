@@ -7,6 +7,7 @@
     </div>
 </template>
 <script>
+import { Message } from 'element-ui';
 import { getIndexMsg } from '@/api/public.js'
 export default {
     name: 'Login',
@@ -18,6 +19,9 @@ export default {
     created() {
         getIndexMsg().then(res => {
             console.log(res);
+            // if(response.status != 200){
+                // Message.error('错了哦，这是一条错误消息');
+            // }
         })
     },
 }

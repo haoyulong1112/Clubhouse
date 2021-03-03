@@ -1,8 +1,7 @@
-import request from '@/plugin/axios/index'
+import axiosRequest from '@/utils/axiosnew'
 export function getIndexMsg(data) {
-  return request ({
+  return axiosRequest ({
     url: '/pet-api/invite/activityIsOpen',
-    method: 'get',
     params: data
   })
 }

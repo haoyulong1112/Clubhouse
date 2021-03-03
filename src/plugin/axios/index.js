@@ -6,5 +6,4 @@ const request = axios.create({
   baseURL: requestDomain,
   timeout: 10000,
 })
-
 export default request
