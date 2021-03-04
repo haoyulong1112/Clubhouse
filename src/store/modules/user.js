@@ -1,15 +1,15 @@
 export default {
   namespaced: true,
   state: {
-    id: 0,
-    name: ''
+    username: '',
+    password: ''
   },
   mutations: {
-    updateId (state, id) {
-      state.id = id
+    updateUsername (state, username) {
+      state.username = username
     },
-    updateName (state, name) {
-      state.name = name
+    updatePassword (state, password) {
+      state.password = password
     }
   }
 }

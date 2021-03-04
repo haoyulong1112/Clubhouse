@@ -9,7 +9,7 @@
         // 请求域名头 pet-pai
         requestDomain: 'https://api.ichongwujia.com',
     }
-
+    window.SITE_CONFIG = {};
     // 固定的配置
     // var config = {
     //     // rem布局页面最大宽度
