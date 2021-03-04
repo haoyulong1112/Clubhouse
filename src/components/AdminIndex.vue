@@ -7,7 +7,7 @@
                 <el-submenu index="1" class="menuminebox">
                     <template slot="title"><i class="el-icon-user"></i></template>
                     <el-menu-item index="1-1">郝玉龙</el-menu-item>
-                    <el-menu-item index="1-2">退出登录</el-menu-item>
+                    <el-menu-item @click="backLogin">退出登录</el-menu-item>
                 </el-submenu>
             </el-menu>
         </el-header>
@@ -67,15 +67,18 @@ export default {
             routerChange: false
         }
     },
+    created(){
+    },
     watch:{
         $route:{
+            immediate:true,
             handler(val,oldval){
+                console.log(this.routerChange);
                 if(val && val.name == "AdminIndex"){
                     this.routerChange = true;
                 }else{
                     this.routerChange = false;
                 }
-                // if()
             },
             // 深度观察监听
             deep: true
@@ -89,6 +92,17 @@ export default {
                     path: '/admin'
                 });
             }
+        },
+        backLogin(){
+            console.log(this.$store.state.user.username);
+            console.log(this.$store.state.user.password);
+            this.$store.commit('user/updateUsername','')
+            this.$store.commit('user/updatePassword', '')
+            this.$router.push({
+                name: 'Login'
+            });
+            console.log(this.$store.state.user.username);
+            console.log(this.$store.state.user.password);
         }
     },
 }

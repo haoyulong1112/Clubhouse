@@ -22,7 +22,9 @@
 import { mapGetters, mapMutations, mapActions, mapState } from 'vuex'
 import { Message } from 'element-ui';
 import { getIndexMsg } from '@/api/public.js'
+import preventBack from 'vue-prevent-browser-back';
 export default {
+    mixins: [preventBack],
     name: 'Login',
     data() {
         var validateAccount = (rule, value, callback) => {
@@ -57,6 +59,12 @@ export default {
     },
     computed: {
         ...mapState(['username','password'])
+    },
+    mounted(){ //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+        　　history.pushState(null, null, document.URL);
+        });
     },
     methods: {
         // 注册vuex方法
