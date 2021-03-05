@@ -5,6 +5,7 @@ import AdminIndex from '../components/AdminIndex'
 import ProductManage from '../pages/product/ProductManage'
 import ClientManage from '../pages/client/ClientManage'
 import importPhoneMange from '../pages/importPhone/importPhone'
+import userManage from '../pages/user/userManage'
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ export default new Router({
               path: 'importPhone',
               name: 'importPhone',
               component: importPhoneMange
+          },
+          {
+              path: 'user',
+              name: 'userManage',
+              component: userManage
           }
         ]
     }
