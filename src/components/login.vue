@@ -83,7 +83,7 @@ export default {
                     this.$router.push({
                         name: 'AdminIndex',
                         path: '/admin'
-                    },);
+                    });
                 } else {
                     console.log('error submit!!');
                     return false;

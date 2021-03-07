@@ -2,7 +2,7 @@
     <div class="container">
         <div class="user-search">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
-                <el-form-item label="手机号" class="login-formitem" prop="phone">
+                <el-form-item label="手机号" prop="phone">
                     <el-input type="number" v-model="ruleForm.phone" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item class="check-btnbox">
@@ -116,6 +116,10 @@
             },
             handleEdit(index, row) {
                 console.log(index, row.date);
+                this.$router.push({
+                    name: 'userDetail',
+                    path: 'userDetail'
+                })
             },
             handleDelete(index, row) {
                 console.log(index, row);
