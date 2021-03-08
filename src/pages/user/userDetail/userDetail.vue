@@ -45,7 +45,7 @@
                     style="width: 100%">
                     <el-table-column prop="imgurl" label="头像" width="120">
                         <template slot-scope="scope">
-                            <img :src="scope.row.imgurl" class="td-header" width="100" height="100" alt="">
+                            <img :src="scope.row.imgurl" class="td-header" width="50" height="50" alt="">
                         </template>
                     </el-table-column>
                     <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
@@ -553,7 +553,7 @@
         },
     }
 </script>
-<style lang="stylus" scope>
+<style lang="stylus" scoped>
     .container
         width 100%;
         // height 100%;
@@ -562,6 +562,7 @@
     .header-table
         width 100%;
         height 140px;     
+        padding 0 10px!important;
     .tdbgc
         padding 24px 0!important;
         border-bottom: none!important;
@@ -572,6 +573,7 @@
         color: #fff;
     .block
         margin-top 20px
+        margin-bottom 30px;
     .thnonebober
         border-bottom: none!important;
     .user-message
@@ -646,5 +648,4 @@
                 background-color #fff;
         .tdlist .td-header
             border-radius 50%;
-
 </style>

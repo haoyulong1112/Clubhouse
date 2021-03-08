@@ -4,9 +4,10 @@ import Login from '../components/Login'
 import AdminIndex from '../components/AdminIndex'
 import ProductManage from '../pages/product/ProductManage'
 import ClientManage from '../pages/client/ClientManage'
-import importPhoneMange from '../pages/importPhone/importPhone'
+import importPhoneMange from '../pages/importphone/importPhone'
 import userManage from '../pages/user/userManage'
-import userDetail from '../pages/user/userDetail/userDetail'
+import clubmange from '../pages/clubmange/clubmange'
+import userDetail from '../pages/user/userdetail/userDetail'
 
 Vue.use(Router)
 
@@ -38,7 +39,7 @@ export default new Router({
               component: ClientManage
           },
           {
-              path: 'importPhone',
+              path: 'importphone',
               name: 'importPhone',
               component: importPhoneMange
           },
@@ -48,7 +49,12 @@ export default new Router({
               component: userManage,
           },
           {
-            path: 'userDetail',
+              path: 'clubmange',
+              name: 'clubmange',
+              component: clubmange,
+          },
+          {
+            path: 'userdetail',
             name: 'userDetail',
             component: userDetail
           },

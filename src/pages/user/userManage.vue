@@ -133,7 +133,7 @@
         },
     }
 </script>
-<style lang="stylus" scope>
+<style lang="stylus" scoped>
     .container
         width 100%;
         height 100%;

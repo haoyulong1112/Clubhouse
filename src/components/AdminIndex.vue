@@ -22,6 +22,9 @@
                  <el-menu-item index="/admin/importPhone">
                    <i class="el-icon-mobile-phone"></i>手机号导入
                  </el-menu-item>
+                 <el-menu-item index="/admin/clubmange">
+                   <i class="el-icon-s-grid"></i>俱乐部管理
+                 </el-menu-item>
                 <el-submenu index="1">
                     <template slot="title">
                         <i class="el-icon-setting"></i>
