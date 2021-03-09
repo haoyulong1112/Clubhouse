@@ -1,20 +1,21 @@
 <template>
     <div class="login">
+        <img class="login-bgc" src="@/assets/login.jpg" alt="">
         <div class="login-assembly">
-            <h3>ClubHouse管理后台登录</h3>           
-        </div>
-        <div class="login-input">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item class="login-formitem" prop="account">
-                    <el-input class="login-account" placeholder="用户名" type="text" v-model="ruleForm.account" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item class="login-formitem" prop="checkPass">
-                    <el-input placeholder="密码" type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item class="login-btnbox">
-                    <el-button class="login-btn" type="primary" @click="submitForm('ruleForm')">登录</el-button>
-                </el-form-item>
-            </el-form>
+            <h3>ClubHouse管理后台登录</h3>   
+            <div class="login-input">
+                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                    <el-form-item class="login-formitem" prop="account">
+                        <el-input class="login-account" placeholder="用户名" type="text" v-model="ruleForm.account" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item class="login-formitem" prop="checkPass">
+                        <el-input placeholder="密码" type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item class="login-btnbox">
+                        <el-button class="login-btn" @click="submitForm('ruleForm')">登录</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>        
         </div>
     </div>
 </template>
@@ -103,15 +104,47 @@ export default {
         background-color #fff;
         position relative;
         overflow hidden;
+        > .login-bgc
+            position absolute;
+            top: 0;
+            left: 0;
+            width 100%;
+            height 100%;
     .login-assembly
-        margin-top 10%;
+        // margin-top 10%;
+        width 6.14rem;
+        height 4.40rem;
+        position absolute;
+        top:50%;
+        left 50%;
+        margin-left -3.07rem;
+        margin-top: -2.20rem;
+        background: #FFFFFF;
+        box-shadow: 0 0.11rem 0.22rem 0 rgba(109,147,176,0.08);
+        border-radius: 0.30rem;
+        > h3
+            margin-top 0.50rem!important;
+            margin-bottom 0.52rem;
+            font-family: PingFangSC-Semibold;
+            font-size: 0.24rem;
+            color: #002241;
+            letter-spacing: 0;
+            line-height: 0.24rem;
     .login-input
-        width 400px
+        width 3.66rem
         margin 0 auto;
     .login-formitem > div
         margin-left 0!important;
     .login-btnbox> div
         margin-left 0!important;
     .login-btn
-        width 300px;
+        width 3.73rem;
+        background: #7DBFBB;
+        box-shadow: 0 0.12rem 0.59rem 0 rgba(159,167,185,0.50);
+        border-radius: 0.10rem;
+        border: none;
+        color #fff;
+    .login-btn:hover
+        background: #7DBFBB!important;
+        color #fff!important;
 </style>

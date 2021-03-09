@@ -31,32 +31,38 @@ export default new Router({
           {
               path: 'product',
               name: 'ProductManage',
-              component: ProductManage
+              component: ProductManage,
+              meta: {title: '活动列表'}
           },
           {
               path: 'client',
               name: 'ClientManage',
-              component: ClientManage
+              component: ClientManage,
+              meta: {title: '活动列表'}
           },
           {
               path: 'importphone',
               name: 'importPhone',
-              component: importPhoneMange
+              component: importPhoneMange,
+              meta: {title: '手机号导入',icon: 'el-icon-mobile-phone'}
           },
           {
               path: 'user',
               name: 'userManage',
               component: userManage,
+              meta: {title: '用户管理列表',icon: 'el-icon-user'}
           },
           {
               path: 'clubmange',
               name: 'clubmange',
               component: clubmange,
+              meta: {title: '俱乐部管理列表',icon: 'el-icon-s-grid'}
           },
           {
             path: 'userdetail',
             name: 'userDetail',
-            component: userDetail
+            component: userDetail,
+            meta: {title: '用户详情',icon: 'el-icon-user'}
           },
         ]
     }

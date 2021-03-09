@@ -5,26 +5,48 @@
                 <div class="user-header">
                     <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
                 </div>
-                <el-table class="header-table"
-                    :data="userData"
-                    :header-cell-class-name="thnonebober"
-                    :cell-class-name="tdbgc">
-                    <el-table-column prop="id" label="编号ID" width="80"></el-table-column>
-                    <el-table-column prop="name" label="昵称" width="120"></el-table-column>
-                    <el-table-column prop="phone" label="手机号" width="140"></el-table-column>
-                    <el-table-column prop="email" label="邮箱" width="160"></el-table-column>
-                    <el-table-column prop="enterTime" label="加入时间" width="140"></el-table-column>
-                    <el-table-column prop="logintime" label="最后登录时间" width="140"></el-table-column>
-                    <el-table-column prop="timelone" label="在线时长" width="140"></el-table-column>
-                    <el-table-column prop="room" label="开设房间" width="140"></el-table-column>
-                    <el-table-column prop="club" label="关注的俱乐部" width="140"></el-table-column>
-                </el-table>
+                <table class="user-data">
+                    <thead>
+                        <tr>
+                            <th>编号ID</th>
+                            <th>昵称</th>
+                            <th>手机号</th>
+                            <th>邮箱</th>
+                            <th>加入时间</th>
+                            <th>最后登录时间</th>
+                            <th>在线时长</th>
+                            <th>开设房间</th>
+                            <th>关注的俱乐部</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{userData.id}}</td>
+                            <td>{{userData.name}}</td>
+                            <td>{{userData.phone}}</td>
+                            <td>{{userData.email}}</td>
+                            <td>{{userData.enterTime}}</td>
+                            <td>{{userData.logintime}}</td>
+                            <td>{{userData.timelone}}</td>
+                            <td>{{userData.room}}</td>
+                            <td>{{userData.club}}</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="user-invite">
-                    <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
                     <div class="invite-msg">
                         <span>邀请人</span>
                         <span>李逍遥</span>
                     </div>
+                    <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
+                </div>
+            </div>
+            <div class="userdetail-info">
+                <div>简介</div>
+                <div>
+                    可以为空<br />
+                    可以市一句话<br />
+                    可以是段落<br />
                 </div>
             </div>
         </div>
@@ -36,114 +58,110 @@
                 <div :class=" currentTab == 4 ? 'tab-item active': 'tab-item'" @click="changeTab(4)">邀请的人 <span>232人</span></div>
             </div>
             <div class="tab-content">  
-            <div class="user-box">  
-                <el-table v-if="currentTab == 1 ? true : false" class="list-table"
-                    :data="tableData1"
-                    highlight-current-row
-                    :cell-class-name="tdlist"
-                    height="850"
-                    style="width: 100%">
-                    <el-table-column prop="imgurl" label="头像" width="120">
-                        <template slot-scope="scope">
-                            <img :src="scope.row.imgurl" class="td-header" width="50" height="50" alt="">
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
-                    <el-table-column prop="name" label="昵称" width="120"></el-table-column>
-                    <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
-                    <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
-                    <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
-                    <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
-                    <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
-                    <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
-                    <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
-                    <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
-                    <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
-                </el-table>
-                <el-table v-if="currentTab == 2 ? true : false" class="list-table"
-                    :data="tableData2"
-                    highlight-current-row
-                    :cell-class-name="tdlist"
-                    height="850"
-                    style="width: 100%">
-                    <el-table-column prop="imgurl" label="头像" width="120">
-                        <template slot-scope="scope">
-                            <img :src="scope.row.imgurl" class="td-header" width="100" height="100" alt="">
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
-                    <el-table-column prop="name" label="昵称" width="120"></el-table-column>
-                    <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
-                    <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
-                    <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
-                    <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
-                    <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
-                    <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
-                    <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
-                    <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
-                    <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
-                </el-table>
-                <el-table v-if="currentTab == 3 ? true : false" class="list-table"
-                    :data="tableData3"
-                    highlight-current-row
-                    :cell-class-name="tdlist"
-                    height="850"
-                    style="width: 100%">
-                    <el-table-column prop="imgurl" label="头像" width="120">
-                        <template slot-scope="scope">
-                            <img :src="scope.row.imgurl" class="td-header" width="100" height="100" alt="">
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
-                    <el-table-column prop="name" label="昵称" width="120"></el-table-column>
-                    <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
-                    <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
-                    <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
-                    <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
-                    <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
-                    <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
-                    <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
-                    <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
-                    <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
-                </el-table>
-                <el-table v-if="currentTab == 4 ? true : false" class="list-table"
-                    :data="tableData4"
-                    highlight-current-row
-                    :cell-class-name="tdlist"
-                    height="850"
-                    style="width: 100%">
-                    <el-table-column prop="imgurl" label="头像" width="120">
-                        <template slot-scope="scope">
-                            <img :src="scope.row.imgurl" class="td-header" width="100" height="100" alt="">
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
-                    <el-table-column prop="name" label="昵称" width="120"></el-table-column>
-                    <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
-                    <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
-                    <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
-                    <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
-                    <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
-                    <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
-                    <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
-                    <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
-                    <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
-                </el-table>
+                <div class="user-box">  
+                    <el-table v-if="currentTab == 1 ? true : false" class="list-table"
+                        :data="tableData1"
+                        highlight-current-row
+                        :cell-class-name="tdlist"
+                        style="width: 100%">
+                        <el-table-column prop="imgurl" label="头像" width="120">
+                            <template slot-scope="scope">
+                                <img :src="scope.row.imgurl" class="td-header" width="50" height="50" alt="">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
+                        <el-table-column prop="name" label="昵称" width="120"></el-table-column>
+                        <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
+                        <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
+                        <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
+                        <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
+                        <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
+                        <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
+                        <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
+                        <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
+                        <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
+                    </el-table>
+                    <el-table v-if="currentTab == 2 ? true : false" class="list-table"
+                        :data="tableData2"
+                        highlight-current-row
+                        :cell-class-name="tdlist"
+                        style="width: 100%">
+                        <el-table-column prop="imgurl" label="头像" width="120">
+                            <template slot-scope="scope">
+                                <img :src="scope.row.imgurl" class="td-header" width="50" height="50" alt="">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
+                        <el-table-column prop="name" label="昵称" width="120"></el-table-column>
+                        <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
+                        <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
+                        <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
+                        <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
+                        <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
+                        <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
+                        <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
+                        <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
+                        <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
+                    </el-table>
+                    <el-table v-if="currentTab == 3 ? true : false" class="list-table"
+                        :data="tableData3"
+                        highlight-current-row
+                        :cell-class-name="tdlist"
+                        style="width: 100%">
+                        <el-table-column prop="imgurl" label="头像" width="120">
+                            <template slot-scope="scope">
+                                <img :src="scope.row.imgurl" class="td-header" width="50" height="50" alt="">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
+                        <el-table-column prop="name" label="昵称" width="120"></el-table-column>
+                        <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
+                        <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
+                        <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
+                        <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
+                        <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
+                        <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
+                        <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
+                        <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
+                        <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
+                    </el-table>
+                    <el-table v-if="currentTab == 4 ? true : false" class="list-table"
+                        :data="tableData4"
+                        highlight-current-row
+                        :cell-class-name="tdlist"
+                        style="width: 100%">
+                        <el-table-column prop="imgurl" label="头像" width="120">
+                            <template slot-scope="scope">
+                                <img :src="scope.row.imgurl" class="td-header" width="50" height="50" alt="">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
+                        <el-table-column prop="name" label="昵称" width="120"></el-table-column>
+                        <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
+                        <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
+                        <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
+                        <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
+                        <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
+                        <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
+                        <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
+                        <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
+                        <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
+                    </el-table>
+                </div>
+                <div class="block">
+                    <el-pagination
+                    :background="true"
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 20, 30]"
+                    :page-size="pageSize"
+                    :pager-count="9"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
+                    </el-pagination>
+                </div>
             </div>
-            </div>
-        </div>
-        <div class="block">
-            <el-pagination
-            :background="true"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[10, 20, 30]"
-            :page-size="pageSize"
-            :pager-count="9"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total">
-            </el-pagination>
         </div>
 
     </div>
@@ -162,7 +180,7 @@
                         { required: true, message: '请填写手机号', trigger: 'blur' }
                     ]
                 },
-                userData: [
+                userData: 
                     {
                         id: '12',
                         imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
@@ -177,7 +195,7 @@
                         room: '24',
                         club: '102',
                     }
-                ],
+                ,
                 tableData1: [
                     {
                         id: '12',
@@ -558,67 +576,115 @@
         width 100%;
         // height 100%;
         background-color #F5F7F9;
-        overflow hidden;
+        // overflow-y: scroll
     .header-table
         width 100%;
-        height 140px;     
-        padding 0 10px!important;
+        height 1.12rem;     
+        padding 0 .10rem!important;
     .tdbgc
-        padding 24px 0!important;
+        padding .24rem 0!important;
         border-bottom: none!important;
     .list-table
-        padding 0 20px!important;
+        padding 0 .20rem!important;
     .check
         background-color: #7DBFBB!important;
         color: #fff;
     .block
-        margin-top 20px
-        margin-bottom 30px;
-    .thnonebober
-        border-bottom: none!important;
+        margin-top .20rem
+        margin-bottom .30rem;
+    /deep/  .thnonebober
+                border-bottom: none!important;
     .user-message
         width 100%;
-        padding 10px 20px;
+        padding .26rem .20rem .2rem;;
         box-sizing: border-box;
-        margin-bottom 30px;
+        margin-bottom .30rem;
+        background-color #fff;
+        border-radius: 0.1rem;
+        box-sizing: border-box;
         > .user-box
             width 100%;
+            height: 1.12rem;
             display flex;
             align-items center;
-            border-radius 80px; 
-            background-color #fff;
+            justify-content: flex-start;
+            margin-bottom: 0.3rem;
+            position: relative;
+            > .user-data
+                height: 1.12rem;
+                margin-left: 0.1rem;
+                > thead th
+                    font-family: PingFangSC-Medium;
+                    font-size: .16rem;
+                    color: #002241;
+                    letter-spacing: 0;
+                    line-height: .16rem;
+                    padding: 0.2rem 0.2rem;
+                    box-sizing: border-box;
+                > tbody td
+                    font-family: PingFangSC-Medium;
+                    font-size: .14rem;
+                    color: #717985;
+                    text-align: center;
+                    line-height: .14rem;
             // box-shadow 
+        > .userdetail-info
+            width: 15.17rem;
+            height: 1.54rem;
+            background: #F5F4F5;
+            border-radius: .1rem;
+            overflow: hidden;
+            > div:first-of-type
+                font-family: PingFangSC-Medium;
+                font-size: .16rem;
+                color: #002241;
+                letter-spacing: 0;
+                text-align: left;
+                line-height: .16rem;
+                margin: .2rem .25rem;
+            > div:last-of-type
+                font-family: PingFangSC-Regular;
+                font-size: .14rem;
+                color: #002241;
+                letter-spacing: 0;
+                line-height: .26rem;
+                text-align: left;
+                padding-left: 0.25rem;
     .user-header
-        width 100px;
-        height 100px;
-        margin-left 20px;
+        width 1.00rem;
+        height 1.00rem;
+        // margin-left .20rem;
         >img 
             width 100%;
             height 100%;
             border-radius: 50%; 
     .user-invite
-        width 200px;
-        height 100px;
+        width 2.38rem;
+        height 1.24rem;
+        position: absolute;
         display flex;
         justify-content center;
         align-items center;
-        background-color #e1f2ed;
-        border-radius: 30px;
-        margin-right 20px;
+        background: #F5F4F5;
+        border-radius: .70rem;
+        right .20rem;
+        top: 0;
         > img 
-            width 80px;
-            height 80px;
+            width .80rem;
+            height .80rem;
             border-radius 50%;   
-            margin-right 20px
+            margin-left .30rem
         > div   
             display flex;
             justify-content flex-start;
             flex-direction column;
             > span  
-                font-weight bolder;
-                font-size 16px 
-            > span:first-of-type
-                margin-bottom 10px
+                font-size .16rem 
+                font-family: PingFangSC-Medium;
+                color: #002241;
+            > span:last-of-type
+                margin-top .40rem
+                color: #1B8668;
     .list-box
         width 100%;
         .tab
@@ -626,26 +692,34 @@
             display flex;
             justify-content flex-start;
             align-items center;
-            margin-bottom 20px;
+            margin-bottom .20rem;
             > .tab-item 
-                width 200px;
-                height 50px;
+                // width 2.00rem;
+                height .44rem;
                 background-color #fff;
                 text-align: center;
-                line-height 50px;
-                margin-right 30px;
+                margin-right .30rem;
                 font-weight bolder;
-                border-radius 20px; 
+                border-radius .04rem; 
                 cursor pointer;
+                font-family: PingFangSC-Medium;
+                font-size: .16rem;
+                color: #9FA7B9;
+                letter-spacing: 0;
+                box-sizing: border-box;
+                padding 0.12rem 0.2rem;
             > .tab-item.active
                 background-color #7DBFBB;
+                color: #fff;
         .tab-content
             width 100%;
+            background-color #fff;
             > .user-box
                 width 100%;
                 display flex;
                 align-items center;
-                background-color #fff;
         .tdlist .td-header
             border-radius 50%;
+    .block
+        background-color: #fff;
 </style>

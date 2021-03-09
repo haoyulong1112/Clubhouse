@@ -12,11 +12,11 @@ utils/rem.js
     const recalc = function () {
         const clientWidth = docEl.clientWidth
         if (pageWidth > 0) {
-            docEl.style.fontSize = (clientWidth && clientWidth < pageWidth ? clientWidth : pageWidth) / 7.5 + 'px'
+            docEl.style.fontSize = (clientWidth && clientWidth < pageWidth ? clientWidth : pageWidth) / 19.2 + 'px'
         } else {
-            docEl.style.fontSize = clientWidth / 7.5 + 'px'
+            docEl.style.fontSize = clientWidth / 19.2 + 'px'
         }
-        window.rem = clientWidth / 7.5;
+        window.rem = clientWidth / 19.2;
     }
     if (!document.addEventListener) return
     window.addEventListener(resizeEvt, recalc, false)

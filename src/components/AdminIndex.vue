@@ -2,7 +2,10 @@
     <el-container>
       <!-- 页面顶部 -->
         <el-header>
-            <div class="index-title" @click="goIndex">ClubHouse后台管理系统</div>
+            <div class="index-title" @click="goIndex">ClubHouse</div>
+            <div class="page-title">
+                <i :class="titleClass"></i>{{pageTitle}}
+            </div>
             <el-menu class="mennu-mine" :router="true" mode="horizontal" background-color="#FFF" text-color="#7DBFBB">
                 <el-submenu index="1" class="menuminebox">
                     <template slot="title"><i class="el-icon-user"></i></template>
@@ -72,7 +75,9 @@ export default {
     name: 'AdminIndex',
     data() {
         return {
-            routerChange: false
+            routerChange: false,
+            titleClass: '',
+            pageTitle: ''
         }
     },
     created(){
@@ -81,7 +86,9 @@ export default {
         $route:{
             immediate:true,
             handler(val,oldval){
-                console.log(this.routerChange);
+                console.log(val);
+                this.pageTitle = val.meta.title;
+                this.titleClass = val.meta.icon;
                 if(val && val.name == "AdminIndex"){
                     this.routerChange = true;
                 }else{
@@ -119,24 +126,48 @@ export default {
 .el-header {
     background-color: #FFF;
     color: #fff;
-    line-height: 60px;
+    height: 0.7rem!important;
+    line-height: 0.60rem;
     display flex;
-    justify-content space-between;
+    justify-content flex-start;
     align-items center;
-    padding-left 0!important;
+    padding 0 0!important;
+    position relative;
+
 }
 .el-container 
     width 100%;
     height 100%;
 .index-title
-    width 200px;
+    height 100%;
+    width 2.6rem;
     background-color #7DBFBB
     display inline-block;
     cursor: pointer;
+    font-family: PingFangSC-Semibold;
+    font-size: 0.36rem;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 0.60rem;
+.page-title
+    position absolute;
+    left 3.1rem;
+    height 0.7rem;
+    line-height 0.7rem;
+    font-family: PingFangSC-Medium;
+    font-size: 0.22rem;
+    color: #002241;
+    letter-spacing: 0;
+    > i
+        color: #CFDDDC;
+        margin-right 0.1rem;
 .mennu-mine
+    position absolute;
     border: none!important;
+    height 0.7rem!important;
+    right: 0.2rem;
 .el-aside
-    width 200px!important;
+    width 2.6rem!important;
     height 100%;
     font-weight: bolder;
     background-color #4D7175;
@@ -144,12 +175,14 @@ export default {
         border-right: none!important;
 .el-sidebox > li
     text-align left!important;
-    padding-left 30px!important;
+    padding-left 0.50rem!important;
 .el-submenu > div
     padding 0!important;
-.el-submenu > div .el-icon-arrow-down {
-    right: 60px!important;
-}
+    height 0.7rem!important;
+    line-height 0.7rem!important;
+// .el-submenu > div .el-icon-arrow-down {
+//     left: 1rem!important;
+// }
 .el-sidebox i
     color: #E0F0F0!important;
 .menuminebox .el-icon-arrow-down {
@@ -159,14 +192,18 @@ export default {
     color #7DBFBB!important;
     font-weight: bolder;
 .menuitems
-    font-size: 12px!important;
+    font-size: 0.12rem!important;
 .el-main
     background-color: #F5F7F9;
     box-sizing:border-box;
-    padding 20px;
+    padding 0.50rem;
+    width 100%;
+    height 100%;
+    overflow scroll;
 .indexContent
     width 100%;
     height 100%;
     background-color: #fff;
     overflow hidden;
+    font-size: 0.24rem;
 </style>
