@@ -196,7 +196,7 @@ export default {
 .el-main
     background-color: #F5F7F9;
     box-sizing:border-box;
-    padding 0.50rem;
+    padding 0.3rem;
     width 100%;
     height 100%;
     overflow scroll;

@@ -15,7 +15,6 @@
             :header-cell-class-name="headerclass"
             :data="tableData"
             :cell-class-name="usertd"
-            height="6rem"
             highlight-current-row
             style="width: 100%">
             <el-table-column prop="date" label="编号ID" width="120"></el-table-column>
@@ -112,6 +111,22 @@
                     date: '2016-05-07',
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-07',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-07',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-07',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-07',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
                 }
                 ],
                 headerclass: 'headercss',
@@ -151,14 +166,14 @@
 <style lang="stylus" scoped>
     .container
         width 100%;
-        height 100%;
-        overflow hidden;
+        // height 100%;
+        // overflow-y scroll;
         background-color #fff;
         box-shadow: 0 0.11rem 0.22rem 0 rgba(109,147,176,0.08);
         border-radius: 0.08rem;
     /deep/.user-search
         width 100%;
-        margin-top: 0.20rem
+        padding-top: 0.20rem
         > .el-form
             display flex;
             justify-content flex-start;
