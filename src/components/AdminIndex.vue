@@ -25,31 +25,34 @@
                  <el-menu-item index="/admin/importPhone">
                    <i class="el-icon-mobile-phone"></i>手机号导入
                  </el-menu-item>
-                 <el-menu-item index="/admin/clubmange">
+                 <!-- <el-menu-item index="/admin/clubmange">
                    <i class="el-icon-s-grid"></i>俱乐部管理
+                 </el-menu-item> -->
+                 <el-menu-item index="/admin/system">
+                   <i class="el-icon-s-tools"></i>系统配置
                  </el-menu-item>
                 <el-submenu index="1">
                     <template slot="title">
-                        <i class="el-icon-setting"></i>
-                        <span>系统配置</span>
+                        <i class="el-icon-s-custom"></i>
+                        <span>管理员</span>
                     </template>
-                    <el-menu-item class="menuitems" index="/admin/product">
-                        产品管理
+                    <el-menu-item class="menuitems" index="/admin/masterset">
+                        管理员设置
                     </el-menu-item>
-                    <el-menu-item class="menuitems" index="/admin/client">
-                        客户管理
+                    <el-menu-item class="menuitems" index="/admin/mastermsgset">
+                        管理员信息设置
                     </el-menu-item>
                 </el-submenu>
                 <el-submenu index="2">
                     <template slot="title">
-                        <i class="el-icon-setting"></i>
-                        <span>系统配置</span>
+                        <i class="el-icon-s-grid"></i>
+                        <span>俱乐部管理</span>
                     </template>
-                    <el-menu-item class="menuitems" index="/admin/product">
-                        产品管理
+                    <el-menu-item class="menuitems" index="/admin/clubmange">
+                        俱乐部列表
                     </el-menu-item>
-                    <el-menu-item  class="menuitems" index="/admin/client">
-                        客户管理
+                    <el-menu-item  class="menuitems" index="/admin/clubexamine">
+                        俱乐部审核列表
                     </el-menu-item>
                 </el-submenu>
                  <el-menu-item index="/admin/product">
@@ -126,8 +129,8 @@ export default {
 .el-header {
     background-color: #FFF;
     color: #fff;
-    height: 0.7rem!important;
-    line-height: 0.60rem;
+    height: 70px!important;
+    line-height: 60px;
     display flex;
     justify-content flex-start;
     align-items center;
@@ -140,34 +143,34 @@ export default {
     height 100%;
 .index-title
     height 100%;
-    width 2.6rem;
+    width 260px;
     background-color #7DBFBB
     display inline-block;
     cursor: pointer;
     font-family: PingFangSC-Semibold;
-    font-size: 0.36rem;
+    font-size: 36px;
     color: #FFFFFF;
     letter-spacing: 0;
-    line-height: 0.60rem;
+    line-height: 60px;
 .page-title
     position absolute;
-    left 3.1rem;
-    height 0.7rem;
-    line-height 0.7rem;
+    left 310px;
+    height 70px;
+    line-height 70px;
     font-family: PingFangSC-Medium;
-    font-size: 0.22rem;
+    font-size: 22px;
     color: #002241;
     letter-spacing: 0;
     > i
         color: #CFDDDC;
-        margin-right 0.1rem;
+        margin-right 10px;
 .mennu-mine
     position absolute;
     border: none!important;
-    height 0.7rem!important;
-    right: 0.2rem;
+    height 70px!important;
+    right: 20px;
 .el-aside
-    width 2.6rem!important;
+    width 260px!important;
     height 100%;
     font-weight: bolder;
     background-color #4D7175;
@@ -175,13 +178,13 @@ export default {
         border-right: none!important;
 .el-sidebox > li
     text-align left!important;
-    padding-left 0.50rem!important;
+    padding-left 50px!important;
 .el-submenu > div
     padding 0!important;
-    height 0.7rem!important;
-    line-height 0.7rem!important;
+    height 70px!important;
+    line-height 70px!important;
 // .el-submenu > div .el-icon-arrow-down {
-//     left: 1rem!important;
+//     left: 1px!important;
 // }
 .el-sidebox i
     color: #E0F0F0!important;
@@ -192,11 +195,11 @@ export default {
     color #7DBFBB!important;
     font-weight: bolder;
 .menuitems
-    font-size: 0.12rem!important;
+    font-size: 12px!important;
 .el-main
     background-color: #F5F7F9;
     box-sizing:border-box;
-    padding 0.3rem;
+    padding 30px;
     width 100%;
     height 100%;
     overflow scroll;
@@ -205,5 +208,5 @@ export default {
     height 100%;
     background-color: #fff;
     overflow hidden;
-    font-size: 0.24rem;
+    font-size: 24px;
 </style>

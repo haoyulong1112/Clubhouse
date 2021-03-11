@@ -10,3 +10,7 @@ html,body {
 .el-textarea__inner:focus {
     border-color: #7DBFBB!important;
 }
+.el-pagination .number.active{
+    background-color: #7DBFBC!important;
+    color: #fff!important;
+}

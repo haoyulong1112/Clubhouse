@@ -200,50 +200,51 @@
     .container
         width 100%;
         background-color: #fff;
+        padding-bottom 60px
     /deep/.club-search
         width 100%;
-        padding-top: 0.20rem
+        padding-top: 20px
         > .el-form
             display flex;
             justify-content flex-start;
             > div:first-of-type
-                width 5rem
+                width 500px
     /deep/ .phone-label .el-form-item__label
         font-family: PingFangSC-Semibold;
-        font-size: 0.2rem!important;
+        font-size: 20px!important;
         color: #002241!important;
-        width 1rem!important;
+        width 100px!important;
         letter-spacing: 0;
-        margin-left 0.3rem;
+        margin-left 30px;
     /deep/ .phone-label .el-form-item__content
-        margin-left 1.05rem;
+        margin-left 105px;
     /deep/ .check-btnbox> div
-        margin-left 0.20rem!important
+        margin-left 20px!important
     .check-btnbox .el-button
         background: #7DBFBC;
-        border-radius: 0.04rem;
+        border-radius: 4px;
         color: #fff;
     .club-number
         width 100%;
         text-align left;
-        margin-top: .50rem;
+        margin-top: 50px;
         box-sizing: border-box;
-        padding-left: .30rem;
+        padding-left: 30px;
         font-family: PingFangSC-Medium;
-        font-size: .16rem;
+        font-size: 16px;
         color: #2C3645;
         letter-spacing: 0;
         > span
             font-weight: bolder;
     .club-while
         width 100%;
-        padding-left 0.3rem;
+        padding-left 30px;
         box-sizing: border-box; 
         > h3
             text-align left;
-            text-indent: .10rem;
+            text-indent: 10px;
             font-family: PingFangSC-Medium;
-            font-size: .16rem;
+            font-size: 16px;
             color: #002241;
         > .first-class
             width 100%;
@@ -251,30 +252,30 @@
             justify-content flex-start;
             align-items center;
             box-sizing border-box;
-            padding-left .10rem;
-            height .50rem;
+            padding-left 10px;
+            height 50px;
             position: relative;
             background: #E0F0F0;
             > div
-                margin-right: .20rem;
+                margin-right: 20px;
                 position relative;
                 box-sizing border-box;
                 cursor: pointer;
                 font-family: PingFangSC-Semibold;
-                font-size: .16rem;
+                font-size: 16px;
                 color: #717985;
                 letter-spacing: 0;
                 > span
                     position absolute;
-                    bottom -0.1rem;
+                    bottom -10px;
                     left 50%;
-                    width .2rem;
-                    height .05rem;
-                    margin-left -0.1rem;
+                    width 20px;
+                    height 5px;
+                    margin-left -10px;
                     background-color #ed1941;
-                    border-radius: .02rem;
+                    border-radius: 2px;
             > div:first-of-type
-                font-size .16rem;
+                font-size 16px;
                 font-family: PingFangSC-Medium;
                 color: #2C3645;
                 letter-spacing: 0;
@@ -283,10 +284,10 @@
                 color: #2C3645
             .editclass1
                 position absolute;
-                right .10rem;
-                top: .20rem;
+                right 10px;
+                top: 20px;
                 font-family: PingFangSC-Medium;
-                font-size: .14rem;
+                font-size: 14px;
                 color: #1B8668;
                 text-decoration: underline
         > .second-class
@@ -295,30 +296,30 @@
             justify-content flex-start;
             align-items center;
             box-sizing border-box;
-            padding-left .10rem;
-            height .50rem;
+            padding-left 10px;
+            height 50px;
             position: relative;
             background: #F8FCFC;
             > div
-                margin-right: .20rem;
+                margin-right: 20px;
                 position relative;
                 box-sizing border-box;
                 cursor: pointer;
                 font-family: PingFangSC-Semibold;
-                font-size: .16rem;
+                font-size: 16px;
                 color: #717985;
                 letter-spacing: 0;
                 > span
                     position absolute;
-                    bottom -0.1rem;
+                    bottom -10px;
                     left 50%;
-                    width .2rem;
-                    height .05rem;
-                    margin-left -0.1rem;
+                    width 20px;
+                    height 5px;
+                    margin-left -10px;
                     background-color #ed1941;
-                    border-radius: .02rem;
+                    border-radius: 2px;
             > div:first-of-type
-                font-size .16rem;
+                font-size 16px;
                 font-family: PingFangSC-Medium;
                 color: #2C3645;
                 letter-spacing: 0;
@@ -327,15 +328,16 @@
                 color: #2C3645
             .editclass1
                 position absolute;
-                right .10rem;
-                top: .20rem;
+                right 10px;
+                top: 20px;
                 font-family: PingFangSC-Medium;
-                font-size: .14rem;
+                font-size: 14px;
                 color: #1B8668;
                 text-decoration: underline
     .club-list
-        padding-left: 0.3rem;
-        margin-top 0.12rem;
+        padding-left: 30px;
+        margin-top 12px;
+        box-sizing: border-box;
     /deep/ .headerclass
         background: #F5F6FA;   
     /deep/ .check
@@ -343,11 +345,11 @@
         color: #fff;
         margin-left 0!important;
     .block
-        margin-top 0.50rem
+        margin-top 50px
     .fensisty
         text-decoration underline;
         font-family: PingFangSC-Medium;
-        font-size: .14rem;
+        font-size: 14px;
         color: #1B8668;
         cursor pointer;
 </style>

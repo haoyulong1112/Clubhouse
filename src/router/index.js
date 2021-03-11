@@ -7,7 +7,11 @@ import ClientManage from '../pages/client/ClientManage'
 import importPhoneMange from '../pages/importphone/importPhone'
 import userManage from '../pages/user/userManage'
 import clubmange from '../pages/clubmange/clubmange'
+import clubexamineList from '../pages/clubmange/clubexamine/clubexaminelist'
 import userDetail from '../pages/user/userdetail/userDetail'
+import masterSet from '../pages/master/masterset/masterset'
+import mastermsgSet from '../pages/master/mastermsgset/mastermsgset'
+import systemconfig from '../pages/system/systemconfig'
 
 Vue.use(Router)
 
@@ -56,13 +60,37 @@ export default new Router({
               path: 'clubmange',
               name: 'clubmange',
               component: clubmange,
-              meta: {title: '俱乐部管理列表',icon: 'el-icon-s-grid'}
+              meta: {title: '俱乐部列表',icon: 'el-icon-s-grid'}
+          },
+          {
+              path: 'clubexamine',
+              name: 'clubexaminelist',
+              component: clubexamineList,
+              meta: {title: '俱乐部审核列表',icon: 'el-icon-s-grid'}
+          },
+          {
+              path: 'system',
+              name: 'systemconfig',
+              component: systemconfig,
+              meta: {title: '系统配置',icon: 'el-icon-s-tools'}
           },
           {
             path: 'userdetail',
             name: 'userDetail',
             component: userDetail,
             meta: {title: '用户详情',icon: 'el-icon-user'}
+          },
+          {
+            path: 'masterset',
+            name: 'masterset',
+            component: masterSet,
+            meta: {title: '管理员设置',icon: 'el-icon-s-custom'}
+          },
+          {
+            path: 'mastermsgset',
+            name: 'mastermsgset',
+            component: mastermsgSet,
+            meta: {title: '管理员信息设置',icon: 'el-icon-s-custom'}
           },
         ]
     }

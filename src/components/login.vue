@@ -112,36 +112,36 @@ export default {
             height 100%;
     .login-assembly
         // margin-top 10%;
-        width 6.14rem;
-        height 4.40rem;
+        width 614px;
+        height 440px;
         position absolute;
         top:50%;
         left 50%;
-        margin-left -3.07rem;
-        margin-top: -2.20rem;
+        margin-left -307px;
+        margin-top: -220px;
         background: #FFFFFF;
-        box-shadow: 0 0.11rem 0.22rem 0 rgba(109,147,176,0.08);
-        border-radius: 0.30rem;
+        box-shadow: 0 11px 22px 0 rgba(109,147,176,0.08);
+        border-radius: 30px;
         > h3
-            margin-top 0.50rem!important;
-            margin-bottom 0.52rem;
+            margin-top 50px!important;
+            margin-bottom 52px;
             font-family: PingFangSC-Semibold;
-            font-size: 0.24rem;
+            font-size: 24px;
             color: #002241;
             letter-spacing: 0;
-            line-height: 0.24rem;
+            line-height: 24px;
     .login-input
-        width 3.66rem
+        width 366px
         margin 0 auto;
     .login-formitem > div
         margin-left 0!important;
     .login-btnbox> div
         margin-left 0!important;
     .login-btn
-        width 3.73rem;
+        width 373px;
         background: #7DBFBB;
-        box-shadow: 0 0.12rem 0.59rem 0 rgba(159,167,185,0.50);
-        border-radius: 0.10rem;
+        box-shadow: 0 12px 59px 0 rgba(159,167,185,0.50);
+        border-radius: 10px;
         border: none;
         color #fff;
     .login-btn:hover

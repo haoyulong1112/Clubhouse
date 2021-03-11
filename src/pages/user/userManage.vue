@@ -31,13 +31,15 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <el-button
+                    <div class="usertable-btn" @click="handleDelete(scope.$index, scope.row)">封禁</div>
+                    <div class="usertable-btn" @click="handleEdit(scope.$index, scope.row)">查看详情</div>
+                    <!-- <el-button
                     size="mini"
                     type="danger"
                     @click="handleDelete(scope.$index, scope.row)">封禁</el-button>
                     <el-button class="check"
                     size="mini"
-                    @click="handleEdit(scope.$index, scope.row)">查看详情</el-button>
+                    @click="handleEdit(scope.$index, scope.row)">查看详情</el-button> -->
                 </template>
             </el-table-column>
         </el-table>
@@ -166,35 +168,40 @@
 <style lang="stylus" scoped>
     .container
         width 100%;
-        // height 100%;
-        // overflow-y scroll;
+        // overflow hidden;
+        padding-bottom 60px;
         background-color #fff;
-        box-shadow: 0 0.11rem 0.22rem 0 rgba(109,147,176,0.08);
-        border-radius: 0.08rem;
+        box-shadow: 0 11px 22px 0 rgba(109,147,176,0.08);
+        border-radius: 8px;
     /deep/.user-search
         width 100%;
-        padding-top: 0.20rem
+        padding-top: 20px
         > .el-form
             display flex;
             justify-content flex-start;
             > div:first-of-type
-                width 5rem
-    .phone-label .el-form-item__label
+                // width 500px
+    /deep/ .phone-label .el-form-item__label
         font-family: PingFangSC-Semibold;
-        font-size: 0.16rem!important;
+        font-size: 16px!important;
         color: #002241;
         letter-spacing: 0;
+    /deep/ .phone-label > .el-form-item__content
+        width 220px!important;
+        height 40px!important;
     /deep/ .check-btnbox> div
-        margin-left 0.20rem!important
+        margin-left 20px!important
     .check-btnbox .el-button
         background: #7DBFBC;
-        border-radius: 0.04rem;
+        border-radius: 4px;
         color: #fff;
+        width 80px;
+        height 40px;
     .check-btnbox .el-button:hover
         color: #fff;
         background: #7DBFBC;
     .el-table
-        padding 0 0.20rem!important;
+        padding 0 20px!important;
     .check
         background-color: #7DBFBB!important;
         color: #fff;
@@ -203,10 +210,18 @@
         background-color: #F5F6FA!important;
         color #002241!important;
     .block
-        margin-top 0.50rem
-        height: 0.5rem;
-        > div
-            height: 0.5rem;
+        margin-top 40px
+        // margin-bottom 60px
     /deep/  .user-td
-        padding: 0.06rem 0!important; 
+        padding: 0px 0!important; 
+    /deep/ .headercss
+        background: #F5F6FA;
+        color: #002241;
+    .usertable-btn
+        font-size: 14px;
+        color: #7DBFBB;
+        text-decoration underline;
+        margin-right 5px
+        white-space nowrap;
+        cursor: pointer;
 </style>

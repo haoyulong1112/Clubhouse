@@ -2,10 +2,62 @@
     <div class="container">
         <div class="user-message">
             <div class="user-box">
-                <div class="user-header">
+                <el-row :gutter="10">
+                    <el-col :span="2">
+                        <div class="grid-content bg-purple">
+                            <div class="user-header">
+                                <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
+                            </div>
+                        </div>
+                    </el-col>
+                    <el-col :span="16">
+                        <div class="grid-content bg-purple">
+                            <table class="user-data">
+                                <thead>
+                                    <tr>
+                                        <th>编号ID</th>
+                                        <th>昵称</th>
+                                        <th>手机号</th>
+                                        <th>邮箱</th>
+                                        <th>加入时间</th>
+                                        <th>最后登录时间</th>
+                                        <th>在线时长</th>
+                                        <th>开设房间</th>
+                                        <th>关注的俱乐部</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{userData.id}}</td>
+                                        <td>{{userData.name}}</td>
+                                        <td>{{userData.phone}}</td>
+                                        <td>{{userData.email}}</td>
+                                        <td>{{userData.enterTime}}</td>
+                                        <td>{{userData.logintime}}</td>
+                                        <td>{{userData.timelone}}</td>
+                                        <td>{{userData.room}}</td>
+                                        <td>{{userData.club}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </el-col>
+                    <el-col :span="6">
+                        <div class="grid-content bg-purple">
+                            <div class="user-invite">
+                                <div class="invite-msg">
+                                    <span>邀请人</span>
+                                    <span>李逍遥</span>
+                                </div>
+                                <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
+                            </div>
+                        </div>
+                    </el-col>
+                </el-row>
+                <!-- <div class="user-header">
                     <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
-                </div>
-                <table class="user-data">
+                </div> -->
+                <!-- <table class="user-data">
                     <thead>
                         <tr>
                             <th>编号ID</th>
@@ -39,7 +91,7 @@
                         <span>李逍遥</span>
                     </div>
                     <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
-                </div>
+                </div> -->
             </div>
             <div class="userdetail-info">
                 <div>简介</div>
@@ -574,116 +626,115 @@
 <style lang="stylus" scoped>
     .container
         width 100%;
-        // height 100%;
         background-color #F5F7F9;
-        // overflow-y: scroll
     .header-table
         width 100%;
-        height 1.12rem;     
-        padding 0 .10rem!important;
+        height 112px;     
+        padding 0 10px!important;
     .tdbgc
-        padding .24rem 0!important;
+        padding 24px 0!important;
         border-bottom: none!important;
     .list-table
-        padding 0 .20rem!important;
+        padding 0 20px!important;
     .check
         background-color: #7DBFBB!important;
         color: #fff;
     .block
-        margin-top .20rem
-        margin-bottom .30rem;
+        margin-top 20px
+        margin-bottom 30px;
     /deep/  .thnonebober
                 border-bottom: none!important;
     .user-message
         width 100%;
-        padding .26rem .20rem .2rem;;
+        padding 26px 20px 2px;;
         box-sizing: border-box;
-        margin-bottom .30rem;
+        margin-bottom 30px;
         background-color #fff;
-        border-radius: 0.1rem;
+        border-radius: 10px;
         box-sizing: border-box;
         > .user-box
             width 100%;
-            height: 1.12rem;
-            display flex;
-            align-items center;
-            justify-content: flex-start;
-            margin-bottom: 0.3rem;
-            position: relative;
+            height: 112px;
+            // display flex;
+            // align-items center;
+            // justify-content: flex-start;
+            // margin-bottom: 30px;
+            // position: relative;
             > .user-data
-                height: 1.12rem;
-                margin-left: 0.1rem;
+                height: 112px;
+                margin-left: 10px;
                 > thead th
                     font-family: PingFangSC-Medium;
-                    font-size: .16rem;
+                    font-size: 16px;
                     color: #002241;
                     letter-spacing: 0;
-                    line-height: .16rem;
-                    padding: 0.2rem 0.2rem;
+                    line-height: 16px;
+                    padding: 20px 20px;
                     box-sizing: border-box;
                 > tbody td
                     font-family: PingFangSC-Medium;
-                    font-size: .14rem;
+                    font-size: 14px;
                     color: #717985;
                     text-align: center;
-                    line-height: .14rem;
+                    line-height: 14px;
             // box-shadow 
         > .userdetail-info
-            width: 15.17rem;
-            height: 1.54rem;
+            width: 100%;
+            height: 154px;
             background: #F5F4F5;
-            border-radius: .1rem;
+            border-radius: 10px;
             overflow: hidden;
+            margin-bottom: 20px;
             > div:first-of-type
                 font-family: PingFangSC-Medium;
-                font-size: .16rem;
+                font-size: 16px;
                 color: #002241;
                 letter-spacing: 0;
                 text-align: left;
-                line-height: .16rem;
-                margin: .2rem .25rem;
+                line-height: 16px;
+                margin: 20px 25px;
             > div:last-of-type
                 font-family: PingFangSC-Regular;
-                font-size: .14rem;
+                font-size: 14px;
                 color: #002241;
                 letter-spacing: 0;
-                line-height: .26rem;
+                line-height: 26px;
                 text-align: left;
-                padding-left: 0.25rem;
+                padding-left: 25px;
     .user-header
-        width 1.00rem;
-        height 1.00rem;
-        // margin-left .20rem;
+        width 100px;
+        height 100px;
+        // margin-left .20px;
         >img 
             width 100%;
             height 100%;
             border-radius: 50%; 
     .user-invite
-        width 2.38rem;
-        height 1.24rem;
+        width 238px;
+        height 124px;
         position: absolute;
         display flex;
         justify-content center;
         align-items center;
         background: #F5F4F5;
-        border-radius: .70rem;
-        right .20rem;
+        border-radius: 70px;
+        right 20px;
         top: 0;
         > img 
-            width .80rem;
-            height .80rem;
+            width 80px;
+            height 80px;
             border-radius 50%;   
-            margin-left .30rem
+            margin-left 30px
         > div   
             display flex;
             justify-content flex-start;
             flex-direction column;
             > span  
-                font-size .16rem 
+                font-size 16px 
                 font-family: PingFangSC-Medium;
                 color: #002241;
             > span:last-of-type
-                margin-top .40rem
+                margin-top 40px
                 color: #1B8668;
     .list-box
         width 100%;
@@ -692,22 +743,22 @@
             display flex;
             justify-content flex-start;
             align-items center;
-            margin-bottom .20rem;
+            margin-bottom 20px;
             > .tab-item 
-                // width 2.00rem;
-                height .44rem;
+                // width 2.00px;
+                height 44px;
                 background-color #fff;
                 text-align: center;
-                margin-right .30rem;
+                margin-right 30px;
                 font-weight bolder;
-                border-radius .04rem; 
+                border-radius 4px; 
                 cursor pointer;
                 font-family: PingFangSC-Medium;
-                font-size: .16rem;
+                font-size: 16px;
                 color: #9FA7B9;
                 letter-spacing: 0;
                 box-sizing: border-box;
-                padding 0.12rem 0.2rem;
+                padding 12px 2px;
             > .tab-item.active
                 background-color #7DBFBB;
                 color: #fff;
