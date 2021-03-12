@@ -8,6 +8,7 @@ import importPhoneMange from '../pages/importphone/importPhone'
 import userManage from '../pages/user/userManage'
 import clubmange from '../pages/clubmange/clubmange'
 import clubexamineList from '../pages/clubmange/clubexamine/clubexaminelist'
+import clubexamineApply from '../pages/clubmange/clubapply/clubexamineapply'
 import userDetail from '../pages/user/userdetail/userDetail'
 import masterSet from '../pages/master/masterset/masterset'
 import mastermsgSet from '../pages/master/mastermsgset/mastermsgset'
@@ -67,6 +68,12 @@ export default new Router({
               name: 'clubexaminelist',
               component: clubexamineList,
               meta: {title: '俱乐部审核列表',icon: 'el-icon-s-grid'}
+          },
+          {
+              path: 'clubapply',
+              name: 'clubexamineapply',
+              component: clubexamineApply,
+              meta: {title: '俱乐部申请',icon: 'el-icon-s-grid'}
           },
           {
               path: 'system',

@@ -51,8 +51,11 @@
                     <el-menu-item class="menuitems" index="/admin/clubmange">
                         俱乐部列表
                     </el-menu-item>
-                    <el-menu-item  class="menuitems" index="/admin/clubexamine">
+                    <el-menu-item class="menuitems" index="/admin/clubexamine">
                         俱乐部审核列表
+                    </el-menu-item>
+                    <el-menu-item class="menuitems" index="/admin/clubapply">
+                        俱乐部申请
                     </el-menu-item>
                 </el-submenu>
                  <el-menu-item index="/admin/product">
@@ -201,8 +204,8 @@ export default {
     box-sizing:border-box;
     padding 30px;
     width 100%;
-    height 100%;
-    overflow scroll;
+    // height 100%;
+    overflow auto;
 .indexContent
     width 100%;
     height 100%;

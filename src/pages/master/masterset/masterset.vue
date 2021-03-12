@@ -55,10 +55,22 @@
                         :data="tableData1"
                         highlight-current-row
                         style="width: 100%">
-                        <el-table-column prop="id" label="ID"></el-table-column>
-                        <el-table-column prop="name" label="昵称"></el-table-column>
-                        <el-table-column prop="phone" label="手机号"></el-table-column>
-                        <el-table-column prop="password" label="邮箱"></el-table-column>
+                        <el-table-column prop="id" label="ID" width="60"></el-table-column>
+                        <el-table-column label="昵称" width="220">
+                            <template slot-scope="scope">
+                                <input class="table-input" type="text" name="nikeame" v-model="scope.row.name">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="phone" label="手机号" width="220">
+                            <template slot-scope="scope">
+                                <input class="table-input" type="text" name="phone" v-model="scope.row.phone">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="password" label="密码" width="220">
+                            <template slot-scope="scope">
+                                <input class="table-input" type="text" name="password" v-model="scope.row.password">
+                            </template>
+                        </el-table-column>
                         <el-table-column label="操作">
                             <template>
                                 <div class="opation">
@@ -72,10 +84,22 @@
                         :data="tableData2"
                         highlight-current-row
                         style="width: 100%">
-                        <el-table-column prop="id" label="ID"></el-table-column>
-                        <el-table-column prop="name" label="昵称"></el-table-column>
-                        <el-table-column prop="phone" label="手机号"></el-table-column>
-                        <el-table-column prop="password" label="邮箱"></el-table-column>
+                        <el-table-column prop="id" label="ID" width="60"></el-table-column>
+                        <el-table-column prop="name" label="昵称">
+                            <template slot-scope="scope" width="220">
+                                <input class="table-input" type="text" name="nikeame" v-model="scope.row.name">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="phone" label="手机号" width="220">
+                            <template slot-scope="scope">
+                                <input class="table-input" type="text" name="phone" v-model="scope.row.phone">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="password" label="密码" width="220">
+                            <template slot-scope="scope">
+                                <input class="table-input" type="text" name="password" v-model="scope.row.password">
+                            </template>
+                        </el-table-column>
                         <el-table-column label="操作">
                             <template>
                                 <div class="opation">
@@ -228,7 +252,11 @@
     .container
         width 100%;
         background-color: #fff;
-        height 100%;
+        overflow hidden;
+        // height 100%;
+        // padding-bottom: 30px
+        // margin-bottom 50px
+        // box-sizing border-box;
     .addmaster
         width 100%;
         padding-top 40px;
@@ -290,13 +318,22 @@
             background: #7DBFBC;
     .block
         margin-top 40px;
+        // margin-bottom: 30px;
     .opation
         font-size: 14px;
         color: #1B8668;
-        text-align center;
+        text-align left;
         > span
             text-decoration: underline;
             cursor: pointer;
+    .table-input
+        width: 200px;
+        height: 40px
+        border: 1px solid #9BB0BF;
+        border-radius: 4px;
+        text-indent: 5px;
+    /deep/ .list-table .cell
+        text-overflow: initial;
     // /deep/ .master-ruleForm .el-form-item__content:nth-child(2)
     //     margin-left 0.1rem!important;
     // /deep/ .master-ruleForm .el-form-item__content:nth-child(3)

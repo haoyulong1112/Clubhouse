@@ -14,15 +14,23 @@
             <h3>筛选条件</h3>
             <div class="first-class">
                 <div>一级分类</div>
-                <!-- <div class="active">全部<span></span></div> -->
-                <div :class="currentFirstclass == index ? 'active': ''" v-for="(item,index) in firstClass" :key="`a${index}`" @click="changeClass1(index)">{{item}}<span v-if="currentFirstclass == index"></span></div>
-                <div class="editclass1">编辑</div>
+                <div :class="currentFirstclass == -1 ? 'active': ''" @click="changeClass1(-1)">全部<span v-if="currentFirstclass == -1"></span></div>
+                <div :class="currentFirstclass == index ? 'active': ''" v-for="(item,index) in firstClass1" :key="`a${index}`" @click="changeClass1(index)">{{item.class}}
+                    <span v-if="currentFirstclass == index"></span>
+                    <img class="delclass" v-if="delClassimg1" src="@/assets/del.png" alt="" @click.stop="delClass(index)">
+                </div>
+                <div class="delete" @click="candel1">{{deltext1}}</div>
+                <div class="editclass1" @click="addClass">新增</div>
             </div>
             <div class="second-class">
                 <div>二级分类</div>
-                <!-- <div class="active">全部<span></span></div> -->
-                <div :class="currentSecondclass == index ? 'active': ''" v-for="(item,index) in firstClass" :key="`a${index}`" @click="changeClass2(index)">{{item}}<span v-if="currentSecondclass == index"></span></div>
-                <div class="editclass1">编辑</div>
+                <div :class="currentSecondclass == -1 ? 'active': ''" @click="changeClass2(-1)">全部<span v-if="currentSecondclass == -1"></span></div>
+                <div :class="currentSecondclass == index ? 'active': ''" v-for="(item,index) in firstClass2" :key="`a${index}`" @click="changeClass2(index)">{{item.class}}
+                    <span v-if="currentSecondclass == index"></span>
+                    <img class="delclass" v-if="delClassimg2"  src="@/assets/del.png" alt="">
+                </div>
+                <div class="delete" @click="candel2">{{deltext2}}</div>
+                <div class="editclass1">新增</div>
             </div>
         </div>
         <div class="club-number">
@@ -35,25 +43,26 @@
                 :data="tableData"
                 highlight-current-row
                 style="width: 100%">
-                <el-table-column prop="date" label="俱乐部ID" width="120"></el-table-column>
-                <el-table-column prop="date" label="头像" width="120"></el-table-column>
-                <el-table-column prop="date" label="俱乐部名称" width="120"></el-table-column>
-                <el-table-column prop="date" label="分类" width="120"></el-table-column>
-                <el-table-column prop="date" label="管理员" width="120"></el-table-column>
-                <el-table-column prop="date" label="创建时间" width="120"></el-table-column>
-                <el-table-column prop="date" label="房间次数" width="120"></el-table-column>
-                <el-table-column prop="name" label="在线时长" width="120"></el-table-column>
-                <el-table-column prop="fensi" label="粉丝" width="120">
+                <el-table-column prop="date" label="俱乐部ID"></el-table-column>
+                <el-table-column prop="date" label="头像"></el-table-column>
+                <el-table-column prop="date" label="俱乐部名称"></el-table-column>
+                <el-table-column prop="date" label="分类"></el-table-column>
+                <el-table-column prop="date" label="管理员"></el-table-column>
+                <el-table-column prop="date" label="创建时间"></el-table-column>
+                <el-table-column prop="date" label="房间次数"></el-table-column>
+                <el-table-column prop="name" label="在线时长"></el-table-column>
+                <el-table-column prop="fensi" label="粉丝">
                     <template slot-scope="scope">
                         <span class="fensisty" @click="goFensi(scope.row.date)">{{scope.row.fensi}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="address" label="简介" width="120"></el-table-column>
+                <el-table-column prop="address" label="简介"></el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <el-button class="check"
+                        <span class="check" @click="handleEdit(scope.$index, scope.row)">查看详情</span>
+                        <!-- <el-button class="check"
                         size="mini"
-                        @click="handleEdit(scope.$index, scope.row)">查看详情</el-button>
+                        @click="handleEdit(scope.$index, scope.row)">查看详情</el-button> -->
                     </template>
                 </el-table-column>
             </el-table>
@@ -89,14 +98,54 @@
                     { required: true, message: '请填写手机号', trigger: 'blur' }
                 ]
             },
-            firstClass: [
-                '全部',
-                '股票',
-                '生活',
-                '娱乐',
-                '心理咨询',
-                '教育',
+            firstClass1: [
+                {
+                    id: 0,
+                    class: '点击',
+                },
+                {
+                    id: 1,
+                    class: '股票',
+                },
+                {
+                    id: 2,
+                    class: '生活',
+                },
+                {
+                    id: 3,
+                    class: '娱乐',
+                },
+                {
+                    id: 4,
+                    class: '心理咨询',
+                }
             ],
+            firstClass2: [
+                {
+                    id: 0,
+                    class: '点击',
+                },
+                {
+                    id: 1,
+                    class: '股票',
+                },
+                {
+                    id: 2,
+                    class: '生活',
+                },
+                {
+                    id: 3,
+                    class: '娱乐',
+                },
+                {
+                    id: 4,
+                    class: '心理咨询',
+                }
+            ],
+            delClassimg1: false,
+            delClassimg2: false,
+            deltext1: '删除',
+            deltext2: '删除',
             tableData: [{
                 date: '12',
                 name: '王小虎',
@@ -159,8 +208,8 @@
                     address: '上海市普陀区金沙江路 1518 弄'
                 }
             ],
-            currentFirstclass: 0,
-            currentSecondclass: 0,
+            currentFirstclass: -1,
+            currentSecondclass: -1,
             headerclass: 'headerclass',
             total: 100,
             currentPage: 1,
@@ -169,7 +218,12 @@
     },
     methods: {
         changeClass1(index){
+            console.log(index);
             this.currentFirstclass = index;
+        },
+        changeClass(val){
+            console.log(val);
+            // this.currentFirstclass = index;
         },
         changeClass2(index){
             this.currentSecondclass = index;
@@ -192,6 +246,72 @@
         },
         handleCurrentChange(val){
             console.log(val)
+        },
+        candel1(){
+            this.currentFirstclass = -1;
+            if(this.delClassimg1){
+                this.delClassimg1 = false;
+                this.deltext1 = '删除';
+            }else{
+                this.delClassimg1 = true;
+                this.deltext1 = '取消';
+            }
+        },
+        candel2(){
+            this.currentSecondclass = -1;
+            if(this.delClassimg2){
+                this.delClassimg2 = false;
+                this.deltext2 = '删除';
+            }else{
+                this.delClassimg2 = true;
+                this.deltext2 = '取消';
+            }
+        },
+        delClass(index){
+            this.$confirm('是否删除该分类?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+
+                    let data = this.firstClass1;
+                    for(let i in data){
+                        if(i == index){
+                            data.splice(index, 1); 
+                        }
+                    }
+                    this.firstClass1 = data;
+                }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
+        },
+        addClass(){
+            this.delClassimg1 = false;
+            this.$prompt('请输入分类', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                    }).then(({ value }) => {
+                        let newClass = {
+                            class: value,
+                        }
+                        this.firstClass1.push(newClass);
+                    this.$message({
+                        type: 'success',
+                        message: '添加成功' 
+                    });
+                    }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '取消输入'
+                    });       
+            });
         }
     }
   }
@@ -200,7 +320,7 @@
     .container
         width 100%;
         background-color: #fff;
-        padding-bottom 60px
+        // padding-bottom 60px
     /deep/.club-search
         width 100%;
         padding-top: 20px
@@ -257,7 +377,7 @@
             position: relative;
             background: #E0F0F0;
             > div
-                margin-right: 20px;
+                margin-right: 30px;
                 position relative;
                 box-sizing border-box;
                 cursor: pointer;
@@ -274,6 +394,12 @@
                     margin-left -10px;
                     background-color #ed1941;
                     border-radius: 2px;
+                > .delclass
+                    position absolute;
+                    top: -10px;
+                    right: -15px;
+                    width 17px;
+                    height 17px;
             > div:first-of-type
                 font-size 16px;
                 font-family: PingFangSC-Medium;
@@ -289,6 +415,14 @@
                 font-family: PingFangSC-Medium;
                 font-size: 14px;
                 color: #1B8668;
+                text-decoration: underline
+            .delete
+                position absolute;
+                right 45px;
+                top: 20px;
+                font-family: PingFangSC-Medium;
+                font-size: 14px;
+                color: #FF4E4E;
                 text-decoration: underline
         > .second-class
             width 100%;
@@ -301,7 +435,7 @@
             position: relative;
             background: #F8FCFC;
             > div
-                margin-right: 20px;
+                margin-right: 30px;
                 position relative;
                 box-sizing border-box;
                 cursor: pointer;
@@ -318,6 +452,12 @@
                     margin-left -10px;
                     background-color #ed1941;
                     border-radius: 2px;
+                > .delclass
+                    position absolute;
+                    top: -10px;
+                    right: -15px;
+                    width 17px;
+                    height 17px;
             > div:first-of-type
                 font-size 16px;
                 font-family: PingFangSC-Medium;
@@ -334,16 +474,27 @@
                 font-size: 14px;
                 color: #1B8668;
                 text-decoration: underline
+            .delete
+                position absolute;
+                right 45px;
+                top: 20px;
+                font-family: PingFangSC-Medium;
+                font-size: 14px;
+                color: #FF4E4E;
+                text-decoration: underline
     .club-list
         padding-left: 30px;
+        padding-right: 30px;
         margin-top 12px;
         box-sizing: border-box;
     /deep/ .headerclass
         background: #F5F6FA;   
     /deep/ .check
-        background-color: #7DBFBB!important;
-        color: #fff;
+        color: #7DBFBB;
+        font-size: 14px;
+        font-weight: bolder;
         margin-left 0!important;
+        text-decoration: underline;
     .block
         margin-top 50px
     .fensisty

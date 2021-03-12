@@ -5,11 +5,17 @@
                 <el-form-item class="phone-label" label="手机号" prop="phone">
                     <el-input type="number" v-model="ruleForm.phone" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item class="phone-label" label="俱乐部名称" prop="phone">
-                    <el-input type="number" v-model="ruleForm.phone" autocomplete="off"></el-input>
+                <el-form-item class="phone-label" label="俱乐部名称" prop="name">
+                    <el-input type="text" v-model="ruleForm.name" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item class="phone-label" label="状态" prop="phone">
-                    <el-input type="number" v-model="ruleForm.phone" autocomplete="off"></el-input>
+                <el-form-item class="phone-label" label="状态" prop="status">
+                    <el-select v-model="ruleForm.status" placeholder="请选择状态">
+                        <!-- <el-option label="全部" value="0"></el-option> -->
+                        <el-option label="审核中" value="1"></el-option>
+                        <el-option label="已通过" value="2"></el-option>
+                        <el-option label="未通过" value="3"></el-option>
+                    </el-select>
+                    <!-- <el-input type="text" v-model="ruleForm.status" autocomplete="off"></el-input> -->
                 </el-form-item>
                 <el-form-item class="check-btnbox">
                     <el-button @click="submitForm('ruleForm')">查询</el-button>
@@ -17,43 +23,26 @@
             </el-form>
         </div>
         <div class="list-box">
-            <div class="tab">
-                <div :class=" currentTab == 1 ? 'tab-item active': 'tab-item'" @click="changeTab(1)">管理员 <span>8人</span></div>
-                <div :class=" currentTab == 2 ? 'tab-item active': 'tab-item'" @click="changeTab(2)">俱乐部管理员 <span>22人</span></div>
-            </div>
             <div class="tab-content">  
                 <div class="user-box">  
-                    <el-table v-if="currentTab == 1 ? true : false" class="list-table"
+                    <el-table class="list-table"
                         :data="tableData1"
+                        :header-row-class-name="headerclass"
+                        :header-cell-class-name="headerclass"
                         highlight-current-row
                         style="width: 100%">
-                        <el-table-column prop="id" label="ID"></el-table-column>
-                        <el-table-column prop="name" label="昵称"></el-table-column>
-                        <el-table-column prop="phone" label="手机号"></el-table-column>
-                        <el-table-column prop="password" label="邮箱"></el-table-column>
-                        <el-table-column label="操作">
-                            <template>
-                                <div class="opation">
-                                    <span>保存</span>/
-                                    <span>删除</span>
-                                </div>
+                        <el-table-column prop="clubname" label="俱乐部名称"></el-table-column>
+                        <el-table-column prop="clubid" label="俱乐部编号"></el-table-column>
+                        <el-table-column prop="status" label="状态">
+                            <template slot-scope="scope">
+                                <span>{{scope.row.status == 1 ? "审核中" : (scope.row.status == 2 ? '已通过' : '未通过')}}</span>
                             </template>
                         </el-table-column>
-                    </el-table>
-                    <el-table v-if="currentTab == 2 ? true : false" class="list-table"
-                        :data="tableData2"
-                        highlight-current-row
-                        style="width: 100%">
-                        <el-table-column prop="id" label="ID"></el-table-column>
-                        <el-table-column prop="name" label="昵称"></el-table-column>
-                        <el-table-column prop="phone" label="手机号"></el-table-column>
-                        <el-table-column prop="password" label="邮箱"></el-table-column>
                         <el-table-column label="操作">
                             <template>
-                                <div class="opation">
-                                    <span>保存</span>/
-                                    <span>删除</span>
-                                </div>
+                                <el-button class="examinebtn"
+                                    size="mini"
+                                    @click="examine(scope.$index, scope.row)">审核</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -84,55 +73,39 @@
             ruleForm: {
                 name: '',
                 phone: '',
-                password: '',
+                status: '',
             },
-            // rules: {
-            //     name: [
-            //         { required: true, message: '请填写姓名', trigger: 'blur' }
-            //     ],
-            //     phone: [
-            //         { required: true, message: '请填写手机号', trigger: 'blur' }
-            //     ],
-            //     password: [
-            //         { required: true, message: '请填写密码', trigger: 'blur' }
-            //     ]
-            // },
             total: 100,
             currentPage: 1,
             pageSize: 10,
-            currentTab: 1,
             tableData1: [
                 {
-                    id: '001',
-                    name: '张云',
-                    phone: '17839392020',
-                    password: '2222234',
+                    clubid: '001',
+                    clubname: '张云',
+                    status: '1'
                 },
                 {
-                    id: '002',
-                    name: '登记卡',
-                    phone: '17839392020',
-                    password: '2222234',
+                    clubid: '001',
+                    clubname: '张云',
+                    status: '2'
                 },
                 {
-                    id: '003',
-                    name: '李丹妮',
-                    phone: '17839392020',
-                    password: '2222234',
+                    clubid: '001',
+                    clubname: '张云',
+                    status: '3'
                 },
                 {
-                    id: '004',
-                    name: '都解决',
-                    phone: '17839392020',
-                    password: '2222234',
+                    clubid: '001',
+                    clubname: '张云',
+                    status: '1'
                 },
                 {
-                    id: '005',
-                    name: '张云',
-                    phone: '17839392020',
-                    password: '2222234',
+                    clubid: '001',
+                    clubname: '张云',
+                    status: '1'
                 }
-            ]
+            ],
+            headerclass: 'headerclass'
         }
     },
     methods: {
@@ -156,11 +129,9 @@
     .club-search
         width 100%;
         padding-top 20px;
+        padding-left 30px
     .phone-ruleForm
-        // width 800px;
-        // display flex;
-        // justify-content flex-start;
-        // align-items center;
+        text-align left;
     /deep/ .phone-ruleForm .el-form-item__label
         width 100px!important;
         font-size: 16px;
@@ -173,8 +144,6 @@
         height 40px;
         line-height: 40px;
         margin-left 0!important;
-    // /deep/ .phone-ruleForm .el-form-item__content:first-of-type
-    //     margin-left 140px!important;
     .phone-btn
         background: #7DBFBC;
         border-radius: 14px;
@@ -187,26 +156,6 @@
         padding 0;
     .list-table
         padding: 0 30px;
-    .tab
-        width 100%;
-        display flex;
-        justify-content flex-start;
-        align-items center;
-        padding-left 30px;
-        margin-bottom 10px;
-        > .tab-item
-            font-size: 16px;
-            color: #9FA7B9;
-            letter-spacing: 0;
-            box-sizing: border-box;
-            padding 12px 20px;
-            background: #E7EBF4;
-            border-radius: 4px;
-            margin-right 20px;
-            cursor: pointer;
-        > .tab-item.active
-            color: #fff;
-            background: #7DBFBC;
     .block
         margin-top 40px;
     .opation
@@ -216,8 +165,14 @@
         > span
             text-decoration: underline;
             cursor: pointer;
-    // /deep/ .master-ruleForm .el-form-item__content:nth-child(2)
-    //     margin-left 0.1rem!important;
-    // /deep/ .master-ruleForm .el-form-item__content:nth-child(3)
-    //     margin-left 0.1rem!important;
+    .check-btnbox button
+        width 80px;
+        height 40px;
+        line-height 40px;
+        background: #7DBFBC;
+        border-radius: 4px;
+        color: #fff;
+        padding: 0;
+    /deep/ .headerclass
+        background: #F5F6FA;
 </style>
