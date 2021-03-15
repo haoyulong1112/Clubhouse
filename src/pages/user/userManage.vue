@@ -169,7 +169,7 @@
     .container
         width 100%;
         // overflow hidden;
-        // padding-bottom 60px;
+        padding-bottom 60px;
         background-color #fff;
         box-shadow: 0 11px 22px 0 rgba(109,147,176,0.08);
         border-radius: 8px;

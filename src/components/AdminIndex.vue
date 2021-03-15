@@ -2,7 +2,7 @@
     <el-container>
       <!-- 页面顶部 -->
         <el-header>
-            <div class="index-title" @click="goIndex">ClubHouse</div>
+            <div class="index-title" @click="goIndex">闲聊</div>
             <div class="page-title">
                 <i :class="titleClass"></i>{{pageTitle}}
             </div>
@@ -25,9 +25,6 @@
                  <el-menu-item index="/admin/importPhone">
                    <i class="el-icon-mobile-phone"></i>手机号导入
                  </el-menu-item>
-                 <!-- <el-menu-item index="/admin/clubmange">
-                   <i class="el-icon-s-grid"></i>俱乐部管理
-                 </el-menu-item> -->
                  <el-menu-item index="/admin/system">
                    <i class="el-icon-s-tools"></i>系统配置
                  </el-menu-item>
@@ -58,12 +55,6 @@
                         俱乐部申请
                     </el-menu-item>
                 </el-submenu>
-                 <el-menu-item index="/admin/product">
-                   <i class="el-icon-setting"></i>产品管理
-                 </el-menu-item>
-                 <el-menu-item index="/admin/client">
-                   <i class="el-icon-setting"></i>客户管理
-                 </el-menu-item>
               </el-menu>
             </el-aside>
             <el-main>
@@ -133,13 +124,12 @@ export default {
     background-color: #FFF;
     color: #fff;
     height: 70px!important;
-    line-height: 60px;
+    line-height: 70px;
     display flex;
     justify-content flex-start;
     align-items center;
     padding 0 0!important;
     position relative;
-
 }
 .el-container 
     width 100%;
@@ -154,7 +144,7 @@ export default {
     font-size: 36px;
     color: #FFFFFF;
     letter-spacing: 0;
-    line-height: 60px;
+    line-height: 70px;
 .page-title
     position absolute;
     left 310px;

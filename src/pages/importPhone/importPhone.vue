@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <el-form ref="phoneform" :model="formData" label-width="80px" :rules="rules">
+        <el-form ref="phoneform" class="phoneform" :model="formData" label-width="80px" :rules="rules">
             <el-form-item class="phonemange" label="" prop="phonetext">
                 <el-input type="textarea" v-model="formData.phonetext" autocomplete="off" :rows="10" placeholder="多个手机号以英文逗号分隔"></el-input>
             </el-form-item>
@@ -45,11 +45,16 @@ export default {
     },
 }
 </script>
-<style lang="stylus" scope>
+<style lang="stylus" scoped>
     .container
         width 100%;
         height 100%;
         background-color #fff;
+        overflow hidden;
+        padding 30px;
+        box-sizing border-box;
+    .phoneform
+        text-align left;
     .subphone-btnbox> div
         margin-left 0!important;  
     .exportbtn
@@ -58,5 +63,6 @@ export default {
     .phonemange > div
         margin: 20px 30px 0!important;
 
-    
+    /deep/ .phoneform .el-form-item__content
+        margin-left 0!important;
 </style>

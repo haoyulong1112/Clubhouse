@@ -112,13 +112,13 @@ export default {
             height 100%;
     .login-assembly
         // margin-top 10%;
-        width 614px;
-        height 440px;
+        width 500px;
+        height 380px;
         position absolute;
         top:50%;
         left 50%;
-        margin-left -307px;
-        margin-top: -220px;
+        margin-left -250px;
+        margin-top: -190px;
         background: #FFFFFF;
         box-shadow: 0 11px 22px 0 rgba(109,147,176,0.08);
         border-radius: 30px;

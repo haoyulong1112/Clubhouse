@@ -2,13 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../components/Login'
 import AdminIndex from '../components/AdminIndex'
-import ProductManage from '../pages/product/ProductManage'
-import ClientManage from '../pages/client/ClientManage'
 import importPhoneMange from '../pages/importphone/importPhone'
 import userManage from '../pages/user/userManage'
 import clubmange from '../pages/clubmange/clubmange'
 import clubexamineList from '../pages/clubmange/clubexamine/clubexaminelist'
 import clubexamineApply from '../pages/clubmange/clubapply/clubexamineapply'
+import clubDetail from '../pages/clubmange/clubdetail/clubdetail'
 import userDetail from '../pages/user/userdetail/userDetail'
 import masterSet from '../pages/master/masterset/masterset'
 import mastermsgSet from '../pages/master/mastermsgset/mastermsgset'
@@ -33,18 +32,6 @@ export default new Router({
         name: 'AdminIndex',
         component: AdminIndex,
         children: [
-          {
-              path: 'product',
-              name: 'ProductManage',
-              component: ProductManage,
-              meta: {title: '活动列表'}
-          },
-          {
-              path: 'client',
-              name: 'ClientManage',
-              component: ClientManage,
-              meta: {title: '活动列表'}
-          },
           {
               path: 'importphone',
               name: 'importPhone',
@@ -99,6 +86,12 @@ export default new Router({
             component: mastermsgSet,
             meta: {title: '管理员信息设置',icon: 'el-icon-s-custom'}
           },
+          {
+            path: 'clubdetail',
+            name: 'clubdetail',
+            component: clubDetail,
+            meta: {title: '俱乐部详情',icon: 'el-icon-s-grid'}
+          }
         ]
     }
   ]

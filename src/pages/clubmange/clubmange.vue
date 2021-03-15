@@ -240,6 +240,10 @@
         },
         handleEdit(id){
             console.log(id)
+            this.$router.push({
+                name: 'clubdetail',
+                path: 'clubdetail'
+            })
         },
         handleSizeChange(val){
             console.log(val);
@@ -495,6 +499,7 @@
         font-weight: bolder;
         margin-left 0!important;
         text-decoration: underline;
+        cursor: pointer;
     .block
         margin-top 50px
     .fensisty

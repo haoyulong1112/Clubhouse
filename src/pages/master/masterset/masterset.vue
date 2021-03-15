@@ -111,19 +111,19 @@
                     </el-table>
                 </div>
             </div>
-        </div>
-        <div class="block">
-            <el-pagination
-            :background="true"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[10, 20, 30]"
-            :page-size="pageSize"
-            :pager-count="9"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total">
-            </el-pagination>
+            <div class="block">
+                <el-pagination
+                :background="true"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[10, 20, 30]"
+                :page-size="pageSize"
+                :pager-count="9"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total">
+                </el-pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -252,7 +252,7 @@
     .container
         width 100%;
         background-color: #fff;
-        overflow hidden;
+        // overflow hidden;
         // height 100%;
         // padding-bottom: 30px
         // margin-bottom 50px
@@ -316,8 +316,6 @@
         > .tab-item.active
             color: #fff;
             background: #7DBFBC;
-    .block
-        margin-top 40px;
         // margin-bottom: 30px;
     .opation
         font-size: 14px;
@@ -334,8 +332,7 @@
         text-indent: 5px;
     /deep/ .list-table .cell
         text-overflow: initial;
-    // /deep/ .master-ruleForm .el-form-item__content:nth-child(2)
-    //     margin-left 0.1rem!important;
-    // /deep/ .master-ruleForm .el-form-item__content:nth-child(3)
-    //     margin-left 0.1rem!important;
+    /deep/ .block
+        margin-top 40px;
+        // margin-bottom 30px;
 </style>
