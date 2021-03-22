@@ -2,7 +2,7 @@
     <el-container>
       <!-- 页面顶部 -->
         <el-header>
-            <div class="index-title" @click="goIndex">闲聊</div>
+            <div class="index-title" @click="goIndex">咸聊</div>
             <div class="page-title">
                 <i :class="titleClass"></i>{{pageTitle}}
             </div>
@@ -51,9 +51,9 @@
                     <el-menu-item class="menuitems" index="/admin/clubexamine">
                         俱乐部审核列表
                     </el-menu-item>
-                    <el-menu-item class="menuitems" index="/admin/clubapply">
+                    <!-- <el-menu-item class="menuitems" index="/admin/clubapply">
                         俱乐部申请
-                    </el-menu-item>
+                    </el-menu-item> -->
                 </el-submenu>
               </el-menu>
             </el-aside>

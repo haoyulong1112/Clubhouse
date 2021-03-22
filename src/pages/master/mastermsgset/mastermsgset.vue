@@ -14,15 +14,15 @@
                 <el-form-item label="新密码" class="masterset-formitem" prop="newPassword">
                     <el-input class="masterset-input" placeholder="输入密码" type="text" v-model="mastersetForm.newPassword" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="身份证号" class="masterset-formitem" prop="idCard">
+                <!-- <el-form-item label="身份证号" class="masterset-formitem" prop="idCard">
                     <el-input class="masterset-input" placeholder="输入身份证号" type="text" v-model="mastersetForm.idCard" autocomplete="off"></el-input>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item label="手机号" class="masterset-formitem" prop="cellPhone">
                     <el-input class="masterset-input" placeholder="输入手机号" type="text" v-model="mastersetForm.cellPhone" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="邮箱" class="masterset-formitem" prop="email">
+                <!-- <el-form-item label="邮箱" class="masterset-formitem" prop="email">
                     <el-input class="masterset-input" placeholder="输入邮箱" type="text" v-model="mastersetForm.email" autocomplete="off"></el-input>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item class="masterset-btnbox">
                     <el-button class="masterset-btn" @click="submitForm('masterForm')">保存</el-button>
                 </el-form-item>

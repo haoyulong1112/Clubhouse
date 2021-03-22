@@ -2,7 +2,7 @@
     <div class="container">
         <div class="addmaster">
             <el-row :gutter="20">
-                <el-col :span="12">
+                <el-col :span="24">
                     <div class="grid-content bg-purple">
                         <div class="master">
                             <el-form :model="masterForm" :rules="rules1" ref="masterForm" label-width="100px" class="master-ruleForm">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col :span="12">
+                <!-- <el-col :span="12">
                     <div class="grid-content bg-purple">
                         <div class="clubmaster">
                             <el-form :model="clubForm" :rules="rules2" ref="clubForm" label-width="100px" class="master-ruleForm">
@@ -41,17 +41,17 @@
                             </el-form>
                         </div>
                     </div>
-                </el-col>
+                </el-col> -->
             </el-row>
         </div>
         <div class="list-box">
             <div class="tab">
-                <div :class=" currentTab == 1 ? 'tab-item active': 'tab-item'" @click="changeTab(1)">管理员 <span>8人</span></div>
-                <div :class=" currentTab == 2 ? 'tab-item active': 'tab-item'" @click="changeTab(2)">俱乐部管理员 <span>22人</span></div>
+                <div class="tab-item active">管理员 <span>8人</span></div>
+                <!-- <div :class=" currentTab == 2 ? 'tab-item active': 'tab-item'" @click="changeTab(2)">俱乐部管理员 <span>22人</span></div> -->
             </div>
             <div class="tab-content">  
                 <div class="user-box">  
-                    <el-table v-if="currentTab == 1 ? true : false" class="list-table"
+                    <el-table class="list-table"
                         :data="tableData1"
                         highlight-current-row
                         style="width: 100%">
@@ -80,7 +80,7 @@
                             </template>
                         </el-table-column>
                     </el-table>
-                    <el-table v-if="currentTab == 2 ? true : false" class="list-table"
+                    <!-- <el-table v-if="currentTab == 2 ? true : false" class="list-table"
                         :data="tableData2"
                         highlight-current-row
                         style="width: 100%">
@@ -108,7 +108,7 @@
                                 </div>
                             </template>
                         </el-table-column>
-                    </el-table>
+                    </el-table> -->
                 </div>
             </div>
             <div class="block">
