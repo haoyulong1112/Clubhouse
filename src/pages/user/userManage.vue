@@ -17,29 +17,23 @@
             :cell-class-name="usertd"
             highlight-current-row
             style="width: 100%">
-            <el-table-column prop="date" label="编号ID" width="120"></el-table-column>
-            <el-table-column prop="date" label="昵称" width="120"></el-table-column>
-            <el-table-column prop="date" label="手机号" width="120"></el-table-column>
-            <el-table-column prop="date" label="邮箱" width="120"></el-table-column>
-            <el-table-column prop="date" label="加入时间" width="120"></el-table-column>
-            <el-table-column prop="date" label="最后登录时间" width="120"></el-table-column>
+            <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
+            <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
+            <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
+            <!-- <el-table-column prop="date" label="邮箱" width="120"></el-table-column> -->
+            <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
+            <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
             <el-table-column prop="date" label="关注的人" width="120"></el-table-column>
             <el-table-column prop="date" label="粉丝" width="120"></el-table-column>
             <el-table-column prop="date" label="关注的俱乐部" width="120"></el-table-column>
-            <el-table-column prop="name" label="在线时长" width="120"></el-table-column>
+            <el-table-column prop="totalDuration" label="在线时长" width="120"></el-table-column>
             <el-table-column prop="address" label="开设房间" width="120">
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <div class="usertable-btn" @click="handleDelete(scope.$index, scope.row)">封禁</div>
+                    <div class="usertable-btn" @click="close(scope.$index, scope.row)">封禁</div>
+                    <div class="usertable-btn" @click="relieve(scope.$index, scope.row)">解除</div>
                     <div class="usertable-btn" @click="handleEdit(scope.$index, scope.row)">查看详情</div>
-                    <!-- <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDelete(scope.$index, scope.row)">封禁</el-button>
-                    <el-button class="check"
-                    size="mini"
-                    @click="handleEdit(scope.$index, scope.row)">查看详情</el-button> -->
                 </template>
             </el-table-column>
         </el-table>
@@ -48,7 +42,7 @@
             :background="true"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="currentPage"
+            :current-page="pageNo"
             :page-sizes="[10, 20, 30]"
             :page-size="pageSize"
             :pager-count="9"
@@ -61,6 +55,7 @@
 </template>
 
 <script>
+    import { getUserList,updateUserStatus } from '@/api/user/user.js'
     export default{
         name: 'userManage',
         data() {
@@ -73,77 +68,43 @@
                         { required: true, message: '请填写手机号', trigger: 'blur' }
                     ]
                 },
-                tableData: [{
-                    date: '12',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-08',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-06',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                    }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }
-                ],
+                tableData: [],
                 headerclass: 'headercss',
                 usertd: 'user-td',
                 total: 100,
-                currentPage: 1,
-                pageSize: 10
+                pageNo: 1,
+                pageSize: 10,
+                phone: ''
             }
+        },
+        created() {
+            this.getUserLists();
         },
         methods: {
             submitForm(str){
                 this.$refs[str].validate((flag) => {
                     if(flag){
-                        console.log('查询')
+                        this.getUserLists();
                     }
+                })
+            },
+            getUserLists(){
+                let data = {
+                    pageNo: this.pageNo,
+                    pageSize: this.pageSize
+                };
+                if(this.ruleForm.phone){
+                    data.phone = this.ruleForm.phone;
+                }
+                console.log(this.ruleForm);
+                console.log(data);
+                getUserList(data).then(res => {
+                    console.log(res);
+                    if(res.code == 200){
+                        this.tableData = res.data;
+                    }
+                }).catch(err => {
+                    this.$message.error(err.msg);
                 })
             },
             handleEdit(index, row) {
@@ -153,8 +114,30 @@
                     path: 'userDetail'
                 })
             },
-            handleDelete(index, row) {
-                console.log(index, row);
+            close(index, row) {
+                this.updateUserStatus(row.id,1)
+            },
+            relieve(index, row){
+                this.updateUserStatus(row.id,0)
+            },
+            // 封禁 解除
+            updateUserStatus(id,status){
+                let data = {
+                    userId: id,
+                    status: status
+                }
+                updateUserStatus(data).then(res =>{
+                    if(res.code == 200){
+                        console.log(res.msg)
+                        this.$message({
+                            message: res.msg,
+                            type: 'success'
+                        });
+                    }
+                }).catch(err => {
+                    this.$message.error(err.msg);
+                })
+
             },
             handleSizeChange(val){
                 console.log(val);

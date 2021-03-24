@@ -2,7 +2,9 @@
     // 区分环境的配置 252 demo prod
     var testConfig = {
         // 请求域名头 pet-pai
-        requestDomain: 'http://demo.cwjia.cn',
+        // requestDomain: 'http://8.141.49.230:8200',
+        // 跨域
+        requestDomain: '/test',
     }
 
     var prodConfig = {
@@ -68,9 +70,6 @@
     if (isItemInStr(hostname, testDomainArray)) {
         window.envConfig = testConfig
     }
-    // if (isItemInStr(hostname, demoDomainArray)) {
-    //     window.envConfig = demoConfig
-    // }
     if (isItemInStr(hostname, prodDomainArray)) {
         window.envConfig = prodConfig
     }

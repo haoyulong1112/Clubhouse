@@ -5,9 +5,9 @@
                 <el-form-item label="客服电话" class="system-formitem" prop="phone">
                     <el-input class="system-phone" placeholder="输入电话" type="text" v-model="ruleForm.phone" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="微信号" class="system-formitem" prop="wxCode">
+                <!-- <el-form-item label="微信号" class="system-formitem" prop="wxCode">
                     <el-input placeholder="微信号" type="text" v-model="ruleForm.wxCode" autocomplete="off"></el-input>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item class="system-btnbox">
                     <el-button class="system-btn" @click="submitForm('ruleForm')">保存</el-button>
                 </el-form-item>
@@ -17,23 +17,47 @@
 </template>
 
 <script>
+    import { setServicePhone } from '@/api/system/system.js'
   export default{
     name: 'systemconfig',
     data() {
         return {
             ruleForm: {
                 phone: '',
-                wxCode: ''
             },
             rules: {
                 phone: [
                     { required: true, message: '请填写电话', trigger: 'blur' }
-                ],
-                wxCode: [
-                    { required: true, message: '请填写微信', trigger: 'blur' }
                 ]
             },
         }
+    },
+    created() {
+        this.ruleForm.phone = this.$store.state.common.phone;
+    },
+    methods: {
+        submitForm(formname){
+            this.$refs[formname].validate((flag) => {
+                if(flag){
+                    setServicePhone({
+                        phone: this.ruleForm.phone
+                    }).then(res => {
+                        // this.$store.commit('common/updatePhone', this.ruleForm.phone)
+                        console.log(res)
+                        if(res.code =200){
+                            this.$store.commit('common/updatePhone', this.ruleForm.phone)
+                            console.log(this.$store.state.common.phone)
+                            this.$message({
+                                message: res.msg,
+                                type: 'success'
+                            });
+                        }
+                    }).catch(err => {
+                        this.$message.error(err.msg);
+                    })
+                }
+            })
+        },
     },
   }
 </script>

@@ -1,6 +1,5 @@
 import axios from 'axios'
 const requestDomain = envConfig.requestDomain
-console.log(requestDomain);
 // 可以配置一些基本参数
 const request = axios.create({
   baseURL: requestDomain,

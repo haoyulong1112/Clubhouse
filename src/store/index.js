@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
-// import common from './modules/common'
+import common from './modules/common'
 import user from './modules/user'
 // import prod from './modules/prod'
 
@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    // common,
+    common,
     user,
     // prod
   },

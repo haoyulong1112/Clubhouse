@@ -1,10 +1,10 @@
 // 请求域名头 pet-pai
-envConfig.requestDomain = 'http://localhost:8080'
+// envConfig.requestDomain = 'http://8.141.49.230:8200/'
 
 // 252
 // 请求域名头 和 跨域代理域名头
-// envConfig.requestDomain = 'http://localhost:8080'
-// envConfig.requestDomain = '/test'
+envConfig.requestDomain = 'http://8.141.49.230:8200/'
+envConfig.requestDomain = '/test'
 
 // demo
 // 请求域名头 和 跨域代理域名头

@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { exportPhone } from '@/api/exportphone/exportphone.js'
 export default {
     name: 'importPhone',
     data() {
@@ -40,7 +41,27 @@ export default {
     },
     methods: {
         onSubmit(formname){
-            // this.$refs[formname]
+            this.$refs[formname].validate((flag) => {
+                if(flag){
+                    this.exportPhone();
+                }
+            })
+        },
+        exportPhone(){
+            let data = {
+                phones: this.formData.phonetext
+            }
+            console.log(data);
+            exportPhone(data).then(res => {
+                if(res.code == 200){
+                    this.$message({
+                        message: res.msg,
+                        type: 'success'
+                    });
+                }
+            }).catch(err => {
+                this.$message.error(err.msg);
+            })
         }
     },
 }

@@ -1,15 +1,9 @@
-import axiosRequest from '@/utils/axiosnew'
-export function getIndexMsg(data) {
-  return axiosRequest ({
-    url: '/pet-api/invite/activityIsOpen',
-    params: data
-  })
-}
+// import request from '@/utils/request'
+// const requestDomain = envConfig.requestDomain
 
-// export function getProduct(data) {
-//   return request ({
-//     url: `${requestDomain}`,
-//     method: 'post',
-//     data: data
-//   })
+// export const getUserList = data => {
+//     return request({
+//         url: `${requestDomain}/club-room/admin/userList`,
+//         data: data
+//     })
 // }
