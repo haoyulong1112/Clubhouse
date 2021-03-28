@@ -9,22 +9,16 @@
                     <el-input class="masterset-input" placeholder="输入姓名" type="text" v-model="mastersetForm.name" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="旧密码" class="masterset-formitem" prop="oldPassword">
-                    <el-input class="masterset-input" placeholder="输入密码" type="text" v-model="mastersetForm.oldPassword" autocomplete="off"></el-input>
+                    <el-input class="masterset-input" placeholder="输入密码" type="password" v-model="mastersetForm.oldPassword" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="新密码" class="masterset-formitem" prop="newPassword">
-                    <el-input class="masterset-input" placeholder="输入密码" type="text" v-model="mastersetForm.newPassword" autocomplete="off"></el-input>
+                    <el-input class="masterset-input" placeholder="输入密码" type="password" v-model="mastersetForm.newPassword" autocomplete="off"></el-input>
                 </el-form-item>
-                <!-- <el-form-item label="身份证号" class="masterset-formitem" prop="idCard">
-                    <el-input class="masterset-input" placeholder="输入身份证号" type="text" v-model="mastersetForm.idCard" autocomplete="off"></el-input>
-                </el-form-item> -->
                 <el-form-item label="手机号" class="masterset-formitem" prop="cellPhone">
                     <el-input class="masterset-input" placeholder="输入手机号" type="text" v-model="mastersetForm.cellPhone" autocomplete="off"></el-input>
                 </el-form-item>
-                <!-- <el-form-item label="邮箱" class="masterset-formitem" prop="email">
-                    <el-input class="masterset-input" placeholder="输入邮箱" type="text" v-model="mastersetForm.email" autocomplete="off"></el-input>
-                </el-form-item> -->
                 <el-form-item class="masterset-btnbox">
-                    <el-button class="masterset-btn" @click="submitForm('masterForm')">保存</el-button>
+                    <el-button class="masterset-btn" @click="submitForm('mastersetForm')">保存</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -32,6 +26,7 @@
 </template>
 
 <script>
+  import { updateAdmin } from '@/api/admaster/master.js'
   export default{
     name: 'mastermsgset',
     data() {
@@ -40,10 +35,9 @@
                 name: '',
                 oldPassword: '',
                 newPassword: '',
-                idCard: '',
                 cellPhone: '',
-                email: '',
             },
+            userdetail: {},
             rules: {
                 name: [
                     { required: true, message: '请填写姓名', trigger: 'blur' }
@@ -54,18 +48,55 @@
                 newPassword: [
                     { required: true, message: '请填写新密码', trigger: 'blur' }
                 ],
-                idCard: [
-                    { required: true, message: '请填写身份证号', trigger: 'blur' }
-                ],
                 cellPhone: [
                     { required: true, message: '请填写电话', trigger: 'blur' }
-                ],
-                email: [
-                    { required: true, message: '请填写邮箱', trigger: 'blur' }
                 ]
             }
         }
     },
+    created() {
+        this.userdetail = this.$store.state.user.userdetail;
+        this.mastersetForm.name = this.userdetail.name;
+        this.mastersetForm.oldPassword = this.userdetail.password;
+        this.mastersetForm.cellPhone = this.userdetail.phone;
+        console.log(this.userdetail);
+    },
+    methods:{
+        submitForm(str){
+            this.$refs[str].validate((flag) => {
+                if(flag){
+                    this.update(this.mastersetForm);
+                }
+            })
+        },
+        // 更新管理员
+        update(mastersetForm){
+            console.log(mastersetForm);
+            let data = {
+                id: this.userdetail.id,
+                name: mastersetForm.name,
+                password: mastersetForm.oldPassword,
+                phone: mastersetForm.cellPhone,
+            }
+            if(!data.id){
+                this.$message.error('缺少参数');
+            }
+            console.log(data);
+            updateAdmin(data).then(res => {
+                if(res.code == 200){
+                    this.$message({
+                        message: '更新成功',
+                        type: 'success'
+                    });
+                    this.$router.push({
+                        name: 'Login'
+                    });
+                }
+            }).catch(err => {
+                this.$message.error(err.msg);
+            })
+        },
+    }
   }
 </script>
 

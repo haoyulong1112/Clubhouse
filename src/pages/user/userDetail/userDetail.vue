@@ -3,7 +3,7 @@
         <div class="user-message">
             <div class="user-box">
                 <div class="user-header">
-                    <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
+                    <img :src="userData.headPic" alt="">
                 </div>
                 <table class="user-data">
                     <thead>
@@ -11,7 +11,6 @@
                             <th>编号ID</th>
                             <th>昵称</th>
                             <th>手机号</th>
-                            <th>邮箱</th>
                             <th>加入时间</th>
                             <th>最后登录时间</th>
                             <th>在线时长</th>
@@ -22,14 +21,13 @@
                     <tbody>
                         <tr>
                             <td>{{userData.id}}</td>
-                            <td>{{userData.name}}</td>
-                            <td>{{userData.phone}}</td>
-                            <td>{{userData.email}}</td>
-                            <td>{{userData.enterTime}}</td>
-                            <td>{{userData.logintime}}</td>
-                            <td>{{userData.timelone}}</td>
-                            <td>{{userData.room}}</td>
-                            <td>{{userData.club}}</td>
+                            <td>{{userData.nikeName}}</td>
+                            <td>{{userData.cellPhone}}</td>
+                            <td>{{userData.createTime}}</td>
+                            <td>{{userData.offLineTime}}</td>
+                            <td>{{userData.totalTime}}</td>
+                            <td>{{userData.createClubCount}}</td>
+                            <td>{{userData.followClubSize}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -180,21 +178,7 @@
                         { required: true, message: '请填写手机号', trigger: 'blur' }
                     ]
                 },
-                userData: 
-                    {
-                        id: '12',
-                        imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
-                        name: '王小虎',
-                        phone: '17839193022',
-                        email: '875720142@qq.com',
-                        enterTime: '2021-03-2',
-                        logintime: '2021-03-2',
-                        timelone: '2021-03-23',
-                        attion: '234',
-                        fensi: '3444',
-                        room: '24',
-                        club: '102',
-                    }
+                userData: {}
                 ,
                 tableData1: [
                     {
@@ -542,8 +526,12 @@
                 total: 100,
                 currentPage: 1,
                 pageSize: 10,
-                currentTab: 1,
+                currentTab: 1
             }
+        },
+        created() {
+            this.userData = this.$store.state.user.currentUserdata;
+            console.log('userdetail',this.userData);
         },
         methods: {
             submitForm(str){

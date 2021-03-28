@@ -5,6 +5,7 @@ const requestDomain = envConfig.requestDomain
 export const exportPhone = data => {
     return request({
         url: `${requestDomain}/club-room/admin/export`,
-        data: data
+        data: data,
+        token: sessionStorage.getItem("token")
     })
 }

@@ -1,6 +1,6 @@
 /* eslint-disable */
 /*
-utils/ajax.js
+utils/ajax.js   Authorization
 封装ajax，支持Promise
 @author jinhuajie <jinhuajie@haotang365.com.cn>
 */
@@ -8,9 +8,10 @@ export default (options = {}) => {
   const type = options.type ? options.type.toUpperCase() : 'POST'
   let url = options.url || ''
   const contentType = options.contentType || 'application/x-www-form-urlencoded'
+  const token = options.token || '';
   const data = options.data || {}
   const async = options.async !== false
-
+    console.log('token',token);
   return new Promise((resolve, reject) => {
     let requestObj = {}
     if (window.XMLHttpRequest) {
@@ -28,6 +29,9 @@ export default (options = {}) => {
         url = dataStr ? url + '?' + dataStr : url
         requestObj.open(type, url, async)
         requestObj.setRequestHeader('Content-type', contentType)
+        if(token){
+            requestObj.setRequestHeader('token', token)
+        }
         requestObj.send()
     } else if (type == 'POST') {
         if(data.system){
@@ -39,6 +43,9 @@ export default (options = {}) => {
         }
         requestObj.open(type, url, async)
         requestObj.setRequestHeader('Content-type', contentType)
+        if(token){
+            requestObj.setRequestHeader('token', token)
+        }
         requestObj.send(dataStr)
     } else {
       reject(new Error('不支持的type'))

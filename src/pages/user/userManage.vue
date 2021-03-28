@@ -23,11 +23,13 @@
             <!-- <el-table-column prop="date" label="邮箱" width="120"></el-table-column> -->
             <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
             <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
-            <el-table-column prop="date" label="关注的人" width="120"></el-table-column>
-            <el-table-column prop="date" label="粉丝" width="120"></el-table-column>
-            <el-table-column prop="date" label="关注的俱乐部" width="120"></el-table-column>
-            <el-table-column prop="totalDuration" label="在线时长" width="120"></el-table-column>
-            <el-table-column prop="address" label="开设房间" width="120">
+            <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
+            <el-table-column prop="fansSize" label="粉丝" width="120"></el-table-column>
+            <el-table-column prop="followClubSize" label="关注的俱乐部" width="120"></el-table-column>
+            <el-table-column prop="totalTime" label="在线时长" width="120"></el-table-column>
+            <el-table-column prop="createClubCount" label="开设房间" width="120">
+            </el-table-column>
+            <el-table-column prop="address" label="举报次数" width="120">
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
@@ -88,18 +90,16 @@
                     }
                 })
             },
+            //  获取用户列表
             getUserLists(){
                 let data = {
                     pageNo: this.pageNo,
-                    pageSize: this.pageSize
+                    pageSize: this.pageSize,
                 };
                 if(this.ruleForm.phone){
                     data.phone = this.ruleForm.phone;
                 }
-                console.log(this.ruleForm);
-                console.log(data);
                 getUserList(data).then(res => {
-                    console.log(res);
                     if(res.code == 200){
                         this.tableData = res.data;
                     }
@@ -108,7 +108,8 @@
                 })
             },
             handleEdit(index, row) {
-                console.log(index, row.date);
+                console.log(index, row);
+                this.$store.commit('user/setCurrentdata', row)
                 this.$router.push({
                     name: 'userDetail',
                     path: 'userDetail'
@@ -128,7 +129,6 @@
                 }
                 updateUserStatus(data).then(res =>{
                     if(res.code == 200){
-                        console.log(res.msg)
                         this.$message({
                             message: res.msg,
                             type: 'success'
@@ -141,9 +141,15 @@
             },
             handleSizeChange(val){
                 console.log(val);
+                console.log('切换每页信息数量')
+                this.pageSize = val;
+                this.getUserLists();
             },
             handleCurrentChange(val){
+                console.log('切换页码')
                 console.log(val)
+                this.pageNo = val;
+                this.getUserLists();
             }
         },
     }

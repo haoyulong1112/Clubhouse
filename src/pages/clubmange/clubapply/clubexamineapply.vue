@@ -2,19 +2,19 @@
     <div class="container">
         <div class="apply-box">
             <el-form :model="applyForm" :rules="rules" ref="applyForm" label-width="100px" class="applyForm-ruleForm">
-                <el-form-item label="俱乐部名称" class="applyForm-formitem" prop="clubname">
-                    <el-input class="applyForm-input" placeholder="输入俱乐部名称" type="text" v-model="applyForm.clubname" autocomplete="off"></el-input>
+                <el-form-item label="俱乐部名称" class="applyForm-formitem" prop="name">
+                    <el-input class="applyForm-input" placeholder="输入俱乐部名称" type="text" v-model="applyForm.name" autocomplete="off"></el-input>
                     <template>
                         <div class="applyForm-status">
-                            <span>*</span>状态<span>（审核通过）</span>
+                            <span>*</span>状态<span> {{applyForm.examindStatus == 0 ? '审核中' : (applyForm.examindStatus ==  1 ? '已通过' : '未通过')}}</span>
                         </div>
                     </template>
                 </el-form-item>
-                <el-form-item label="管理员名称" class="applyForm-formitem" prop="masterName">
-                    <el-input class="applyForm-input" placeholder="输入管理员名称" type="text" v-model="applyForm.masterName" autocomplete="off"></el-input>
+                <el-form-item label="管理员名称" class="applyForm-formitem" prop="name">
+                    <el-input class="applyForm-input" placeholder="输入管理员名称" type="text" v-model="applyForm.name" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="俱乐部编号" class="applyForm-formitem" prop="clubId">
-                    <el-input class="applyForm-input" placeholder="输入密码" type="number" v-model="applyForm.clubId" autocomplete="off"></el-input>
+                <el-form-item label="俱乐部编号" class="applyForm-formitem" prop="id">
+                    <el-input class="applyForm-input" placeholder="输入密码" type="number" v-model="applyForm.id" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="管理员手机号" class="applyForm-formitem" prop="cellPhone">
                     <el-input class="applyForm-input" placeholder="输入手机号" type="text" v-model="applyForm.cellPhone" autocomplete="off"></el-input>
@@ -38,57 +38,123 @@
                 <el-form-item label="三个标签" class="applyForm-formitem" prop="tags">
                     <el-input class="applyForm-inputlage" placeholder="每个标签以英文逗号隔开" type="text" v-model="applyForm.tags" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item class="applyForm-text" label="俱乐部简介" prop="clubtext">
-                    <el-input type="textarea" v-model="applyForm.clubtext" autocomplete="off" :rows="10" placeholder="输入文字介绍"></el-input>
+                <el-form-item class="applyForm-text" label="俱乐部简介" prop="roomInstructions">
+                    <el-input type="textarea" v-model="applyForm.roomInstructions" autocomplete="off" :rows="10" placeholder="输入文字介绍"></el-input>
                 </el-form-item>
                 <!-- <el-form-item class="applyForm-btnbox">
                     <el-button class="applyForm-btn" @click="submitForm('masterForm')">保存提交审核</el-button>
                 </el-form-item> -->
                 <el-form-item class="applyForm-btnbox">
-                    <el-button type="danger" @click="unpast('masterForm')">不通过</el-button>
-                    <el-button class="applyForm-past" @click="past('masterForm')">通过</el-button>
+                    <el-button type="danger" @click="unpast">不通过</el-button>
+                    <el-button class="applyForm-past" @click="past">通过</el-button>
                 </el-form-item>
             </el-form>
         </div>
         <div class="uploader-img">
-            <el-upload
+            <img class="uploader-headerimg" :src="applyForm.avatar" alt="">
+            <!-- <el-upload
                 class="upload-demo"
                 action="https://jsonplaceholder.typicode.com/posts/"
                 :limit="1">
                 <img v-if="!header" class="uploader-headerimg" src="@/assets/more.png" alt="">
                 <img v-else class="uploader-headerimg" :src="header" alt="">
                 <el-button size="small" type="primary">点击上传</el-button>
-                <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-            </el-upload>
+            </el-upload> -->
         </div>
     </div>
 </template>
 
 <script>
+  import { auditDetailInfo ,auditClub} from '@/api/club/club.js'
   export default{
     name: 'clubexamineapply',
     data() {
         return {
-            applyForm: {
-                clubname: '',
-                masterName: '',
-                clubId: '',
-                cellPhone: '',
-                oneClass: '',
-                twoClass: '',
-                tags: '',
-                clubtext: '',
-                imgurl: ''
-            },
+            applyForm: {},
             rules: {},
-            total: 100,
-            currentPage: 1,
-            pageSize: 10,
-            header:''
+            header:'',
+            query: {},
         }
     },
+    created() {
+        this.query = this.$route.query;
+        this.getClubdetail();
+    },
     methods: {
-
+        // 不通过
+        unpast(){
+            this.$prompt('请输入不通过理由', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                inputType: 'textarea'
+                    }).then(({ value }) => {
+                        if(value){
+                            this.auditClub(2,value);
+                        }else{
+                            this.$message('未不通过理由');     
+                        }
+                    }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '取消输入'
+                    });       
+            });
+        },
+        // 通过
+        past(){
+            this.$confirm('确认通过改俱乐部吗?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    this.auditClub(1);
+                }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
+        },
+        // 通过不通过
+        auditClub(status,remark){
+            let data = {
+                id: this.query.id,
+                status: status
+            }
+            if(remark){
+                data.remark = remark;
+            }
+            auditClub(data).then(res =>{
+                if(res.code == 200){
+                    if(status == 1){
+                        this.$message({
+                            type: 'success',
+                            message: '俱乐部已通过' 
+                        });
+                    }else{
+                        this.$message('俱乐部未通过');  
+                    }
+                    this.getClubdetail();
+                }
+            }).catch((err) => {
+                this.$message({
+                    type: 'warning',
+                    message: err.msg
+                });  
+            })
+        },
+        //获取俱乐部详情
+        getClubdetail(){
+            let data = {
+                id: this.query.id
+            }
+            auditDetailInfo(data).then(res =>{
+                if(res.code == 200){
+                    this.applyForm = res.data;
+                    console.log(this.applyForm)
+                }
+            })
+        }
     },
   }
 </script>

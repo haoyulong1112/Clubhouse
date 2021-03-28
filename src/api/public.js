@@ -1,9 +1,10 @@
-// import request from '@/utils/request'
-// const requestDomain = envConfig.requestDomain
+import request from '@/utils/request'
+const requestDomain = envConfig.requestDomain
 
-// export const getUserList = data => {
-//     return request({
-//         url: `${requestDomain}/club-room/admin/userList`,
-//         data: data
-//     })
-// }
+// 登录接口
+export const adminLogin = data => {
+    return request({
+        url: `${requestDomain}/club-room/admin/adminLogin`,
+        data: data
+    })
+}

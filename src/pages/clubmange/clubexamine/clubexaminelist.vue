@@ -10,10 +10,9 @@
                 </el-form-item>
                 <el-form-item class="phone-label" label="状态" prop="status">
                     <el-select v-model="ruleForm.status" placeholder="请选择状态">
-                        <!-- <el-option label="全部" value="0"></el-option> -->
-                        <el-option label="审核中" value="1"></el-option>
-                        <el-option label="已通过" value="2"></el-option>
-                        <el-option label="未通过" value="3"></el-option>
+                        <el-option label="审核中" value="0"></el-option>
+                        <el-option label="已通过" value="1"></el-option>
+                        <el-option label="未通过" value="2"></el-option>
                     </el-select>
                     <!-- <el-input type="text" v-model="ruleForm.status" autocomplete="off"></el-input> -->
                 </el-form-item>
@@ -31,18 +30,18 @@
                         :header-cell-class-name="headerclass"
                         highlight-current-row
                         style="width: 100%">
-                        <el-table-column prop="clubname" label="俱乐部名称"></el-table-column>
-                        <el-table-column prop="clubid" label="俱乐部编号"></el-table-column>
+                        <el-table-column prop="name" label="俱乐部名称"></el-table-column>
+                        <el-table-column prop="id" label="俱乐部编号"></el-table-column>
                         <el-table-column prop="status" label="状态">
                             <template slot-scope="scope">
-                                <span>{{scope.row.status == 1 ? "审核中" : (scope.row.status == 2 ? '已通过' : '未通过')}}</span>
+                                <span>{{scope.row.examindStatus == 0 ? "审核中" : (scope.row.examindStatus == 1 ? '已通过' : '未通过')}}</span>
                             </template>
                         </el-table-column>
                         <el-table-column label="操作">
-                            <template>
+                            <template slot-scope="scope">
                                 <el-button class="examinebtn"
                                     size="mini"
-                                    @click="examine(scope.$index, scope.row)">审核</el-button>
+                                    @click="examine(scope.row)">审核</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -54,7 +53,7 @@
             :background="true"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="currentPage"
+            :current-page="pageNo"
             :page-sizes="[10, 20, 30]"
             :page-size="pageSize"
             :pager-count="9"
@@ -66,6 +65,7 @@
 </template>
 
 <script>
+  import { auditList } from '@/api/club/club.js'
   export default{
     name: 'clubexaminelist',
     data() {
@@ -75,40 +75,24 @@
                 phone: '',
                 status: '',
             },
-            total: 100,
-            currentPage: 1,
+            total: 0,
+            pageNo: 1,
             pageSize: 10,
-            tableData1: [
-                {
-                    clubid: '001',
-                    clubname: '张云',
-                    status: '1'
-                },
-                {
-                    clubid: '001',
-                    clubname: '张云',
-                    status: '2'
-                },
-                {
-                    clubid: '001',
-                    clubname: '张云',
-                    status: '3'
-                },
-                {
-                    clubid: '001',
-                    clubname: '张云',
-                    status: '1'
-                },
-                {
-                    clubid: '001',
-                    clubname: '张云',
-                    status: '1'
-                }
-            ],
+            tableData1: [],
             headerclass: 'headerclass'
         }
     },
+    created() {
+        this.getauditList();
+    },
     methods: {
+            submitForm(str){
+                this.$refs[str].validate((flag) => {
+                    if(flag){
+                        this.getauditList();
+                    }
+                })
+            },
             handleSizeChange(val){
                 console.log(val);
             },
@@ -117,6 +101,28 @@
             },
             changeTab(index){
                 this.currentTab = index;
+            },
+            examine(row){
+                console.log(row);
+                this.$router.push({
+                    path: 'clubapply',
+                    name: 'clubexamineapply',
+                    query: {
+                        id: row.id
+                    }
+                })
+            },
+            // 审核列表
+            getauditList(){
+                let data = this.ruleForm;
+                data.pageNo = this.pageNo;
+                data.pageSize = this.pageSize;
+                auditList(data).then(res =>{
+                    if(res.code == 200){
+                        this.tableData1 = res.data
+                        this.total = res.total;
+                    }
+                })
             }
     },
   }

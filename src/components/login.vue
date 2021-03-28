@@ -20,9 +20,7 @@
     </div>
 </template>
 <script>
-import { mapGetters, mapMutations, mapActions, mapState } from 'vuex'
-import { Message } from 'element-ui';
-import { getIndexMsg } from '@/api/public.js'
+import { adminLogin } from '@/api/public.js'
 import preventBack from 'vue-prevent-browser-back';
 export default {
     mixins: [preventBack],
@@ -58,9 +56,6 @@ export default {
             }
         };
     },
-    computed: {
-        ...mapState(['username','password'])
-    },
     mounted(){ //防止页面后退
         history.pushState(null, null, document.URL);
         window.addEventListener('popstate', function () {
@@ -68,23 +63,44 @@ export default {
         });
     },
     methods: {
-        // 注册vuex方法
-        ...mapMutations(['updateUsername', 'updatePassword']),
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 console.log(valid);
                 if (valid) {
-                    this.$store.commit('user/updateUsername', this.ruleForm.account)
-                    this.$store.commit('user/updatePassword', this.ruleForm.checkPass)
-                    // this.updateUsername(this.ruleForm.account);
-                    // this.updatePassword(this.ruleForm.checkPass);
+                    // console.log(this.$store.state.user.username);
+                    // console.log(this.$store.state.user.password);
+                    console.log('submit!');
+                    let data = {
+                        password: this.ruleForm.checkPass,
+                        username: this.ruleForm.account,
+                    }
+                    adminLogin(data).then(res=> {
+                        if(res.code == 200){
+                            this.$store.commit('user/updateUser', res.data)
+                            // this.$store.commit('user/updatePhone', res.data.phone)
+                            // this.$store.commit('user/updatePassword', res.data.password)
+                            // this.$store.commit('user/updateToken', res.token);
+                            // window.token = res.token;
+                            sessionStorage.setItem("token", res.token);
+                            this.$router.push({
+                                name: 'AdminIndex',
+                                path: '/admin'
+                            });
                     console.log(this.$store.state.user.username);
                     console.log(this.$store.state.user.password);
-                    console.log('submit!');
-                    this.$router.push({
-                        name: 'AdminIndex',
-                        path: '/admin'
-                    });
+                    console.log(this.$store.state.user.token);
+                        }else{
+                            this.$message({
+                                message: res.msg,
+                                type: 'warning'
+                            });
+                        }
+                    }).catch(err => {
+                        this.$message({
+                            message: '登录失败',
+                            type: 'warning'
+                        });
+                    })
                 } else {
                     console.log('error submit!!');
                     return false;

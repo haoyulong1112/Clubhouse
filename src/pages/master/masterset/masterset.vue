@@ -105,24 +105,11 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
                     { required: true, message: '请填写密码', trigger: 'blur' }
                 ]
             },
-            // rules2: {
-            //     name: [
-            //         { required: true, message: '请填写姓名', trigger: 'blur' }
-            //     ],
-            //     phone: [
-            //         { required: true, message: '请填写手机号', trigger: 'blur' }
-            //     ],
-            //     newPapasswordssword: [
-            //         { required: true, message: '请填写密码', trigger: 'blur' }
-            //     ]
-            // },
             total: 100,
             pageNo: 1,
             pageSize: 10,
             currentTab: 1,
-            tableData1: [],
-            tableData2: [
-            ]
+            tableData1: []
         }
     },
     created() {

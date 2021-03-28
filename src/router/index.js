@@ -20,7 +20,7 @@ Vue.use(Router)
 //   return originalPush.call(this, location).catch(err => err)
 // }
 
-export default new Router({
+const router = new Router({
   routes: [
     {
         path: '/',
@@ -31,68 +31,87 @@ export default new Router({
         path: '/admin',
         name: 'AdminIndex',
         component: AdminIndex,
+        meta: {
+            requireAuth: true
+        },
         children: [
           {
               path: 'importphone',
               name: 'importPhone',
               component: importPhoneMange,
-              meta: {title: '手机号导入',icon: 'el-icon-mobile-phone'}
+              meta: {title: '手机号导入',icon: 'el-icon-mobile-phone',requireAuth: true}
           },
           {
               path: 'user',
               name: 'userManage',
               component: userManage,
-              meta: {title: '用户管理列表',icon: 'el-icon-user'}
+              meta: {title: '用户管理列表',icon: 'el-icon-user',requireAuth: true}
           },
           {
               path: 'clubmange',
               name: 'clubmange',
               component: clubmange,
-              meta: {title: '俱乐部列表',icon: 'el-icon-s-grid'}
+              meta: {title: '俱乐部列表',icon: 'el-icon-s-grid',requireAuth: true}
           },
           {
               path: 'clubexamine',
               name: 'clubexaminelist',
               component: clubexamineList,
-              meta: {title: '俱乐部审核列表',icon: 'el-icon-s-grid'}
+              meta: {title: '俱乐部审核列表',icon: 'el-icon-s-grid',requireAuth: true}
           },
           {
               path: 'clubapply',
               name: 'clubexamineapply',
               component: clubexamineApply,
-              meta: {title: '俱乐部申请',icon: 'el-icon-s-grid'}
+              meta: {title: '俱乐部申请',icon: 'el-icon-s-grid',requireAuth: true}
           },
           {
               path: 'system',
               name: 'systemconfig',
               component: systemconfig,
-              meta: {title: '系统配置',icon: 'el-icon-s-tools'}
+              meta: {title: '系统配置',icon: 'el-icon-s-tools',requireAuth: true}
           },
           {
             path: 'userdetail',
             name: 'userDetail',
             component: userDetail,
-            meta: {title: '用户详情',icon: 'el-icon-user'}
+            meta: {title: '用户详情',icon: 'el-icon-user',requireAuth: true}
           },
           {
             path: 'masterset',
             name: 'masterset',
             component: masterSet,
-            meta: {title: '管理员设置',icon: 'el-icon-s-custom'}
+            meta: {title: '管理员设置',icon: 'el-icon-s-custom',requireAuth: true}
           },
           {
             path: 'mastermsgset',
             name: 'mastermsgset',
             component: mastermsgSet,
-            meta: {title: '管理员信息设置',icon: 'el-icon-s-custom'}
+            meta: {title: '管理员信息设置',icon: 'el-icon-s-custom',requireAuth: true}
           },
           {
             path: 'clubdetail',
             name: 'clubdetail',
             component: clubDetail,
-            meta: {title: '俱乐部详情',icon: 'el-icon-s-grid'}
+            meta: {title: '俱乐部详情',icon: 'el-icon-s-grid',requireAuth: true}
           }
         ]
     }
   ]
-})
+});
+
+export default router
+router.beforeEach((to, from, next) => {
+    if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
+        console.log(sessionStorage.getItem("token"));
+      if (sessionStorage.getItem("token")) { // 判断本地是否存在token
+        next()
+      } else {
+        // 未登录,跳转到登陆页面
+        next('/')
+      }
+    } else {
+        console.log(sessionStorage.getItem("token"));
+        next();
+    }
+  });

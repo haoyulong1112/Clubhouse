@@ -5,6 +5,7 @@ const requestDomain = envConfig.requestDomain
 export const setServicePhone = data => {
     return request({
         url: `${requestDomain}/club-room/admin/setServicePhone`,
-        data: data
+        data: data,
+        token: sessionStorage.getItem("token")
     })
 }

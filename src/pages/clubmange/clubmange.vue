@@ -1,9 +1,12 @@
 <template>
     <div class="container">
         <div class="club-search">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="phone-ruleForm">
+            <el-form :model="ruleForm" ref="ruleForm" label-width="150px" class="phone-ruleForm">
                 <el-form-item class="phone-label" label="手机号" prop="phone">
                     <el-input type="number" v-model="ruleForm.phone" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item class="phone-label" label="俱乐部名称" prop="clubname">
+                    <el-input type="text" v-model="ruleForm.clubname" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item class="check-btnbox">
                     <el-button @click="submitForm('ruleForm')">查询</el-button>
@@ -14,10 +17,10 @@
             <h3>筛选条件</h3>
             <div class="first-class">
                 <div>一级分类</div>
-                <div :class="currentFirstclass == -1 ? 'active': ''" @click="changeClass1(-1)">全部<span v-if="currentFirstclass == -1"></span></div>
-                <div :class="currentFirstclass == index ? 'active': ''" v-for="(item,index) in firstClass1" :key="`a${index}`" @click="changeClass1(index)">{{item.class}}
+                <div :class="currentFirstclass == -1 ? 'active': ''" @click="changeClass1('',-1)">全部<span v-if="currentFirstclass == -1"></span></div>
+                <div :class="currentFirstclass == index ? 'active': ''" v-for="(item,index) in firstClass1" :key="`a${index}`" @click="changeClass1(item.id,index)">{{item.name}}
                     <span v-if="currentFirstclass == index"></span>
-                    <img class="delclass" v-if="delClassimg1" src="@/assets/del.png" alt="" @click.stop="delClass(index)">
+                    <img class="delclass" v-if="delClassimg1" src="@/assets/del.png" alt="" @click.stop="delClass(item.id)">
                 </div>
                 <div class="delete" @click="candel1">{{deltext1}}</div>
                 <div class="editclass1" @click="addClass">新增</div>
@@ -25,12 +28,12 @@
             <div class="second-class">
                 <div>二级分类</div>
                 <div :class="currentSecondclass == -1 ? 'active': ''" @click="changeClass2(-1)">全部<span v-if="currentSecondclass == -1"></span></div>
-                <div :class="currentSecondclass == index ? 'active': ''" v-for="(item,index) in firstClass2" :key="`a${index}`" @click="changeClass2(index)">{{item.class}}
+                <div :class="currentSecondclass == index ? 'active': ''" v-for="(item,index) in firstClass2" :key="`a${index}`" @click="changeClass2(item.id,index)">{{item.name}}
                     <span v-if="currentSecondclass == index"></span>
-                    <img class="delclass" v-if="delClassimg2"  src="@/assets/del.png" alt="">
+                    <img class="delclass" v-if="delClassimg2"  src="@/assets/del.png" alt="" @click.stop="delClass2(item.id)">
                 </div>
                 <div class="delete" @click="candel2">{{deltext2}}</div>
-                <div class="editclass1">新增</div>
+                <div class="editclass1" @click="addClass2">新增</div>
             </div>
         </div>
         <div class="club-number">
@@ -43,12 +46,16 @@
                 :data="tableData"
                 highlight-current-row
                 style="width: 100%">
-                <el-table-column prop="date" label="俱乐部ID"></el-table-column>
-                <el-table-column prop="date" label="头像"></el-table-column>
-                <el-table-column prop="date" label="俱乐部名称"></el-table-column>
+                <el-table-column prop="id" label="俱乐部ID"></el-table-column>
+                <el-table-column prop="avatar" label="头像">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.avatar" class="td-header" width="50" height="50" alt="">
+                    </template>
+                </el-table-column>
+                <el-table-column prop="name" label="俱乐部名称"></el-table-column>
                 <el-table-column prop="date" label="分类"></el-table-column>
-                <el-table-column prop="date" label="管理员"></el-table-column>
-                <el-table-column prop="date" label="创建时间"></el-table-column>
+                <el-table-column prop="presenterId" label="管理员"></el-table-column>
+                <el-table-column prop="createTime" label="创建时间"></el-table-column>
                 <el-table-column prop="date" label="房间次数"></el-table-column>
                 <el-table-column prop="name" label="在线时长"></el-table-column>
                 <el-table-column prop="fensi" label="粉丝">
@@ -56,13 +63,10 @@
                         <span class="fensisty" @click="goFensi(scope.row.date)">{{scope.row.fensi}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="address" label="简介"></el-table-column>
+                <el-table-column prop="roomInstructions" label="简介"></el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <span class="check" @click="handleEdit(scope.$index, scope.row)">查看详情</span>
-                        <!-- <el-button class="check"
-                        size="mini"
-                        @click="handleEdit(scope.$index, scope.row)">查看详情</el-button> -->
                     </template>
                 </el-table-column>
             </el-table>
@@ -73,7 +77,7 @@
                 :background="true"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage"
+                :current-page="pageNo"
                 :page-sizes="[10, 20, 30]"
                 :page-size="pageSize"
                 :pager-count="9"
@@ -86,158 +90,68 @@
 </template>
 
 <script>
+  import { getClub ,getFirstTopic ,getSecondTopic,addTopic,delTopic} from '@/api/club/club.js'
   export default{
     name: 'clubmange',
     data() {
         return {
             ruleForm: {
-                phone: ''
+                phone: '',
+                clubname: ''
             },
-            rules: {
-                phone: [
-                    { required: true, message: '请填写手机号', trigger: 'blur' }
-                ]
-            },
-            firstClass1: [
-                {
-                    id: 0,
-                    class: '点击',
-                },
-                {
-                    id: 1,
-                    class: '股票',
-                },
-                {
-                    id: 2,
-                    class: '生活',
-                },
-                {
-                    id: 3,
-                    class: '娱乐',
-                },
-                {
-                    id: 4,
-                    class: '心理咨询',
-                }
-            ],
-            firstClass2: [
-                {
-                    id: 0,
-                    class: '点击',
-                },
-                {
-                    id: 1,
-                    class: '股票',
-                },
-                {
-                    id: 2,
-                    class: '生活',
-                },
-                {
-                    id: 3,
-                    class: '娱乐',
-                },
-                {
-                    id: 4,
-                    class: '心理咨询',
-                }
-            ],
+            firstClass1: [],
+            firstClass2: [],
             delClassimg1: false,
             delClassimg2: false,
             deltext1: '删除',
             deltext2: '删除',
-            tableData: [{
-                date: '12',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-02',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-08',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-06',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-07',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-07',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-07',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                date: '2016-05-07',
-                name: '王小虎',
-                fensi: '35',
-                address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    fensi: '35',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    fensi: '35',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }
-            ],
+            tableData: [],
             currentFirstclass: -1,
             currentSecondclass: -1,
             headerclass: 'headerclass',
             total: 100,
-            currentPage: 1,
-            pageSize: 10
+            pageNo: 1,
+            pageSize: 10,
+            // 一级分类
+            parentTopicId: '',
+            // 二级分类
+            topicId: ''
         }
     },
+    created() {
+        // 获取一级分类
+        this.getFirsttitle()
+        // 获取二级分类
+        this.getSecondtitle('')
+        // 获取俱乐部列表
+        this.getList();
+    },
     methods: {
-        changeClass1(index){
-            console.log(index);
+        changeClass1(id,index){
             this.currentFirstclass = index;
+            this.getSecondtitle(id)
+            this.parentTopicId = id;
         },
         changeClass(val){
             console.log(val);
             // this.currentFirstclass = index;
         },
-        changeClass2(index){
+        changeClass2(id,index){
+            this.topicId = id;
             this.currentSecondclass = index;
         },
         submitForm(str){
             this.$refs[str].validate((flag) => {
                 if(flag){
-                    console.log('查询')
+                    this.getList();
                 }
             })
         },
+        // 去粉丝页面
         goFensi(id){
             console.log(id)
         },
+        // 去俱乐部详情页
         handleEdit(id){
             console.log(id)
             this.$router.push({
@@ -251,6 +165,7 @@
         handleCurrentChange(val){
             console.log(val)
         },
+        // 删除一级分类
         candel1(){
             this.currentFirstclass = -1;
             if(this.delClassimg1){
@@ -261,6 +176,7 @@
                 this.deltext1 = '取消';
             }
         },
+        // 删除二级分类
         candel2(){
             this.currentSecondclass = -1;
             if(this.delClassimg2){
@@ -271,24 +187,14 @@
                 this.deltext2 = '取消';
             }
         },
-        delClass(index){
+        // 确认删除一级分类
+        delClass(id){
             this.$confirm('是否删除该分类?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
                 }).then(() => {
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功!'
-                    });
-
-                    let data = this.firstClass1;
-                    for(let i in data){
-                        if(i == index){
-                            data.splice(index, 1); 
-                        }
-                    }
-                    this.firstClass1 = data;
+                    this.delClassname(1,id)
                 }).catch(() => {
                 this.$message({
                     type: 'info',
@@ -296,26 +202,157 @@
                 });          
             });
         },
+        // 添加一级分类
         addClass(){
             this.delClassimg1 = false;
             this.$prompt('请输入分类', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
+                // inputType: 'textarea'
                     }).then(({ value }) => {
-                        let newClass = {
-                            class: value,
+                        if(value){
+                            this.addClassname(1,value);
+                        }else{
+                            this.$message('未填写分类名称');     
                         }
-                        this.firstClass1.push(newClass);
-                    this.$message({
-                        type: 'success',
-                        message: '添加成功' 
-                    });
                     }).catch(() => {
                     this.$message({
                         type: 'info',
                         message: '取消输入'
                     });       
             });
+        },
+        // 添加分类接口
+        addClassname(type,name){
+            let data = {
+                name: name,
+                sort: '1'
+            }
+            if(type == 1){
+                data.parentId = 0;
+            }else{
+                data.parentId = this.parentTopicId
+            }
+            if(!name){
+                return;
+            }
+            console.log(data);
+            addTopic(data).then(res =>{
+                console.log(res);
+                if(res.code == 200){
+                    if(this.parentTopicId){
+                        this.currentSecondclass = -1,
+                        this.getSecondtitle(this.parentTopicId);
+                    }else{
+                        this.currentFirstclass = -1,
+                        this.getFirsttitle();
+                    }
+                    this.$message({
+                        type: 'success',
+                        message: '添加成功' 
+                    });
+                }
+            })
+        },
+        // 删除分类接口
+        delClassname(type,id){
+            let data = {
+                id: id,
+            }
+            if(!id){
+                return;
+            }
+            delTopic(data).then(res =>{
+                if(res.code == 200){
+                    if(type == 1){
+                        this.currentFirstclass = -1,
+                        this.getFirsttitle();
+                    }else{
+                        this.currentSecondclass = -1,
+                        this.getSecondtitle(this.parentTopicId);
+                    }
+                    this.$message({
+                        type: 'success',
+                        message: '添加成功' 
+                    });
+                }
+            })
+        },
+
+        // 添加二级分类
+        addClass2(){
+            this.delClassimg1 = false;
+            this.$prompt('请输入分类', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                    }).then(({ value }) => {
+                        if(value){
+                            if(this.parentTopicId){
+                                this.addClassname(2,value);
+                            }else{
+                                this.$message('添加二级分类需要先选择一级分类！');  
+                            }
+                        }else{
+                            this.$message('未填写分类名称');     
+                        }
+                    }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '取消输入'
+                    });       
+            });
+        },
+        // 确认删除二级分类
+        delClass2(id){
+            this.$confirm('是否删除该分类?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    this.delClassname(2,id)
+                }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
+        },
+        // 获取俱乐部列表
+        getList(){
+            let data = {
+                name: this.ruleForm.clubname,
+                phone: this.ruleForm.phone,
+                pageNo: this.pageNo,
+                pageSize: this.pageSize,
+                parentTopicId: this.parentTopicId,
+                topicId: this.topicId,
+            }
+            getClub(data).then(res =>{
+                console.log(res);
+                if(res.code == 200){
+                    this.tableData = res.data;
+                console.log(this.tableData);
+                }
+            })
+        },
+        //获取一级标题
+        getFirsttitle(){
+            getFirstTopic().then(res =>{
+                if(res.code == 200){
+                    this.firstClass1 = res.data;
+                }
+            })
+        },
+        //获取二级标题
+        getSecondtitle(id){
+            let data = {
+                parentId: id
+            }
+            getSecondTopic(data).then(res =>{
+                if(res.code == 200){
+                    this.firstClass2 = res.data;
+                }
+            })
         }
     }
   }
@@ -331,11 +368,9 @@
         > .el-form
             display flex;
             justify-content flex-start;
-            > div:first-of-type
-                width 500px
     /deep/ .phone-label .el-form-item__label
         font-family: PingFangSC-Semibold;
-        font-size: 20px!important;
+        font-size: 16px!important;
         color: #002241!important;
         width 100px!important;
         letter-spacing: 0;

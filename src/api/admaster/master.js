@@ -5,21 +5,24 @@ const requestDomain = envConfig.requestDomain
 export const addAdmin = data => {
     return request({
         url: `${requestDomain}/club-room/admin/addAdmin`,
-        data: data
+        data: data,
+        token: sessionStorage.getItem("token")
     })
 }
 // 获取管理员列表  
 export const adminList = data => {
     return request({
         url: `${requestDomain}/club-room/admin/adminList`,
-        data: data
+        data: data,
+        token: sessionStorage.getItem("token")
     })
 }
 // 更新管理员
 export const updateAdmin = data => {
     return request({
         url: `${requestDomain}/club-room/admin/updateAdmin`,
-        data: data
+        data: data,
+        token: sessionStorage.getItem("token")
     })
 }
 
@@ -27,6 +30,7 @@ export const updateAdmin = data => {
 export const delAdmin = data => {
     return request({
         url: `${requestDomain}/club-room/admin/delAdmin`,
-        data: data
+        data: data,
+        token: sessionStorage.getItem("token")
     })
 }

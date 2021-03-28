@@ -106,15 +106,15 @@ export default {
             }
         },
         backLogin(){
-            console.log(this.$store.state.user.username);
-            console.log(this.$store.state.user.password);
-            this.$store.commit('user/updateUsername','')
-            this.$store.commit('user/updatePassword', '')
+            // console.log(this.$store.state.user.username);
+            // console.log(this.$store.state.user.password);
+            // this.$store.commit('user/updateUsername','')
+            // this.$store.commit('user/updatePassword', '')
             this.$router.push({
                 name: 'Login'
             });
-            console.log(this.$store.state.user.username);
-            console.log(this.$store.state.user.password);
+            // console.log(this.$store.state.user.username);
+            // console.log(this.$store.state.user.password);
         }
     },
 }

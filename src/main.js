@@ -17,7 +17,6 @@ Vue.config.productionTip = false
 // 保存整站vuex本地储存初始状态
 console.log(cloneDeep(store.state));
 window.SITE_CONFIG['storeState'] = cloneDeep(store.state)
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
