@@ -6,6 +6,12 @@
         // 跨域
         requestDomain: '/test',
     }
+    var demoConfig = {
+        // 请求域名头 pet-pai
+        requestDomain: 'http://8.141.49.230:8200',
+        // 跨域
+        // requestDomain: '/test',
+    }
 
     var prodConfig = {
         // 请求域名头 pet-pai
@@ -52,6 +58,7 @@
 
     // 通过hostname区分环境  http://localhost:8080/
     var testDomainArray = ['localhost']
+    var demoDomainArray = ['8.141.49.230']
     var prodDomainArray = ['static.ichongwujia.com']
 
     var hostname = window.location.hostname
@@ -69,6 +76,9 @@
     window.envConfig = {}
     if (isItemInStr(hostname, testDomainArray)) {
         window.envConfig = testConfig
+    }
+    if (isItemInStr(hostname, demoDomainArray)) {
+        window.envConfig = demoConfig
     }
     if (isItemInStr(hostname, prodDomainArray)) {
         window.envConfig = prodConfig
