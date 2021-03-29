@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
 import common from './modules/common'
 import user from './modules/user'
+import createPersistedState from "vuex-persistedstate"
 // import prod from './modules/prod'
 
 Vue.use(Vuex)
@@ -21,5 +22,6 @@ export default new Vuex.Store({
       })
     }
   },
-  strict: process.env.NODE_ENV !== 'production'
+  strict: process.env.NODE_ENV !== 'production',
+  plugins: [createPersistedState()]
 })

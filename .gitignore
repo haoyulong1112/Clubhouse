@@ -12,3 +12,4 @@ dev.sh
 *.ntvs*
 *.njsproj
 *.sln
+sendbuild.sh
