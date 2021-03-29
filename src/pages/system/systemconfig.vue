@@ -42,11 +42,8 @@
                     setServicePhone({
                         phone: this.ruleForm.phone
                     }).then(res => {
-                        // this.$store.commit('common/updatePhone', this.ruleForm.phone)
-                        console.log(res)
                         if(res.code =200){
                             this.$store.commit('common/updatePhone', this.ruleForm.phone)
-                            console.log(this.$store.state.common.phone)
                             this.$message({
                                 message: res.msg,
                                 type: 'success'

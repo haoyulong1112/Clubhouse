@@ -69,5 +69,15 @@ export const auditClub = data => {
     })
 }
 
+// 俱乐部详情
+export const clubDetail = data => {
+    return request({
+        url: `${requestDomain}/club-room/admin/clubDetail`,
+        data: data,
+        token: sessionStorage.getItem("token")
+    })
+}
+
+
 
 

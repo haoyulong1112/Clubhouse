@@ -11,7 +11,6 @@ export default (options = {}) => {
   const token = options.token || '';
   const data = options.data || {}
   const async = options.async !== false
-    console.log('token',token);
   return new Promise((resolve, reject) => {
     let requestObj = {}
     if (window.XMLHttpRequest) {

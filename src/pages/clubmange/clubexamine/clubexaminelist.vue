@@ -14,7 +14,6 @@
                         <el-option label="已通过" value="1"></el-option>
                         <el-option label="未通过" value="2"></el-option>
                     </el-select>
-                    <!-- <el-input type="text" v-model="ruleForm.status" autocomplete="off"></el-input> -->
                 </el-form-item>
                 <el-form-item class="check-btnbox">
                     <el-button @click="submitForm('ruleForm')">查询</el-button>
@@ -94,16 +93,19 @@
                 })
             },
             handleSizeChange(val){
-                console.log(val);
+                console.log('切换每页信息数量')
+                this.pageSize = val;
+                this.getauditList();
             },
             handleCurrentChange(val){
-                console.log(val)
+                console.log('切换页码')
+                this.pageNo = val;
+                this.getauditList();
             },
             changeTab(index){
                 this.currentTab = index;
             },
             examine(row){
-                console.log(row);
                 this.$router.push({
                     path: 'clubapply',
                     name: 'clubexamineapply',

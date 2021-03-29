@@ -17,20 +17,24 @@
             <h3>筛选条件</h3>
             <div class="first-class">
                 <div>一级分类</div>
-                <div :class="currentFirstclass == -1 ? 'active': ''" @click="changeClass1('',-1)">全部<span v-if="currentFirstclass == -1"></span></div>
-                <div :class="currentFirstclass == index ? 'active': ''" v-for="(item,index) in firstClass1" :key="`a${index}`" @click="changeClass1(item.id,index)">{{item.name}}
-                    <span v-if="currentFirstclass == index"></span>
-                    <img class="delclass" v-if="delClassimg1" src="@/assets/del.png" alt="" @click.stop="delClass(item.id)">
+                <div class="class1box">
+                    <div :class="currentFirstclass == -1 ? 'active': ''" @click="changeClass1('',-1)">全部<span v-if="currentFirstclass == -1"></span></div>
+                    <div :class="currentFirstclass == index ? 'active': ''" v-for="(item,index) in firstClass1" :key="`a${index}`" @click="changeClass1(item.id,index)">{{item.name}}
+                        <span v-if="currentFirstclass == index"></span>
+                        <img class="delclass" v-if="delClassimg1" src="@/assets/del.png" alt="" @click.stop="delClass(item.id)">
+                    </div>
                 </div>
                 <div class="delete" @click="candel1">{{deltext1}}</div>
                 <div class="editclass1" @click="addClass">新增</div>
             </div>
             <div class="second-class">
                 <div>二级分类</div>
-                <div :class="currentSecondclass == -1 ? 'active': ''" @click="changeClass2(-1)">全部<span v-if="currentSecondclass == -1"></span></div>
-                <div :class="currentSecondclass == index ? 'active': ''" v-for="(item,index) in firstClass2" :key="`a${index}`" @click="changeClass2(item.id,index)">{{item.name}}
-                    <span v-if="currentSecondclass == index"></span>
-                    <img class="delclass" v-if="delClassimg2"  src="@/assets/del.png" alt="" @click.stop="delClass2(item.id)">
+                <div class="class2box">
+                    <div :class="currentSecondclass == -1 ? 'active': ''" @click="changeClass2('',-1)">全部<span v-if="currentSecondclass == -1"></span></div>
+                    <div :class="currentSecondclass == index ? 'active': ''" v-for="(item,index) in firstClass2" :key="`a${index}`" @click="changeClass2(item.id,index)">{{item.name}}
+                        <span v-if="currentSecondclass == index"></span>
+                        <img class="delclass" v-if="delClassimg2"  src="@/assets/del.png" alt="" @click.stop="delClass2(item.id)">
+                    </div>
                 </div>
                 <div class="delete" @click="candel2">{{deltext2}}</div>
                 <div class="editclass1" @click="addClass2">新增</div>
@@ -109,7 +113,7 @@
             currentFirstclass: -1,
             currentSecondclass: -1,
             headerclass: 'headerclass',
-            total: 100,
+            total: 0,
             pageNo: 1,
             pageSize: 10,
             // 一级分类
@@ -132,10 +136,6 @@
             this.getSecondtitle(id)
             this.parentTopicId = id;
         },
-        changeClass(val){
-            console.log(val);
-            // this.currentFirstclass = index;
-        },
         changeClass2(id,index){
             this.topicId = id;
             this.currentSecondclass = index;
@@ -152,18 +152,22 @@
             console.log(id)
         },
         // 去俱乐部详情页
-        handleEdit(id){
-            console.log(id)
+        handleEdit(index, row){
+            this.$store.commit('club/setClubdata', row)
             this.$router.push({
                 name: 'clubdetail',
                 path: 'clubdetail'
             })
         },
         handleSizeChange(val){
-            console.log(val);
+            console.log('切换每页信息数量')
+            this.pageSize = val;
+            this.getList();
         },
         handleCurrentChange(val){
-            console.log(val)
+            console.log('切换页码')
+            this.pageNo = val;
+            this.getList();
         },
         // 删除一级分类
         candel1(){
@@ -236,9 +240,7 @@
             if(!name){
                 return;
             }
-            console.log(data);
             addTopic(data).then(res =>{
-                console.log(res);
                 if(res.code == 200){
                     if(this.parentTopicId){
                         this.currentSecondclass = -1,
@@ -273,7 +275,7 @@
                     }
                     this.$message({
                         type: 'success',
-                        message: '添加成功' 
+                        message: '删除成功' 
                     });
                 }
             })
@@ -328,10 +330,9 @@
                 topicId: this.topicId,
             }
             getClub(data).then(res =>{
-                console.log(res);
                 if(res.code == 200){
                     this.tableData = res.data;
-                console.log(this.tableData);
+                    this.total = res.total;
                 }
             })
         },
@@ -409,41 +410,49 @@
             width 100%;
             display flex;
             justify-content flex-start;
-            align-items center;
+            align-items baseline;
             box-sizing border-box;
             padding-left 10px;
-            height 50px;
             position: relative;
             background: #E0F0F0;
-            > div
-                margin-right: 30px;
-                position relative;
-                box-sizing border-box;
-                cursor: pointer;
-                font-family: PingFangSC-Semibold;
-                font-size: 16px;
-                color: #717985;
-                letter-spacing: 0;
-                > span
-                    position absolute;
-                    bottom -10px;
-                    left 50%;
-                    width 20px;
-                    height 5px;
-                    margin-left -10px;
-                    background-color #ed1941;
-                    border-radius: 2px;
-                > .delclass
-                    position absolute;
-                    top: -10px;
-                    right: -15px;
-                    width 17px;
-                    height 17px;
+            > .class1box
+                display: flex;
+                justify-content flex-start;
+                align-items center;
+                flex-wrap: wrap;
+                width: 750px;
+                > div
+                    height: 100%;
+                    line-height: 50px;
+                    margin-right: 30px;
+                    position relative;
+                    box-sizing border-box;
+                    cursor: pointer;
+                    font-family: PingFangSC-Semibold;
+                    font-size: 16px;
+                    color: #717985;
+                    letter-spacing: 0;
+                    > span
+                        position absolute;
+                        bottom 5px;
+                        left 50%;
+                        width 20px;
+                        height 5px;
+                        margin-left -10px;
+                        background-color #ed1941;
+                        border-radius: 2px;
+                    > .delclass
+                        position absolute;
+                        top: 5px;
+                        right: -15px;
+                        width 17px;
+                        height 17px;
             > div:first-of-type
                 font-size 16px;
                 font-family: PingFangSC-Medium;
                 color: #2C3645;
                 letter-spacing: 0;
+                width: 85px;
             > div.active
                 font-weight: bolder;
                 color: #2C3645
@@ -454,7 +463,8 @@
                 font-family: PingFangSC-Medium;
                 font-size: 14px;
                 color: #1B8668;
-                text-decoration: underline
+                text-decoration: underline;
+                cursor pointer;
             .delete
                 position absolute;
                 right 45px;
@@ -463,45 +473,54 @@
                 font-size: 14px;
                 color: #FF4E4E;
                 text-decoration: underline
+                cursor pointer;
         > .second-class
             width 100%;
             display flex;
             justify-content flex-start;
-            align-items center;
+            align-items baseline;
             box-sizing border-box;
             padding-left 10px;
-            height 50px;
             position: relative;
             background: #F8FCFC;
-            > div
-                margin-right: 30px;
-                position relative;
-                box-sizing border-box;
-                cursor: pointer;
-                font-family: PingFangSC-Semibold;
-                font-size: 16px;
-                color: #717985;
-                letter-spacing: 0;
-                > span
-                    position absolute;
-                    bottom -10px;
-                    left 50%;
-                    width 20px;
-                    height 5px;
-                    margin-left -10px;
-                    background-color #ed1941;
-                    border-radius: 2px;
-                > .delclass
-                    position absolute;
-                    top: -10px;
-                    right: -15px;
-                    width 17px;
-                    height 17px;
+            > .class2box
+                display: flex;
+                justify-content flex-start;
+                align-items center;
+                flex-wrap: wrap;
+                width: 750px;
+                > div
+                    height: 100%;
+                    line-height: 50px;
+                    margin-right: 30px;
+                    position relative;
+                    box-sizing border-box;
+                    cursor: pointer;
+                    font-family: PingFangSC-Semibold;
+                    font-size: 16px;
+                    color: #717985;
+                    letter-spacing: 0;
+                    > span
+                        position absolute;
+                        bottom 5px;
+                        left 50%;
+                        width 20px;
+                        height 5px;
+                        margin-left -10px;
+                        background-color #ed1941;
+                        border-radius: 2px;
+                    > .delclass
+                        position absolute;
+                        top: 5px;
+                        right: -15px;
+                        width 17px;
+                        height 17px;
             > div:first-of-type
                 font-size 16px;
                 font-family: PingFangSC-Medium;
                 color: #2C3645;
                 letter-spacing: 0;
+                width: 85px;
             > div.active
                 font-weight: bolder;
                 color: #2C3645
@@ -512,7 +531,8 @@
                 font-family: PingFangSC-Medium;
                 font-size: 14px;
                 color: #1B8668;
-                text-decoration: underline
+                text-decoration: underline;
+                cursor pointer;
             .delete
                 position absolute;
                 right 45px;
@@ -520,7 +540,8 @@
                 font-family: PingFangSC-Medium;
                 font-size: 14px;
                 color: #FF4E4E;
-                text-decoration: underline
+                text-decoration: underline;
+                cursor pointer;
     .club-list
         padding-left: 30px;
         padding-right: 30px;

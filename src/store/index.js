@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import cloneDeep from 'lodash/cloneDeep'
 import common from './modules/common'
 import user from './modules/user'
+import club from './modules/club'
 import createPersistedState from "vuex-persistedstate"
-// import prod from './modules/prod'
 
 Vue.use(Vuex)
 
@@ -12,7 +12,7 @@ export default new Vuex.Store({
   modules: {
     common,
     user,
-    // prod
+    club
   },
   mutations: {
     // 重置vuex本地储存状态

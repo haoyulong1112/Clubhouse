@@ -105,7 +105,7 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
                     { required: true, message: '请填写密码', trigger: 'blur' }
                 ]
             },
-            total: 100,
+            total: 0,
             pageNo: 1,
             pageSize: 10,
             currentTab: 1,
@@ -117,10 +117,14 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
     },
     methods: {
             handleSizeChange(val){
-                console.log(val);
+                console.log('切换每页信息数量')
+                this.pageSize = val;
+                this.getAdmasterList();
             },
             handleCurrentChange(val){
-                console.log(val)
+                console.log('切换页码')
+                this.pageNo = val;
+                this.getAdmasterList();
             },
             changeTab(index){
                 this.currentTab = index;
@@ -134,7 +138,6 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
                             password: this.masterForm.password,
                             phone: this.masterForm.phone,
                         }
-                        console.log(data);
                         addAdmin(data).then(res => {
                             if(res.code == 200){
                                 this.$message({
@@ -158,12 +161,12 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
                 adminList(data).then(res => {
                     if(res.code == 200){
                         this.tableData1 = res.data;
+                        this.total = res.total;
                     }
                 })
             },
             // 更新管理员
             update(row){
-                console.log(row);
                 let data = {
                     id: row.id,
                     name: row.name,
@@ -173,7 +176,6 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
                 if(!data.id){
                     this.$message.error('缺少参数');
                 }
-                console.log(data);
                 updateAdmin(data).then(res => {
                     if(res.code == 200){
                         this.$message({
@@ -192,7 +194,6 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
                 if(!data.id){
                     this.$message.error('缺少参数');
                 }
-                console.log(data);
                 delAdmin(data).then(res => {
                     if(res.code == 200){
                         this.$message({

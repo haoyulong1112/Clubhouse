@@ -59,7 +59,6 @@
         this.mastersetForm.name = this.userdetail.name;
         this.mastersetForm.oldPassword = this.userdetail.password;
         this.mastersetForm.cellPhone = this.userdetail.phone;
-        console.log(this.userdetail);
     },
     methods:{
         submitForm(str){
@@ -71,7 +70,6 @@
         },
         // 更新管理员
         update(mastersetForm){
-            console.log(mastersetForm);
             let data = {
                 id: this.userdetail.id,
                 name: mastersetForm.name,
@@ -81,7 +79,6 @@
             if(!data.id){
                 this.$message.error('缺少参数');
             }
-            console.log(data);
             updateAdmin(data).then(res => {
                 if(res.code == 200){
                     this.$message({

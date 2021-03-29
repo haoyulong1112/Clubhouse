@@ -51,7 +51,6 @@ export default {
             let data = {
                 phones: this.formData.phonetext
             }
-            console.log(data);
             exportPhone(data).then(res => {
                 if(res.code == 200){
                     this.$message({

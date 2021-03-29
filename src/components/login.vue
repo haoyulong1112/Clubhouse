@@ -65,11 +65,7 @@ export default {
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
-                console.log(valid);
                 if (valid) {
-                    // console.log(this.$store.state.user.username);
-                    // console.log(this.$store.state.user.password);
-                    console.log('submit!');
                     let data = {
                         password: this.ruleForm.checkPass,
                         username: this.ruleForm.account,
@@ -77,18 +73,11 @@ export default {
                     adminLogin(data).then(res=> {
                         if(res.code == 200){
                             this.$store.commit('user/updateUser', res.data)
-                            // this.$store.commit('user/updatePhone', res.data.phone)
-                            // this.$store.commit('user/updatePassword', res.data.password)
-                            // this.$store.commit('user/updateToken', res.token);
-                            // window.token = res.token;
                             sessionStorage.setItem("token", res.token);
                             this.$router.push({
                                 name: 'AdminIndex',
                                 path: '/admin'
                             });
-                    console.log(this.$store.state.user.username);
-                    console.log(this.$store.state.user.password);
-                    console.log(this.$store.state.user.token);
                         }else{
                             this.$message({
                                 message: res.msg,

@@ -16,3 +16,11 @@ export const updateUserStatus = data => {
         token: sessionStorage.getItem("token")
     })
 }
+// 获取用户详情
+export const userDetail = data => {
+    return request({
+        url: `${requestDomain}/club-room/admin/userDetail`,
+        data: data,
+        token: sessionStorage.getItem("token")
+    })
+}

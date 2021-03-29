@@ -17,10 +17,10 @@
                     <tbody>
                         <tr>
                             <td>{{userData.id}}</td>
+                            <td><img width="50" height="50" :src="userData.avatar" alt=""></td>
                             <td>{{userData.name}}</td>
-                            <td>{{userData.phone}}</td>
                             <td>{{userData.email}}</td>
-                            <td>{{userData.enterTime}}</td>
+                            <td>{{userData.createTime}}</td>
                             <td>{{userData.logintime}}</td>
                             <td>{{userData.timelone}}</td>
                         </tr>
@@ -36,44 +36,39 @@
             <div class="club-tag">
                 <div class="tag-title">标签</div>
                 <div class="tag-tags">
-                    <div>股票好受</div>
-                    <div>投资大亨</div>
-                    <div>地产打哈</div>
+                    <div v-for="(item,index) in userData.onlytags" :key="`c${index}`">{{item}}</div>
                 </div>
             </div>
             <div class="clubdetail-info">
                 <div>简介</div>
                 <div>
-                    可以为空<br />
-                    可以市一句话<br />
-                    可以是段落<br />
+                    {{userData.roomInstructions}}
                 </div>
             </div>
         </div>
         <div class="club-fans">
-            <div class="fansbtn">粉丝 58人</div>
+            <div class="fansbtn">粉丝 {{total}}人</div>
             <div class="user-box">  
                 <el-table class="list-table"
                     :data="tableData"
                     highlight-current-row
                     :cell-class-name="tdlist"
                     style="width: 100%">
-                    <el-table-column prop="imgurl" label="头像" width="120">
+                    <el-table-column prop="headPic" label="头像" width="120">
                         <template slot-scope="scope">
-                            <img :src="scope.row.imgurl" class="td-header" width="50" height="50" alt="">
+                            <img :src="scope.row.headPic" class="td-header" width="50" height="50" alt="">
                         </template>
                     </el-table-column>
                     <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
-                    <el-table-column prop="name" label="昵称" width="120"></el-table-column>
-                    <el-table-column prop="phone" label="手机号" width="120"></el-table-column>
-                    <el-table-column prop="email" label="邮箱" width="120"></el-table-column>
-                    <el-table-column prop="enterTime" label="加入时间" width="120"></el-table-column>
-                    <el-table-column prop="logintime" label="最后登录时间" width="120"></el-table-column>
-                    <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
-                    <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
-                    <el-table-column prop="club" label="关注的俱乐部" width="120"></el-table-column>
-                    <el-table-column prop="timelone" label="在线时长" width="120"></el-table-column>
-                    <el-table-column prop="room" label="开设房间" width="120"></el-table-column>
+                    <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
+                    <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
+                    <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
+                    <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
+                    <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
+                    <el-table-column prop="fansSize" label="粉丝" width="120"></el-table-column>
+                    <el-table-column prop="followClubSize" label="关注的俱乐部" width="120"></el-table-column>
+                    <el-table-column prop="totalTime" label="在线时长" width="120"></el-table-column>
+                    <el-table-column prop="createClubCount" label="开设房间" width="120"></el-table-column>
                 </el-table>
             </div>
             <div class="block">
@@ -93,123 +88,49 @@
     </div>
 </template>
 <script>
+  import { clubDetail } from '@/api/club/club.js'
     export default {
         name: 'clubdetail',
         data() {
             return {
-                userData: 
-                    {
-                        id: '12',
-                        imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
-                        name: '王小虎',
-                        phone: '17839193022',
-                        email: '875720142@qq.com',
-                        enterTime: '2021-03-2',
-                        logintime: '2021-03-2',
-                        timelone: '2021-03-23',
-                        attion: '234',
-                        fensi: '3444',
-                        room: '24',
-                        club: '102',
-                    },
-                tableData: [
-                    {
-                        id: '12',
-                        imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
-                        name: '王小虎',
-                        phone: '17839193022',
-                        email: '875720142@qq.com',
-                        enterTime: '2021-03-2',
-                        logintime: '2021-03-2',
-                        timelone: '2021-03-23',
-                        attion: '234',
-                        fensi: '3444',
-                        room: '24',
-                        club: '102',
-                    },
-                    {
-                        id: '12',
-                        imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
-                        name: '王小虎',
-                        phone: '17839193022',
-                        email: '875720142@qq.com',
-                        enterTime: '2021-03-2',
-                        logintime: '2021-03-2',
-                        timelone: '2021-03-23',
-                        attion: '234',
-                        fensi: '3444',
-                        room: '24',
-                        club: '102',
-                    }, 
-                    {
-                        id: '12',
-                        imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
-                        name: '王小虎',
-                        phone: '17839193022',
-                        email: '875720142@qq.com',
-                        enterTime: '2021-03-2',
-                        logintime: '2021-03-2',
-                        timelone: '2021-03-23',
-                        attion: '234',
-                        fensi: '3444',
-                        room: '24',
-                        club: '102',
-                    }, 
-                    {
-                        id: '12',
-                        imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
-                        name: '王小虎',
-                        phone: '17839193022',
-                        email: '875720142@qq.com',
-                        enterTime: '2021-03-2',
-                        logintime: '2021-03-2',
-                        timelone: '2021-03-23',
-                        attion: '234',
-                        fensi: '3444',
-                        room: '24',
-                        club: '102',
-                    }, 
-                    {
-                        id: '12',
-                        imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
-                        name: '王小虎',
-                        phone: '17839193022',
-                        email: '875720142@qq.com',
-                        enterTime: '2021-03-2',
-                        logintime: '2021-03-2',
-                        timelone: '2021-03-23',
-                        attion: '234',
-                        fensi: '3444',
-                        room: '24',
-                        club: '102',
-                    }, 
-                    {
-                        id: '12',
-                        imgurl: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg',
-                        name: '王小虎',
-                        phone: '17839193022',
-                        email: '875720142@qq.com',
-                        enterTime: '2021-03-2',
-                        logintime: '2021-03-2',
-                        timelone: '2021-03-23',
-                        attion: '234',
-                        fensi: '3444',
-                        room: '24',
-                        club: '102',
-                    }], 
+                userData:{},
+                tableData: [], 
                 tdlist: 'tdlist',
-                total: 100,
+                total: 0,
                 currentPage: 1,
                 pageSize: 10,
             }
         },
+        created() {
+            this.userData = this.$store.state.club.currentClubdata;
+            this.userData['onlytags'] = this.userData.title ? this.userData.title.split(',') : []
+            this.getclubDetail();
+        },
         methods: {
             handleSizeChange(val){
-                console.log(val);
+                this.pageSize = val;
+                this.clubDetail();
             },
             handleCurrentChange(val){
-                console.log(val)
+                this.currentPage = val;
+                this.clubDetail();
             },
+            // 获取俱乐部详情
+            getclubDetail(){
+                let data = {
+                    pageNo: this.currentPage,
+                    pageSize: this.pageSize,
+                    id: this.userData.id
+                }
+                clubDetail(data).then(res =>{
+                    if(res.code == 200 && res.data){
+                        this.tableData = this.data;
+                        this.total = res.total;
+                    }
+                }).catch(err =>{
+                    this.$message.error(err.msg);
+                })
+            }
         },
     }
 </script>

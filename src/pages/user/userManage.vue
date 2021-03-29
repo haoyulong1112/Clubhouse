@@ -20,7 +20,6 @@
             <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
             <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
             <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
-            <!-- <el-table-column prop="date" label="邮箱" width="120"></el-table-column> -->
             <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
             <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
             <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
@@ -73,7 +72,7 @@
                 tableData: [],
                 headerclass: 'headercss',
                 usertd: 'user-td',
-                total: 100,
+                total: 0,
                 pageNo: 1,
                 pageSize: 10,
                 phone: ''
@@ -102,13 +101,13 @@
                 getUserList(data).then(res => {
                     if(res.code == 200){
                         this.tableData = res.data;
+                        this.total = res.total || 100;
                     }
                 }).catch(err => {
                     this.$message.error(err.msg);
                 })
             },
             handleEdit(index, row) {
-                console.log(index, row);
                 this.$store.commit('user/setCurrentdata', row)
                 this.$router.push({
                     name: 'userDetail',
@@ -140,14 +139,12 @@
 
             },
             handleSizeChange(val){
-                console.log(val);
                 console.log('切换每页信息数量')
                 this.pageSize = val;
                 this.getUserLists();
             },
             handleCurrentChange(val){
                 console.log('切换页码')
-                console.log(val)
                 this.pageNo = val;
                 this.getUserLists();
             }

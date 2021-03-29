@@ -151,7 +151,6 @@
             auditDetailInfo(data).then(res =>{
                 if(res.code == 200){
                     this.applyForm = res.data;
-                    console.log(this.applyForm)
                 }
             })
         }

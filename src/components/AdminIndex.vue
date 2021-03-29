@@ -51,9 +51,6 @@
                     <el-menu-item class="menuitems" index="/admin/clubexamine">
                         俱乐部审核列表
                     </el-menu-item>
-                    <!-- <el-menu-item class="menuitems" index="/admin/clubapply">
-                        俱乐部申请
-                    </el-menu-item> -->
                 </el-submenu>
               </el-menu>
             </el-aside>
@@ -83,7 +80,6 @@ export default {
         $route:{
             immediate:true,
             handler(val,oldval){
-                console.log(val);
                 this.pageTitle = val.meta.title;
                 this.titleClass = val.meta.icon;
                 if(val && val.name == "AdminIndex"){
@@ -106,15 +102,9 @@ export default {
             }
         },
         backLogin(){
-            // console.log(this.$store.state.user.username);
-            // console.log(this.$store.state.user.password);
-            // this.$store.commit('user/updateUsername','')
-            // this.$store.commit('user/updatePassword', '')
             this.$router.push({
                 name: 'Login'
             });
-            // console.log(this.$store.state.user.username);
-            // console.log(this.$store.state.user.password);
         }
     },
 }
