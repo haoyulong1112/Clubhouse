@@ -144,7 +144,7 @@ export default {
         margin-left 0!important;
     .login-btn
         width 373px;
-        background: #7DBFBB;
+        background: #7DBFBB!important;
         box-shadow: 0 12px 59px 0 rgba(159,167,185,0.50);
         border-radius: 10px;
         border: none;

@@ -8,9 +8,9 @@
     }
     var demoConfig = {
         // 请求域名头 pet-pai
-        requestDomain: 'http://8.141.49.230:8200',
+        // requestDomain: 'http://8.141.49.230:8888',
         // 跨域
-        // requestDomain: '/test',
+        requestDomain: '/demo',
     }
 
     var prodConfig = {
