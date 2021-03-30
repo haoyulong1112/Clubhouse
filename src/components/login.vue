@@ -102,7 +102,7 @@ export default {
     }
 }
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
     .login
         width 100%;
         height 100%;
@@ -138,18 +138,18 @@ export default {
     .login-input
         width 366px
         margin 0 auto;
-    .login-formitem > div
+    /deep/ .login-formitem > div
         margin-left 0!important;
-    .login-btnbox> div
+    /deep/ .login-btnbox> div
         margin-left 0!important;
-    .login-btn
+    /deep/ .login-btn
         width 373px;
         background: #7DBFBB!important;
         box-shadow: 0 12px 59px 0 rgba(159,167,185,0.50);
         border-radius: 10px;
         border: none;
         color #fff;
-    .login-btn:hover
+    /deep/ .login-btn:hover
         background: #7DBFBB!important;
         color #fff!important;
 </style>

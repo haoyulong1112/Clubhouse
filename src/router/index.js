@@ -103,7 +103,6 @@ const router = new Router({
 export default router
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
-        console.log(sessionStorage.getItem("token"));
       if (sessionStorage.getItem("token")) { // 判断本地是否存在token
         next()
       } else {
@@ -111,7 +110,6 @@ router.beforeEach((to, from, next) => {
         next('/')
       }
     } else {
-        console.log(sessionStorage.getItem("token"));
         next();
     }
   });

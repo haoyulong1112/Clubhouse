@@ -26,7 +26,7 @@
         </div>
         <div class="list-box">
             <div class="tab">
-                <div class="tab-item active">管理员 <span>8人</span></div>
+                <div class="tab-item active">管理员 <span>{{total}}人</span></div>
             </div>
             <div class="tab-content">  
                 <div class="user-box">  
@@ -161,7 +161,7 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
                 adminList(data).then(res => {
                     if(res.code == 200){
                         this.tableData1 = res.data;
-                        this.total = res.total;
+                        this.total = res.total || 0;
                     }
                 })
             },

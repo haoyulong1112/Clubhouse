@@ -109,8 +109,8 @@ export default {
     },
 }
 </script>
-<style lang="stylus">
-.el-header {
+<style lang="stylus" scoped>
+/deep/ .el-header {
     background-color: #FFF;
     color: #fff;
     height: 70px!important;
@@ -147,37 +147,37 @@ export default {
     > i
         color: #CFDDDC;
         margin-right 10px;
-.mennu-mine
+/deep/ .mennu-mine
     position absolute;
     border: none!important;
     height 70px!important;
     right: 20px;
-.el-aside
+/deep/ .el-aside
     width 260px!important;
     height 100%;
     font-weight: bolder;
     background-color #4D7175;
     > .el-menu
         border-right: none!important;
-.el-sidebox > li
+/deep/ .el-sidebox > li
     text-align left!important;
     padding-left 50px!important;
-.el-submenu > div
+/deep/ .el-submenu > div
     padding 0!important;
     height 70px!important;
     line-height 70px!important;
 // .el-submenu > div .el-icon-arrow-down {
 //     left: 1px!important;
 // }
-.el-sidebox i
+/deep/ .el-sidebox i
     color: #E0F0F0!important;
-.menuminebox .el-icon-arrow-down {
+/deep/ .menuminebox .el-icon-arrow-down {
     color: #7DBFBB!important;
 }
-.menuminebox i 
+/deep/ .menuminebox i 
     color #7DBFBB!important;
     font-weight: bolder;
-.menuitems
+/deep/ /deep/ .menuitems
     font-size: 12px!important;
 .el-main
     background-color: #F5F7F9;

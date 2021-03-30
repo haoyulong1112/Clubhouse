@@ -16,14 +16,7 @@ module.exports = {
             pathRewrite: {
                 '^/test': ''
             }
-        },
-        '/demo': {
-              target: 'http://8.141.49.230:8200/',
-              changeOrigin: true,
-              pathRewrite: {
-                  '^/demo': ''
-              }
-          }
+        }
     },
 
     // Various Dev Server settings
@@ -58,6 +51,15 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
+    proxyTable: {
+      '/demo': {
+            target: 'http://8.141.49.230:8200/',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/demo': 'demo'
+            }
+        }
+    },
 
     /**
      * Source Maps
