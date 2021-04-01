@@ -73,7 +73,7 @@
             let data = {
                 id: this.userdetail.id,
                 name: mastersetForm.name,
-                password: mastersetForm.oldPassword,
+                password: mastersetForm.newPassword,
                 phone: mastersetForm.cellPhone,
             }
             if(!data.id){
@@ -85,9 +85,11 @@
                         message: '更新成功',
                         type: 'success'
                     });
-                    this.$router.push({
-                        name: 'Login'
-                    });
+                    setTimeout(()=>{
+                        this.$router.push({
+                            name: 'Login'
+                        });
+                    },1500)
                 }
             }).catch(err => {
                 this.$message.error(err.msg);
