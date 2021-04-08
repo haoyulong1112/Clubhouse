@@ -18,9 +18,14 @@
             highlight-current-row
             style="width: 100%">
             <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
+            <el-table-column prop="headPic" label="头像" width="120">
+                <template slot-scope="scope">
+                    <img v-if="scope.row.headPic" :src="scope.row.headPic" class="td-header" width="50" height="50" alt="">
+                </template>
+            </el-table-column>
             <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
             <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
-            <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
+            <el-table-column prop="createTimeStr" label="加入时间" width="120"></el-table-column>
             <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
             <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
             <el-table-column prop="fansSize" label="粉丝" width="120"></el-table-column>
@@ -210,4 +215,6 @@
         margin-right 5px
         white-space nowrap;
         cursor: pointer;
+    .td-header
+        border-radius: 50%;
 </style>

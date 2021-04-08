@@ -42,9 +42,7 @@
             <div class="userdetail-info">
                 <div>简介</div>
                 <div>
-                    可以为空<br />
-                    可以市一句话<br />
-                    可以是段落<br />
+                    {{userData.describetion}}
                 </div>
             </div>
         </div>

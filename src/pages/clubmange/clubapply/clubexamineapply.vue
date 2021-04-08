@@ -19,24 +19,19 @@
                 <el-form-item label="管理员手机号" class="applyForm-formitem" prop="cellPhone">
                     <el-input class="applyForm-input" placeholder="输入手机号" type="text" v-model="applyForm.cellPhone" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="一级分类" class="applyForm-formitem" prop="oneClass">
-                    <el-select class="applyForm-input" v-model="applyForm.oneClass" placeholder="请选择状态">
-                        <el-option label="股票" value="1"></el-option>
-                        <el-option label="已通过" value="2"></el-option>
-                        <el-option label="未通过" value="3"></el-option>
+                <el-form-item label="一级分类" class="applyForm-formitem" prop="presenterId">
+                    <el-select class="applyForm-input" v-model="applyForm.presenterId" placeholder="请选择状态">
+                        <el-option v-for="(item,index) in firstClass1" :key="`a${index}`" :label="item.name" :value="item.id"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="二级分类" class="applyForm-formitem" prop="topicId">
+                    <el-select class="applyForm-input" v-model="applyForm.topicId" placeholder="请选择状态">
+                        <el-option v-for="(item,index) in firstClass2" :key="`b${index}`" :label="item.name" :value="item.id"></el-option>
                     </el-select>
                     <!-- <el-input class="applyForm-input" placeholder="输入身份证号" type="text" v-model="applyForm.idCard" autocomplete="off"></el-input> -->
                 </el-form-item>
-                <el-form-item label="二级分类" class="applyForm-formitem" prop="twoClass">
-                    <el-select class="applyForm-input" v-model="applyForm.twoClass" placeholder="请选择状态">
-                        <el-option label="股票能手" value="1"></el-option>
-                        <el-option label="已通过" value="2"></el-option>
-                        <el-option label="未通过" value="3"></el-option>
-                    </el-select>
-                    <!-- <el-input class="applyForm-input" placeholder="输入身份证号" type="text" v-model="applyForm.idCard" autocomplete="off"></el-input> -->
-                </el-form-item>
-                <el-form-item label="三个标签" class="applyForm-formitem" prop="tags">
-                    <el-input class="applyForm-inputlage" placeholder="每个标签以英文逗号隔开" type="text" v-model="applyForm.tags" autocomplete="off"></el-input>
+                <el-form-item label="三个标签" class="applyForm-formitem" prop="title">
+                    <el-input class="applyForm-inputlage" placeholder="每个标签以英文逗号隔开" type="text" v-model="applyForm.title" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item class="applyForm-text" label="俱乐部简介" prop="roomInstructions">
                     <el-input type="textarea" v-model="applyForm.roomInstructions" autocomplete="off" :rows="10" placeholder="输入文字介绍"></el-input>
@@ -44,7 +39,7 @@
                 <!-- <el-form-item class="applyForm-btnbox">
                     <el-button class="applyForm-btn" @click="submitForm('masterForm')">保存提交审核</el-button>
                 </el-form-item> -->
-                <el-form-item class="applyForm-btnbox">
+                <el-form-item class="applyForm-btnbox" v-if="applyForm.examindStatus !=  1">
                     <el-button type="danger" @click="unpast">不通过</el-button>
                     <el-button class="applyForm-past" @click="past">通过</el-button>
                 </el-form-item>
@@ -65,7 +60,7 @@
 </template>
 
 <script>
-  import { auditDetailInfo ,auditClub} from '@/api/club/club.js'
+  import { auditDetailInfo ,auditClub,getFirstTopic ,getSecondTopic} from '@/api/club/club.js'
   export default{
     name: 'clubexamineapply',
     data() {
@@ -74,11 +69,27 @@
             rules: {},
             header:'',
             query: {},
+            firstClass1: [],
+            firstClass2: []
         }
     },
     created() {
         this.query = this.$route.query;
         this.getClubdetail();
+        // 获取一级分类
+        getFirstTopic().then(res =>{
+            if(res.code == 200){
+                this.firstClass1 = res.data;
+            }
+        })
+        // 获取二级分类
+        getSecondTopic({
+            parentId: ''
+        }).then(res =>{
+            if(res.code == 200){
+                this.firstClass2 = res.data;
+            }
+        })
     },
     methods: {
         // 不通过
@@ -186,12 +197,19 @@
     /deep/ .applyForm-ruleForm .applyForm-input
         width 172px;
         height 26px!important;
+        line-height 26px!important;
     /deep/ .applyForm-ruleForm .applyForm-input input
         width 172px;
         height 26px!important;
+        line-height 26px!important;
     /deep/ .applyForm-ruleForm .applyForm-inputlage input
         width 300px;
         height 26px!important;
+        line-height 26px!important;
+    /deep/ .applyForm-ruleForm .applyForm-inputlage .el-input__icon
+        line-height 26px!important;
+    /deep/ .el-icon-arrow-up
+        line-height 26px!important;
     .applyForm-btn
         width 102px;
         height 26px;
