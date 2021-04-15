@@ -10,6 +10,7 @@
                 </el-form-item>
                 <el-form-item class="phone-label" label="状态" prop="status">
                     <el-select v-model="ruleForm.status" placeholder="请选择状态">
+                        <el-option label="全部" value=""></el-option>
                         <el-option label="审核中" value="0"></el-option>
                         <el-option label="已通过" value="1"></el-option>
                         <el-option label="未通过" value="2"></el-option>

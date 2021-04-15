@@ -220,14 +220,20 @@
     .uploader-img
         position absolute;
         top: 50px;
-        right: 30px;
-        > .upload-demo img
-            width 115px;
-            height 115px;
-        > .upload-demo button
-            background: #7DBFBC;
-            border: none;
-            margin-top 10px;
+        right: 88px;
+        width 115px;
+        height 115px;
+        >img
+            width 100%;
+            height 100%;
+            border-radius: 50%;
+        // > .upload-demo img
+        //     width 115px;
+        //     height 115px;
+        // > .upload-demo button
+        //     background: #7DBFBC;
+        //     border: none;
+        //     margin-top 10px;
 
     .applyForm-status
         position absolute;
