@@ -56,6 +56,12 @@ export default {
             }
         };
     },
+    created () {
+        // 获取屏幕宽度
+        let screenWidth = window.screen.width;
+        this.$store.commit('common/updateScreenwidth', screenWidth);
+        
+    },
     mounted(){ //防止页面后退
         history.pushState(null, null, document.URL);
         window.addEventListener('popstate', function () {

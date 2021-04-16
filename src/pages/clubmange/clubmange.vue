@@ -17,7 +17,7 @@
             <h3>筛选条件</h3>
             <div class="first-class">
                 <div>一级分类</div>
-                <div class="class1box">
+                <div class="class1box" :style="'width: '+domWidth+'px'">
                     <div :class="currentFirstclass == -1 ? 'active': ''" @click="changeClass1('',-1)">全部<span v-if="currentFirstclass == -1"></span></div>
                     <div :class="currentFirstclass == index ? 'active': ''" v-for="(item,index) in firstClass1" :key="`a${index}`" @click="changeClass1(item.id,index)">{{item.name}}
                         <span v-if="currentFirstclass == index"></span>
@@ -29,7 +29,7 @@
             </div>
             <div class="second-class">
                 <div>二级分类</div>
-                <div class="class2box">
+                <div class="class2box" :style="'width: '+domWidth+'px'">
                     <div :class="currentSecondclass == -1 ? 'active': ''" @click="changeClass2('',-1)">全部<span v-if="currentSecondclass == -1"></span></div>
                     <div :class="currentSecondclass == index ? 'active': ''" v-for="(item,index) in firstClass2" :key="`a${index}`" @click="changeClass2(item.id,index)">{{item.name}}
                         <span v-if="currentSecondclass == index"></span>
@@ -119,10 +119,22 @@
             // 一级分类
             parentTopicId: '',
             // 二级分类
-            topicId: ''
+            topicId: '',
+            classstyle: '',
+            domWidth: '',
         }
     },
+    beforeCreate () {
+        
+    },
     created() {
+        this.$nextTick(function () {
+            let screenWidth = this.$store.state.common.screenWidth;
+            let domWidth = screenWidth -320 -250;
+            this.domWidth = domWidth;
+            this.classstyle = `width: ${domWidth}px!important;`;
+            console.log(this.domWidth)
+        })
         // 获取一级分类
         this.getFirsttitle()
         // 获取二级分类
@@ -420,7 +432,7 @@
                 justify-content flex-start;
                 align-items center;
                 flex-wrap: wrap;
-                width: 750px;
+                // width: 750px;
                 > div
                     height: 100%;
                     line-height: 50px;
@@ -488,7 +500,7 @@
                 justify-content flex-start;
                 align-items center;
                 flex-wrap: wrap;
-                width: 750px;
+                // width: 750px;
                 > div
                     height: 100%;
                     line-height: 50px;
