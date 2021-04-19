@@ -205,7 +205,7 @@
         },
         // 确认删除一级分类
         delClass(id){
-            this.$confirm('是否删除该分类?', '提示', {
+            this.$confirm('是否删除该一级分类，如果删除，所有该一级分类下的二级分类都会被删除?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
@@ -281,6 +281,8 @@
                     if(type == 1){
                         this.currentFirstclass = -1,
                         this.getFirsttitle();
+                        this.currentSecondclass = -1,
+                        this.getSecondtitle('');
                     }else{
                         this.currentSecondclass = -1,
                         this.getSecondtitle(this.parentTopicId);

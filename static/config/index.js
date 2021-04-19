@@ -2,7 +2,7 @@
     // 区分环境的配置 252 demo prod
     var testConfig = {
         // 请求域名头 pet-pai
-        // requestDomain: 'http://8.141.49.230:8200',
+        // requestDomain: 'http://192.168.1.151:8200',
         // 跨域
         requestDomain: '/test',
     }
@@ -15,7 +15,9 @@
 
     var prodConfig = {
         // 请求域名头 pet-pai
-        requestDomain: 'https://api.ichongwujia.com',
+        // requestDomain: 'https://api.ichongwujia.com',
+        // 跨域
+        requestDomain: '/test',
     }
     window.SITE_CONFIG = {};
     
@@ -59,7 +61,7 @@
     // 通过hostname区分环境  http://localhost:8080/
     var testDomainArray = ['localhost']
     var demoDomainArray = ['8.141.49.230']
-    var prodDomainArray = ['static.ichongwujia.com']
+    var prodDomainArray = ['192.168.1.188']
 
     var hostname = window.location.hostname
 
@@ -83,4 +85,5 @@
     if (isItemInStr(hostname, prodDomainArray)) {
         window.envConfig = prodConfig
     }
+    console.log(window.envConfig);
 }(window))

@@ -210,10 +210,13 @@
                 this.currentTab = index;
                 this.currentPage = 1;
                 this.pageSize = 2;
+                console.log('切换tab');
                 this.getuserDetail();
             },
             // 获取用户详情
             getuserDetail(){
+
+                console.log(this.currentTab);
                 let data = {
                     pageNo: this.currentPage,
                     pageSize: this.pageSize,

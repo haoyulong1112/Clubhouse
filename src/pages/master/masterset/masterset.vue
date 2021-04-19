@@ -160,8 +160,8 @@ import { addAdmin ,adminList,updateAdmin, delAdmin} from '@/api/admaster/master.
                 }
                 adminList(data).then(res => {
                     if(res.code == 200){
-                        this.tableData1 = res.data;
-                        this.total = res.total || 0;
+                        this.tableData1 = res.data.list;
+                        this.total = res.data.count || 0;
                     }
                 })
             },
