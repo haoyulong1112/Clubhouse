@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import { setServicePhone } from '@/api/system/system.js'
+    import { setServicePhone,getServicePhone } from '@/api/system/system.js'
   export default{
     name: 'systemconfig',
     data() {
@@ -33,7 +33,13 @@
         }
     },
     created() {
-        this.ruleForm.phone = this.$store.state.common.phone;
+        // this.ruleForm.phone = this.$store.state.common.phone;
+        getServicePhone().then(res =>{
+            console.log(res);
+            if(res.code == 200){
+                this.ruleForm.phone = res.data || '';
+            }
+        })
     },
     methods: {
         submitForm(formname){
@@ -43,7 +49,7 @@
                         phone: this.ruleForm.phone
                     }).then(res => {
                         if(res.code =200){
-                            this.$store.commit('common/updatePhone', this.ruleForm.phone)
+                            // this.$store.commit('common/updatePhone', this.ruleForm.phone)
                             this.$message({
                                 message: res.msg,
                                 type: 'success'

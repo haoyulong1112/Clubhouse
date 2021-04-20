@@ -23,8 +23,8 @@
                             <td>{{userData.id}}</td>
                             <td>{{userData.nikeName}}</td>
                             <td>{{userData.cellPhone}}</td>
-                            <td>{{userData.createTime}}</td>
-                            <td>{{userData.offLineTime}}</td>
+                            <td>{{userData.createTimeStr}}</td>
+                            <td>{{userData.onLineTimeStr}}</td>
                             <td>{{userData.totalTime}}</td>
                             <td>{{userData.createClubCount}}</td>
                             <td>{{userData.followClubSize}}</td>
@@ -48,10 +48,10 @@
         </div>
         <div class="list-box">
             <div class="tab">
-                <div :class=" currentTab == 1 ? 'tab-item active': 'tab-item'" @click="changeTab(1)">关注的人 <span>{{total1}}人</span></div>
-                <div :class=" currentTab == 2 ? 'tab-item active': 'tab-item'" @click="changeTab(2)">粉丝 <span>{{total2}}人</span></div>
-                <div :class=" currentTab == 3 ? 'tab-item active': 'tab-item'" @click="changeTab(3)">关注的俱乐部 <span>{{total3}}个</span></div>
-                <div :class=" currentTab == 4 ? 'tab-item active': 'tab-item'" @click="changeTab(4)">邀请的人 <span>{{total4}}人</span></div>
+                <div :class=" currentTab == 1 ? 'tab-item active': 'tab-item'" @click="changeTab(1)">关注的人 <span>{{userData.followSize}}人</span></div>
+                <div :class=" currentTab == 2 ? 'tab-item active': 'tab-item'" @click="changeTab(2)">粉丝 <span>{{userData.fansSize}}人</span></div>
+                <div :class=" currentTab == 3 ? 'tab-item active': 'tab-item'" @click="changeTab(3)">关注的俱乐部 <span>{{userData.followClubSize}}个</span></div>
+                <div :class=" currentTab == 4 ? 'tab-item active': 'tab-item'" @click="changeTab(4)">邀请的人 <span>{{currenttotal}}人</span></div>
             </div>
             <div class="tab-content">  
                 <div class="user-box">  
@@ -68,13 +68,13 @@
                         <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
                         <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
                         <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
-                        <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
-                        <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
+                        <el-table-column prop="createTimeStr" label="加入时间" width="150"></el-table-column>
+                        <el-table-column prop="onLineTimeStr" label="最后登录时间" width="150"></el-table-column>
                         <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
                         <el-table-column prop="fansSize" label="粉丝" width="120"></el-table-column>
                         <el-table-column prop="followClubSize" label="关注的俱乐部" width="120"></el-table-column>
                         <el-table-column prop="totalTime" label="在线时长" width="120"></el-table-column>
-                        <el-table-column prop="createClubCount" label="开设房间" width="120"></el-table-column>
+                        <el-table-column prop="createClubCount" label="开设房间"></el-table-column>
                     </el-table>
                     <el-table v-if="currentTab == 2 ? true : false" class="list-table"
                         :data="tableData2"
@@ -89,13 +89,13 @@
                         <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
                         <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
                         <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
-                        <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
-                        <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
+                        <el-table-column prop="createTimeStr" label="加入时间" width="150"></el-table-column>
+                        <el-table-column prop="onLineTimeStr" label="最后登录时间" width="150"></el-table-column>
                         <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
                         <el-table-column prop="fansSize" label="粉丝" width="120"></el-table-column>
                         <el-table-column prop="followClubSize" label="关注的俱乐部" width="120"></el-table-column>
                         <el-table-column prop="totalTime" label="在线时长" width="120"></el-table-column>
-                        <el-table-column prop="createClubCount" label="开设房间" width="120"></el-table-column>
+                        <el-table-column prop="createClubCount" label="开设房间"></el-table-column>
                     </el-table>
                     <el-table v-if="currentTab == 3 ? true : false" class="list-table"
                         :data="tableData3"
@@ -109,14 +109,14 @@
                         </el-table-column>
                         <el-table-column prop="id" label="俱乐部编号ID" width="120"></el-table-column>
                         <el-table-column prop="name" label="俱乐部名称" width="120"></el-table-column>
-                        <el-table-column prop="phone" label="俱乐部管理员" width="120"></el-table-column>
-                        <el-table-column prop="email" label="成立时间" width="120"></el-table-column>
+                        <el-table-column prop="createName" label="俱乐部管理员" width="120"></el-table-column>
+                        <el-table-column prop="createTime" label="成立时间" width="150"></el-table-column>
                         <el-table-column prop="enterTime" label="在线时长" width="120"></el-table-column>
-                        <el-table-column prop="logintime" label="开设房间次数" width="120"></el-table-column>
-                        <el-table-column prop="attion" label="关注的人" width="120"></el-table-column>
-                        <el-table-column prop="fensi" label="粉丝" width="120"></el-table-column>
-                        <el-table-column prop="club" label="一级分类" width="120"></el-table-column>
-                        <el-table-column prop="timelone" label="二级分类" width="120"></el-table-column>
+                        <el-table-column prop="roomCount" label="开设房间次数" width="120"></el-table-column>
+                        <el-table-column prop="members" label="关注的人" width="120"></el-table-column>
+                        <el-table-column prop="fansCount" label="粉丝" width="120"></el-table-column>
+                        <el-table-column prop="topicName" label="一级分类" width="120"></el-table-column>
+                        <el-table-column prop="topicName2" label="二级分类"></el-table-column>
                     </el-table>
                     <el-table v-if="currentTab == 4 ? true : false" class="list-table"
                         :data="tableData4"
@@ -131,13 +131,13 @@
                         <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
                         <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
                         <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
-                        <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
-                        <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
+                        <el-table-column prop="createTimeStr" label="加入时间" width="150"></el-table-column>
+                        <el-table-column prop="onLineTimeStr" label="最后登录时间" width="150"></el-table-column>
                         <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
                         <el-table-column prop="fansSize" label="粉丝" width="120"></el-table-column>
                         <el-table-column prop="followClubSize" label="关注的俱乐部" width="120"></el-table-column>
                         <el-table-column prop="totalTime" label="在线时长" width="120"></el-table-column>
-                        <el-table-column prop="createClubCount" label="开设房间" width="120"></el-table-column>
+                        <el-table-column prop="createClubCount" label="开设房间"></el-table-column>
                     </el-table>
                 </div>
                 <div class="block">
@@ -150,7 +150,7 @@
                     :page-size="pageSize"
                     :pager-count="9"
                     layout="total, sizes, prev, pager, next, jumper"
-                    :total="total">
+                    :total="currenttotal">
                     </el-pagination>
                 </div>
             </div>
@@ -182,13 +182,14 @@
                 tdlist: 'tdlist',
                 thnonebober:'thnonebober',
                 tdbgc: 'tdbgc',
-                total1: 0,
-                total2: 0,
-                total3: 0,
-                total4: 0,
+                // total1: 0,
+                // total2: 0,
+                // total3: 0,
+                // total4: 0,
                 currentPage: 1,
-                pageSize: 2,
-                currentTab: 1
+                pageSize: 10,
+                currentTab: 1,
+                currenttotal: 0
             }
         },
         created() {
@@ -197,12 +198,10 @@
         },
         methods: {
             handleSizeChange(val){
-                console.log(val);
                 this.pageSize = val;
                 this.getuserDetail();
             },
             handleCurrentChange(val){
-                console.log(val)
                 this.currentPage = val;
                 this.getuserDetail();
             },
@@ -215,8 +214,6 @@
             },
             // 获取用户详情
             getuserDetail(){
-
-                console.log(this.currentTab);
                 let data = {
                     pageNo: this.currentPage,
                     pageSize: this.pageSize,
@@ -224,12 +221,17 @@
                     userId: this.userData.id
                 }
                 userDetail(data).then(res =>{
-                    if(res.code == 200 && res.data){
-                        this.tableData[this.currentTab] = this.data;
-                        this.total[this.currentTab] = res.total;
+                    if(res.code == "200"){
+                         this['tableData' + this.currentTab] = res.data;
+                         console.log(this.tableData1);
+                        //  this['total' + this.currentTab] = res.total;
+                        // this.tableData[`${this.currentTab}`] = res.data;
+                        // this.total = res.total;
+                        this.currenttotal = res.total;
                     }
                 }).catch(err =>{
-                    this.$message.error(err.msg);
+                    console.log(err.msg);
+                    // this.$message.error(err.msg);
                 })
             }
         },

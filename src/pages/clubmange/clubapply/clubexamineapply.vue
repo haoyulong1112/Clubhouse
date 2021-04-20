@@ -10,8 +10,8 @@
                         </div>
                     </template>
                 </el-form-item>
-                <el-form-item label="管理员名称" class="applyForm-formitem" prop="name">
-                    <el-input class="applyForm-input" placeholder="输入管理员名称" type="text" v-model="applyForm.name" autocomplete="off"></el-input>
+                <el-form-item label="管理员名称" class="applyForm-formitem" prop="createName">
+                    <el-input class="applyForm-input" placeholder="输入管理员名称" type="text" v-model="applyForm.createName" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="俱乐部编号" class="applyForm-formitem" prop="id">
                     <el-input class="applyForm-input" placeholder="输入密码" type="number" v-model="applyForm.id" autocomplete="off"></el-input>
@@ -19,16 +19,11 @@
                 <el-form-item label="管理员手机号" class="applyForm-formitem" prop="cellPhone">
                     <el-input class="applyForm-input" placeholder="输入手机号" type="text" v-model="applyForm.cellPhone" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="一级分类" class="applyForm-formitem" prop="presenterId">
-                    <el-select class="applyForm-input" v-model="applyForm.presenterId" placeholder="请选择状态">
-                        <el-option v-for="(item,index) in firstClass1" :key="`a${index}`" :label="item.name" :value="item.id"></el-option>
-                    </el-select>
+                <el-form-item label="一级分类" class="applyForm-formitem" prop="topicName">
+                    <el-input class="applyForm-input" type="text" v-model="applyForm.topicName" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="二级分类" class="applyForm-formitem" prop="topicId">
-                    <el-select class="applyForm-input" v-model="applyForm.topicId" placeholder="请选择状态">
-                        <el-option v-for="(item,index) in firstClass2" :key="`b${index}`" :label="item.name" :value="item.id"></el-option>
-                    </el-select>
-                    <!-- <el-input class="applyForm-input" placeholder="输入身份证号" type="text" v-model="applyForm.idCard" autocomplete="off"></el-input> -->
+                <el-form-item label="二级分类" class="applyForm-formitem" prop="topicName2">
+                    <el-input class="applyForm-input" type="text" v-model="applyForm.topicName2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="三个标签" class="applyForm-formitem" prop="title">
                     <el-input class="applyForm-inputlage" placeholder="每个标签以英文逗号隔开" type="text" v-model="applyForm.title" autocomplete="off"></el-input>
@@ -60,7 +55,7 @@
 </template>
 
 <script>
-  import { auditDetailInfo ,auditClub,getFirstTopic ,getSecondTopic} from '@/api/club/club.js'
+  import { getClub ,auditClub,getFirstTopic ,getSecondTopic} from '@/api/club/club.js'
   export default{
     name: 'clubexamineapply',
     data() {
@@ -157,11 +152,13 @@
         //获取俱乐部详情
         getClubdetail(){
             let data = {
-                id: this.query.id
+                id: this.query.id,
+                pageNo: 1,
+                pageSize: 1
             }
-            auditDetailInfo(data).then(res =>{
+            getClub(data).then(res =>{
                 if(res.code == 200){
-                    this.applyForm = res.data;
+                    this.applyForm = res.data[0];
                 }
             })
         }

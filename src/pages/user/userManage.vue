@@ -25,15 +25,15 @@
             </el-table-column>
             <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
             <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
-            <el-table-column prop="createTimeStr" label="加入时间" width="120"></el-table-column>
-            <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
+            <el-table-column prop="createTimeStr" label="加入时间" width="150"></el-table-column>
+            <el-table-column prop="onLineTimeStr" label="最后登录时间" width="150"></el-table-column>
             <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
             <el-table-column prop="fansSize" label="粉丝" width="120"></el-table-column>
             <el-table-column prop="followClubSize" label="关注的俱乐部" width="120"></el-table-column>
             <el-table-column prop="totalTime" label="在线时长" width="120"></el-table-column>
             <el-table-column prop="createClubCount" label="开设房间" width="120">
             </el-table-column>
-            <el-table-column prop="address" label="举报次数" width="120">
+            <el-table-column prop="blockCount" label="举报次数" width="120">
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
@@ -105,8 +105,8 @@
                 }
                 getUserList(data).then(res => {
                     if(res.code == 200){
-                        this.tableData = res.data;
-                        this.total = res.total || 100;
+                        this.tableData = res.data.list;
+                        this.total = res.data.count || 0;
                     }
                 }).catch(err => {
                     this.$message.error(err.msg);

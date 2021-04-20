@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="club-number">
-            俱乐部总数 <span>32324个</span>
+            俱乐部总数 <span>{{total}}个</span>
         </div>
         <div class="club-list">
             <el-table 
@@ -57,14 +57,15 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="name" label="俱乐部名称"></el-table-column>
-                <el-table-column prop="date" label="分类"></el-table-column>
-                <el-table-column prop="presenterId" label="管理员"></el-table-column>
+                <el-table-column prop="topicName" label="一级分类"></el-table-column>
+                <el-table-column prop="topicName2" label="二级分类"></el-table-column>
+                <el-table-column prop="createName" label="管理员"></el-table-column>
                 <el-table-column prop="createTime" label="创建时间"></el-table-column>
-                <el-table-column prop="date" label="房间次数"></el-table-column>
+                <el-table-column prop="roomCount" label="房间次数"></el-table-column>
                 <el-table-column prop="name" label="在线时长"></el-table-column>
-                <el-table-column prop="fensi" label="粉丝">
+                <el-table-column prop="fansCount" label="粉丝">
                     <template slot-scope="scope">
-                        <span class="fensisty" @click="goFensi(scope.row.date)">{{scope.row.fensi}}</span>
+                        <span class="fensisty" @click="goFensi(scope.row.fansCount)">{{scope.row.fansCount}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column prop="roomInstructions" label="简介"></el-table-column>

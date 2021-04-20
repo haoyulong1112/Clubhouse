@@ -8,7 +8,8 @@
                             <th>俱乐部ID</th>
                             <th>头像</th>
                             <th>俱乐部名称</th>
-                            <th>分类</th>
+                            <th>一级分类</th>
+                            <th>二级分类</th>
                             <th>创建时间</th>
                             <th>房间次数</th>
                             <th>在线时长</th>
@@ -19,9 +20,10 @@
                             <td>{{userData.id}}</td>
                             <td><img width="50" height="50" :src="userData.avatar" alt=""></td>
                             <td>{{userData.name}}</td>
-                            <td>{{userData.email}}</td>
+                            <td>{{userData.topicName}}</td>
+                            <td>{{userData.topicName2}}</td>
                             <td>{{userData.createTime}}</td>
-                            <td>{{userData.logintime}}</td>
+                            <td>{{userData.roomCount}}</td>
                             <td>{{userData.timelone}}</td>
                         </tr>
                     </tbody>
@@ -124,7 +126,7 @@
                 }
                 clubDetail(data).then(res =>{
                     if(res.code == 200 && res.data){
-                        this.tableData = this.data;
+                        this.tableData = res.data;
                         this.total = res.total;
                     }
                 }).catch(err =>{
