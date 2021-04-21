@@ -208,7 +208,7 @@
             changeTab(index){
                 this.currentTab = index;
                 this.currentPage = 1;
-                this.pageSize = 2;
+                this.pageSize = 10;
                 console.log('切换tab');
                 this.getuserDetail();
             },

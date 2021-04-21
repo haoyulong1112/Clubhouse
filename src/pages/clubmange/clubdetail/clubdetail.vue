@@ -12,7 +12,7 @@
                             <th>二级分类</th>
                             <th>创建时间</th>
                             <th>房间次数</th>
-                            <th>在线时长</th>
+                            <!-- <th>在线时长</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -24,14 +24,14 @@
                             <td>{{userData.topicName2}}</td>
                             <td>{{userData.createTime}}</td>
                             <td>{{userData.roomCount}}</td>
-                            <td>{{userData.timelone}}</td>
+                            <!-- <td>{{userData.timelone}}</td> -->
                         </tr>
                     </tbody>
                 </table>
                 <div class="club-invite">
-                    <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
+                    <img :src="userData.createUrl" alt="">
                     <div class="invite-msg">
-                        管理员：李逍遥
+                        管理员：{{userData.createName}}
                     </div>
                 </div>
             </div>
@@ -64,13 +64,13 @@
                     <el-table-column prop="id" label="编号ID" width="120"></el-table-column>
                     <el-table-column prop="nikeName" label="昵称" width="120"></el-table-column>
                     <el-table-column prop="cellPhone" label="手机号" width="120"></el-table-column>
-                    <el-table-column prop="createTime" label="加入时间" width="120"></el-table-column>
-                    <el-table-column prop="offLineTime" label="最后登录时间" width="120"></el-table-column>
+                    <el-table-column prop="createTime" label="加入时间" width="150"></el-table-column>
+                    <el-table-column prop="offLineTime" label="最后登录时间" width="150"></el-table-column>
                     <el-table-column prop="followSize" label="关注的人" width="120"></el-table-column>
                     <el-table-column prop="fansSize" label="粉丝" width="120"></el-table-column>
                     <el-table-column prop="followClubSize" label="关注的俱乐部" width="120"></el-table-column>
-                    <el-table-column prop="totalTime" label="在线时长" width="120"></el-table-column>
-                    <el-table-column prop="createClubCount" label="开设房间" width="120"></el-table-column>
+                    <el-table-column prop="totalDuration" label="在线时长" width="120"></el-table-column>
+                    <el-table-column prop="createClubCount" label="开设房间"></el-table-column>
                 </el-table>
             </div>
             <div class="block">
@@ -91,6 +91,7 @@
 </template>
 <script>
   import { clubDetail } from '@/api/club/club.js'
+  import timestr from '@/utils/timestamp.js'
     export default {
         name: 'clubdetail',
         data() {
@@ -109,6 +110,7 @@
             this.getclubDetail();
         },
         methods: {
+            timestr,
             handleSizeChange(val){
                 this.pageSize = val;
                 this.clubDetail();
@@ -126,7 +128,12 @@
                 }
                 clubDetail(data).then(res =>{
                     if(res.code == 200 && res.data){
-                        this.tableData = res.data;
+                        let tableData = res.data;
+                        for(let i in tableData){
+                            tableData[i].createTime = this.timestr(tableData[i].createTime); 
+                            tableData[i].offLineTime = this.timestr(tableData[i].offLineTime); 
+                        }
+                        this.tableData = tableData;
                         this.total = res.total;
                     }
                 }).catch(err =>{
@@ -182,7 +189,7 @@
                     line-height: 14px;
                     padding: 20px;
             > .club-invite
-                    // width 427px;
+                    width 280px;
                     height 124px;
                     padding: 12px 20px;
                     box-sizing: border-box;
@@ -196,9 +203,9 @@
                         width 72px;
                         height 72px;
                         border-radius 50%;   
-                        margin-left 30px
+                        margin-left 10px
                     > div   
-                        width 112px;
+                        // width 112px;
                         margin-left: 25px
                         font-size 16px 
                         font-family: PingFangSC-Medium;

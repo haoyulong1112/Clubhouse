@@ -64,27 +64,27 @@
             rules: {},
             header:'',
             query: {},
-            firstClass1: [],
-            firstClass2: []
+            // firstClass1: [],
+            // firstClass2: []
         }
     },
     created() {
         this.query = this.$route.query;
         this.getClubdetail();
-        // 获取一级分类
-        getFirstTopic().then(res =>{
-            if(res.code == 200){
-                this.firstClass1 = res.data;
-            }
-        })
-        // 获取二级分类
-        getSecondTopic({
-            parentId: ''
-        }).then(res =>{
-            if(res.code == 200){
-                this.firstClass2 = res.data;
-            }
-        })
+        // // 获取一级分类
+        // getFirstTopic().then(res =>{
+        //     if(res.code == 200){
+        //         this.firstClass1 = res.data;
+        //     }
+        // })
+        // // 获取二级分类
+        // getSecondTopic({
+        //     parentId: ''
+        // }).then(res =>{
+        //     if(res.code == 200){
+        //         this.firstClass2 = res.data;
+        //     }
+        // })
     },
     methods: {
         // 不通过

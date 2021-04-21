@@ -60,9 +60,9 @@
                 <el-table-column prop="topicName" label="一级分类"></el-table-column>
                 <el-table-column prop="topicName2" label="二级分类"></el-table-column>
                 <el-table-column prop="createName" label="管理员"></el-table-column>
-                <el-table-column prop="createTime" label="创建时间"></el-table-column>
+                <el-table-column prop="createTime" label="创建时间" width="150"></el-table-column>
                 <el-table-column prop="roomCount" label="房间次数"></el-table-column>
-                <el-table-column prop="name" label="在线时长"></el-table-column>
+                <!-- <el-table-column prop="name" label="在线时长"></el-table-column> -->
                 <el-table-column prop="fansCount" label="粉丝">
                     <template slot-scope="scope">
                         <span class="fensisty" @click="goFensi(scope.row.fansCount)">{{scope.row.fansCount}}</span>
@@ -96,6 +96,7 @@
 
 <script>
   import { getClub ,getFirstTopic ,getSecondTopic,addTopic,delTopic} from '@/api/club/club.js'
+  import timestr from '@/utils/timestamp.js'
   export default{
     name: 'clubmange',
     data() {
@@ -144,6 +145,7 @@
         this.getList();
     },
     methods: {
+        timestr,
         changeClass1(id,index){
             this.currentFirstclass = index;
             this.getSecondtitle(id)
@@ -346,7 +348,11 @@
             }
             getClub(data).then(res =>{
                 if(res.code == 200){
-                    this.tableData = res.data;
+                    let tableData = res.data;
+                    for(let i in tableData){
+                        tableData[i].createTime = this.timestr(tableData[i].createTime); 
+                    }
+                    this.tableData = tableData;
                     this.total = res.total;
                 }
             })
