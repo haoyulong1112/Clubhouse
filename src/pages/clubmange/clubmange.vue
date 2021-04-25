@@ -65,10 +65,10 @@
                 <!-- <el-table-column prop="name" label="在线时长"></el-table-column> -->
                 <el-table-column prop="fansCount" label="粉丝">
                     <template slot-scope="scope">
-                        <span class="fensisty" @click="goFensi(scope.row.fansCount)">{{scope.row.fansCount}}</span>
+                        <span class="fensisty" @click="goFensi(scope.$index, scope.row)">{{scope.row.fansCount}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="roomInstructions" label="简介"></el-table-column>
+                <el-table-column prop="roomInstructions" label="简介" width="200"></el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <span class="check" @click="handleEdit(scope.$index, scope.row)">查看详情</span>
@@ -163,8 +163,12 @@
             })
         },
         // 去粉丝页面
-        goFensi(id){
-            console.log(id)
+        goFensi(index, row){
+            this.$store.commit('club/setClubdata', row)
+            this.$router.push({
+                name: 'clubdetail',
+                path: 'clubdetail'
+            })
         },
         // 去俱乐部详情页
         handleEdit(index, row){
@@ -585,4 +589,8 @@
         font-size: 14px;
         color: #1B8668;
         cursor pointer;
+    .td-header
+        border-radius: 50%;
+    // /deep/ .el-table .cell
+    //     overflow-x: scroll;
 </style>

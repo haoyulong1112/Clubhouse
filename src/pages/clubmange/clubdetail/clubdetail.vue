@@ -18,7 +18,7 @@
                     <tbody>
                         <tr>
                             <td>{{userData.id}}</td>
-                            <td><img width="50" height="50" :src="userData.avatar" alt=""></td>
+                            <td><img class="header-img" width="50" height="50" :src="userData.avatar" alt=""></td>
                             <td>{{userData.name}}</td>
                             <td>{{userData.topicName}}</td>
                             <td>{{userData.topicName2}}</td>
@@ -286,4 +286,6 @@
         border-radius 50%;
     /deep/ .block
         margin-top 30px;
+    .header-img
+        border-radius: 50%;
 </style>

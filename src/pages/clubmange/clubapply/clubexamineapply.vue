@@ -16,8 +16,8 @@
                 <el-form-item label="俱乐部编号" class="applyForm-formitem" prop="id">
                     <el-input class="applyForm-input" placeholder="输入密码" type="number" v-model="applyForm.id" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="管理员手机号" class="applyForm-formitem" prop="cellPhone">
-                    <el-input class="applyForm-input" placeholder="输入手机号" type="text" v-model="applyForm.cellPhone" autocomplete="off"></el-input>
+                <el-form-item label="管理员手机号" class="applyForm-formitem" prop="phone">
+                    <el-input class="applyForm-input" placeholder="输入手机号" type="text" v-model="applyForm.phone" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="一级分类" class="applyForm-formitem" prop="topicName">
                     <el-input class="applyForm-input" type="text" v-model="applyForm.topicName" autocomplete="off"></el-input>

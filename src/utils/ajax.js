@@ -54,10 +54,14 @@ export default (options = {}) => {
       if (requestObj.readyState == 4) {
         if (requestObj.status == 200) {
           let obj = requestObj.response
-          if (typeof obj !== 'object') {
-            obj = JSON.parse(obj)
+          if(obj){
+            if (typeof obj !== 'object') {
+                obj = JSON.parse(obj)
+            }
+            resolve(obj)
+          }else{
+            reject(requestObj)
           }
-          resolve(obj)
         } else {
           reject(requestObj)
         }

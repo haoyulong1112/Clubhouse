@@ -31,12 +31,12 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="user-invite">
+                <div class="user-invite" v-if="userData.recommandName">
                     <div class="invite-msg">
                         <span>邀请人</span>
-                        <span>李逍遥</span>
+                        <span>{{userData.recommandName}}</span>
                     </div>
-                    <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2631334549,246605465&fm=26&gp=0.jpg" alt="">
+                    <img :src="userData.recommandHeadPic" alt="">
                 </div>
             </div>
             <div class="userdetail-info">
@@ -51,7 +51,7 @@
                 <div :class=" currentTab == 1 ? 'tab-item active': 'tab-item'" @click="changeTab(1)">关注的人 <span>{{userData.followSize}}人</span></div>
                 <div :class=" currentTab == 2 ? 'tab-item active': 'tab-item'" @click="changeTab(2)">粉丝 <span>{{userData.fansSize}}人</span></div>
                 <div :class=" currentTab == 3 ? 'tab-item active': 'tab-item'" @click="changeTab(3)">关注的俱乐部 <span>{{userData.followClubSize}}个</span></div>
-                <div :class=" currentTab == 4 ? 'tab-item active': 'tab-item'" @click="changeTab(4)">邀请的人 <span>{{currenttotal}}人</span></div>
+                <div :class=" currentTab == 4 ? 'tab-item active': 'tab-item'" @click="changeTab(4)">邀请的人 <span>{{userData.recommandCount}}人</span></div>
             </div>
             <div class="tab-content">  
                 <div class="user-box">  

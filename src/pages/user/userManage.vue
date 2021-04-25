@@ -109,7 +109,10 @@
                         this.total = res.data.count || 0;
                     }
                 }).catch(err => {
-                    this.$message.error(err.msg);
+                    this.$message({
+                        message: err.msg || '接口异常',
+                        type: 'error'
+                    });
                 })
             },
             handleEdit(index, row) {
@@ -139,7 +142,10 @@
                         });
                     }
                 }).catch(err => {
-                    this.$message.error(err.msg);
+                    this.$message({
+                        message: err.msg,
+                        type: 'error'
+                    });
                 })
 
             },
