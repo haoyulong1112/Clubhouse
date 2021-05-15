@@ -5,6 +5,10 @@ console.log(requestDomain);
 export const adminLogin = data => {
     return request({
         url: `${requestDomain}/club-room/admin/adminLogin`,
-        data: data
+        data: data,
+        header: {
+            token: sessionStorage.getItem("token"),
+            cellPhone: sessionStorage.getItem("cellPhone")
+        }
     })
 }

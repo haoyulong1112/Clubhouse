@@ -6,6 +6,9 @@ export const exportPhone = data => {
     return request({
         url: `${requestDomain}/club-room/admin/export`,
         data: data,
-        token: sessionStorage.getItem("token")
+        header: {
+            token: sessionStorage.getItem("token"),
+            cellPhone: sessionStorage.getItem("cellPhone")
+        }
     })
 }
