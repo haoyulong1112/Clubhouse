@@ -77,6 +77,7 @@ export default {
                         password: this.ruleForm.checkPass,
                         username: this.ruleForm.account,
                     }
+                    sessionStorage.setItem("cellPhone", this.ruleForm.account);
                     adminLogin(data).then(res=> {
                         if(res.code == 200){
                             this.$store.commit('user/updateUser', res.data)
