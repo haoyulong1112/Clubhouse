@@ -1,4 +1,4 @@
-(function (window) {
+(function(window) {
     // 区分环境的配置 252 demo prod
     var demoConfig = {
         // 请求域名头 pet-pai
@@ -18,7 +18,7 @@
     }
 
     window.SITE_CONFIG = {};
-    
+
     // 固定的配置
     var config = {
         // rem布局页面最大宽度
@@ -27,14 +27,14 @@
 
     // 通过hostname区分环境  http://localhost:8080/
     var demoDomainArray = ['8.141.49.230']
-    var prodDomainArray = ['www.huitingdata.com']
+    var prodDomainArray = ['h5.huitingdata.com']
 
     var hostname = window.location.hostname
 
-    function isItemInStr (str, arr) {
+    function isItemInStr(str, arr) {
         for (var i = 0, len = arr.length; i < len; ++i) {
-            if (str.indexOf(arr[i]) !== -1) { 
-                return true 
+            if (str.indexOf(arr[i]) !== -1) {
+                return true
             }
         }
         return false
