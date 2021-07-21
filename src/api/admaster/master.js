@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 const requestDomain = envConfig.requestDomain
-
+console.log(requestDomain);
 // 添加管理员
 export const addAdmin = data => {
         return request({
